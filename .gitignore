@@ -361,3 +361,17 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# LaTeX temporary files
+*.aux
+*.synctex.gz
+*.bbl
+*.blg
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.abs
+*.xmpdata
+*.xmpi
