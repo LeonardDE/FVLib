@@ -1,0 +1,23 @@
+\babel@toc {russian}{}\relax 
+\contentsline {section}{Введение}{3}{section*.1}%
+\contentsline {section}{\numberline {1}Теоретическая часть}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Рассматриваемые модели динамики}{4}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}Материальная точка}{4}{subsubsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.2}Коптер}{4}{subsubsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.2}Полетный план}{5}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}ПИД-регулятор}{5}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Построение регулятора для материальной точки}{6}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Прокладка траектории полета}{7}{subsection.1.5}%
+\contentsline {subsubsection}{\numberline {1.5.1}<<Наивная>> прокладка}{7}{subsubsection.1.5.1}%
+\contentsline {subsubsection}{\numberline {1.5.2}Прокладка с упреждением поворотов}{7}{subsubsection.1.5.2}%
+\contentsline {section}{\numberline {2}Практическая часть}{10}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Вспомогательные классы и методы}{10}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Реализация динамических моделей}{11}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Материальная точка}{12}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Коптер}{12}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}Вычисление <<штурманской>> прокладки}{13}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Разметка траектории}{13}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Вычисление прокладки}{13}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Вычисление движения}{13}{subsubsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.4}Результаты}{14}{subsection.2.4}%
+\contentsline {section}{Список литературы}{17}{figure.caption.9}%
