@@ -1,0 +1,3023 @@
+{
+    "FVs": [
+        {
+            "dynamic_data": [
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 1.0,
+                    "v_x": 0.9675709461,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.52158864891,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 2.0,
+                    "v_x": 1.2756669124239102,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 1.7890096836675018,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 3.0,
+                    "v_x": 1.1472918210956815,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 3.0158382788788436,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 4.0,
+                    "v_x": 1.0056071278164895,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 4.094309209147509,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 5.0,
+                    "v_x": 0.9469422274236775,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 5.066156879143653,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 6.0,
+                    "v_x": 0.960013496783927,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 6.1097220769272855,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 7.0,
+                    "v_x": 0.935238780772017,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 7.143894030556034,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 8.0,
+                    "v_x": 0.9146699143033212,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 8.150437663588596,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 9.0,
+                    "v_x": 0.6835271715143763,
+                    "v_y": 0.0,
+                    "v_z": -0.10147392805548876,
+                    "x": 9.066636727151394,
+                    "y": 0.0,
+                    "z": -0.029448099624627702
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 10.0,
+                    "v_x": 0.3499344567402394,
+                    "v_y": 0.0,
+                    "v_z": -0.29617974098019045,
+                    "x": 9.640590849172415,
+                    "y": 0.0,
+                    "z": -0.23655645489261706
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 11.0,
+                    "v_x": 0.15656914091394583,
+                    "v_y": 0.0,
+                    "v_z": -0.42605780757766554,
+                    "x": 9.911176708921161,
+                    "y": 0.0,
+                    "z": -0.6324001622665227
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 12.0,
+                    "v_x": 0.08419324674381184,
+                    "v_y": 0.0,
+                    "v_z": -0.4663502137419233,
+                    "x": 10.038732494244071,
+                    "y": 0.0,
+                    "z": -1.1235805783906525
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 13.0,
+                    "v_x": 0.03778448007109676,
+                    "v_y": 0.0,
+                    "v_z": -0.45689829891536604,
+                    "x": 10.108305790063117,
+                    "y": 0.0,
+                    "z": -1.6297383262181477
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 14.0,
+                    "v_x": -0.03381807626473409,
+                    "v_y": 0.0,
+                    "v_z": -0.4325364022397244,
+                    "x": 10.117026231465665,
+                    "y": 0.0,
+                    "z": -2.1160123642404565
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 15.0,
+                    "v_x": -0.06878598887301039,
+                    "v_y": 0.0,
+                    "v_z": -0.43070935100847474,
+                    "x": 10.051923591439392,
+                    "y": 0.0,
+                    "z": -2.5818433288265736
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 16.0,
+                    "v_x": -0.03226385921863072,
+                    "v_y": 0.0,
+                    "v_z": -0.45041385940480444,
+                    "x": 9.991930430863272,
+                    "y": 0.0,
+                    "z": -3.0599147142250622
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 17.0,
+                    "v_x": 0.0036212439574654855,
+                    "v_y": 0.0,
+                    "v_z": -0.46373661756885776,
+                    "x": 9.9764089987184,
+                    "y": 0.0,
+                    "z": -3.5579171417250914
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 18.0,
+                    "v_x": 0.013770505080930454,
+                    "v_y": 0.0,
+                    "v_z": -0.463477338953936,
+                    "x": 9.986307181325,
+                    "y": 0.0,
+                    "z": -4.018055244384738
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 19.0,
+                    "v_x": 0.009150258413135586,
+                    "v_y": 0.0,
+                    "v_z": -0.4861127708402707,
+                    "x": 9.998685863702846,
+                    "y": 0.0,
+                    "z": -4.491292473987087
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 20.0,
+                    "v_x": 0.2591387034397652,
+                    "v_y": 0.0,
+                    "v_z": -0.5384373656999772,
+                    "x": 10.062421185862902,
+                    "y": 0.0,
+                    "z": -5.008158599542615
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 21.0,
+                    "v_x": 0.8863106807184662,
+                    "v_y": 0.0,
+                    "v_z": -0.09877669016477245,
+                    "x": 10.610944683291393,
+                    "y": 0.0,
+                    "z": -5.392710697544955
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 22.0,
+                    "v_x": 1.209896905850721,
+                    "v_y": 0.0,
+                    "v_z": 0.21345426209932938,
+                    "x": 11.675600409423005,
+                    "y": 0.0,
+                    "z": -5.318362546556602
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 23.0,
+                    "v_x": 1.2052397814434939,
+                    "v_y": 0.0,
+                    "v_z": 0.20216065559067237,
+                    "x": 12.90272639747174,
+                    "y": 0.0,
+                    "z": -5.091220404294558
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 24.0,
+                    "v_x": 1.0756585989566194,
+                    "v_y": 0.0,
+                    "v_z": 0.07191196375283569,
+                    "x": 14.051728512623294,
+                    "y": 0.0,
+                    "z": -4.945980287140481
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 25.0,
+                    "v_x": 0.9780979601227486,
+                    "v_y": 0.0,
+                    "v_z": -0.02357622660718275,
+                    "x": 15.07754986203215,
+                    "y": 0.0,
+                    "z": -4.923050257944917
+                }
+            ],
+            "parameters": {
+                "name": "R2D2",
+                "plan": [],
+                "type": "\u0000"
+            }
+        },
+        {
+            "dynamic_data": [
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 1.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 2.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 3.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 4.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 5.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 6.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 7.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 8.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 9.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 10.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 11.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 12.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 13.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 14.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 15.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 16.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 17.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 18.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 19.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 20.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 21.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 22.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 23.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 24.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                {
+                    "new_plan": [
+                        {
+                            "arrivalTime": 0.0,
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 8.0,
+                            "position": {
+                                "x": 8.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 14.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -2.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 19.0,
+                            "position": {
+                                "x": 10.0,
+                                "y": 0.0,
+                                "z": -4.5
+                            }
+                        },
+                        {
+                            "arrivalTime": 20.5,
+                            "position": {
+                                "x": 10.5,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        },
+                        {
+                            "arrivalTime": 25.0,
+                            "position": {
+                                "x": 15.0,
+                                "y": 0.0,
+                                "z": -5.0
+                            }
+                        }
+                    ],
+                    "position_transmitted": false,
+                    "t": 25.0,
+                    "v_x": 0.0,
+                    "v_y": 0.0,
+                    "v_z": 0.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            ],
+            "parameters": {
+                "name": "R2D2123",
+                "plan": [],
+                "type": "\u0001"
+            }
+        }
+    ],
+    "version": "1.0"
+}

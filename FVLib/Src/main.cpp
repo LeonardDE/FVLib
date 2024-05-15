@@ -1,108 +1,107 @@
-#include <iostream>
-#include <string>
-#include <thread>
-#include <mutex>
-#include <condition_variable>
+//#include <iostream>
+//#include <string>
+//#include <thread>
+//#include <chrono>
+//
+//#include <stdio.h>
+//#include <stdlib.h>
 
-#include "FV.h"
+
+#include "Modeler.h"
 
 using namespace std;
 
-mutex mtx;
-mutex data1;
-condition_variable cv;
-condition_variable new_data;
-bool flag = false;
-bool solved = false;
-int counter = 0;
-
-void timer(int32_t& timer)
-{
-    while (true)
-    {
-        flag = true;
-        cv.notify_one();
-        timer += 1;
-        this_thread::sleep_for(chrono::seconds(1));
-    }
-}
-
-void solving(FV& point, AirSituationState& states)
-{
-    vector<double> acceleration = { 1,1,1 };
-    map<string, void*> dict;
-    dict["acceleration"] = &acceleration;
-    while (true)
-    {
-        {
-            unique_lock<mutex> lk(mtx);
-            cv.wait(lk);//, [] {return flag;});
-        }
-        flag = false;
-
-        // Счет 
-        cout << "Счет" << endl;
-        point.next(1,states.time,dict);
-        
-
-        data1.lock();
-        // Перекладка данных
-        cout << "Перекладка данных" << endl;
-        Plane plane_point = point.getPlane();
-        states.planes.clear();
-        states.planes.push_back(plane_point);
-
-        data1.unlock();
-
-        solved = true;
-        new_data.notify_one();
-
-    }
-}
 
 
 int main()
 {
-    setlocale(LC_ALL, "ru");
+	string file_name = "test.json";
+	Modeler modeler = Modeler(file_name);
+	
+	modeler.startModeling();
 
-    MaterialPoint point = MaterialPoint("point", 0, 0, 0, 1, 0, 0);
-
-    AirSituationState air_states = AirSituationState();
-    air_states.time = 0;
-    air_states.planes = vector<Plane>();
-
-    thread time(timer,ref(air_states.time));
-    time.detach();
-
-    thread solve(solving,ref(point),ref(air_states));
-
-    solve.detach();
-
-    while (true)
-    {
-        {
-            unique_lock<mutex> lk(mtx);
-            // Ждем пока данные вычислятся 
-            new_data.wait(lk);//, [] {return solved;});
-        }
-        solved = false;
-        data1.lock();
-        //Печатаем
-        for (int i = 0; i < air_states.planes.size();i++)
-        {   
-            Plane& plane = air_states.planes[i];
-
-            cout << "-------" << i+1 <<"------" << endl;
-            cout << "Position(" << plane.x << ", " << plane.y << ", " << plane.z << ")" << endl;
-            cout << "Velocity(" << plane.speedX << ", " << plane.speedY << ", " << plane.speedZ << ")" << endl;
-            cout << "|Velocity| = " << plane.speed << endl;
-            cout << "-------------" << endl;
-        }
-        data1.unlock();
-    }
-
-    return 0;
+	return 0;
 }
+
+//int main()
+//{
+//	output = fopen("position.dat", "w");
+//	velocity_file = fopen("velocity.dat", "w");
+//	path_file = fopen("path.dat", "w");
+//	path_file_2 = fopen("path2.dat", "w");
+//	acceleration_file = fopen("acceleration.dat", "w");
+//	wishPos = fopen("wishPos.dat", "w");
+//	wishVel = fopen("wishVel.dat", "w");
+//
+//	// Получать время
+//	// Получаем шаг вычисления состояния
+//	// Получаем шаг интегрирования для моделей/аппаратов
+//	double solve_time = 1;
+//	double integral_h = 0.001;
+//	double h = 0.001;
+//	double timer = 0;
+//
+//	MaterialPoint mPoint = MaterialPoint("point",0,0,0,0,0,0,1,-1,-1);
+//
+//	Vector3 p1 = Vector3(  0,0,0 );
+//	Vector3 p2 = Vector3(  10,0,0);
+//	Vector3 p3 = Vector3(  10,0,-5 );
+//	Vector3 p4 = Vector3( 15, 0, -10);
+//
+//	vector<Point> path =
+//	{
+//		Point(p1,0),
+//		Point{p2,10},
+//		Point{p3,20},
+//		Point{p4,25},
+//	};
+//
+//	mPoint.setPath(path);
+//
+//	for (const Point& pathPoint : path//mPoint.getPath()
+//		)
+//	{
+//		fprintf(path_file, "%f %f\n", pathPoint.position.x, pathPoint.position.z);
+//	}
+//
+//	for (PathPoint pathPoint : mPoint.getDynamicPath().getPath())
+//	{
+//		pathPoint.position.print("POINT and Time");
+//		cout << pathPoint.arrivalTime << endl;
+//		cout << (int)pathPoint.type << endl;
+//		fprintf(path_file_2, "%f %f\n", pathPoint.position.x, pathPoint.position.z);
+//	}
+//
+//	Plane plane;
+//	while (timer < 25)
+//	{
+//		mPoint.next(0.01, timer);
+//		plane = mPoint.getPlane();
+//		cout << "-------" << timer << "------" << endl;
+//		cout << "Position(" << plane.x << ", " << plane.y << ", " << plane.z << ")" << endl;
+//		cout << "Velocity(" << plane.speedX << ", " << plane.speedY << ", " << plane.speedZ << ")" << endl;
+//		cout << "|Velocity| = " << plane.speed << endl;
+//		cout << "-------------" << endl;
+//
+//		fprintf(output, "%f %f\n", plane.x, plane.z);
+//		fprintf(velocity_file, "%f %f %f\n", timer,plane.speedX, plane.speedZ);
+//		fprintf(acceleration_file, "%f %f\n",  timer, mPoint.acceleration.norm());
+//
+//		fprintf(wishPos, "%f %f %f\n", mPoint.wishPosition.x, mPoint.wishPosition.z, mPoint.wishPosition.y);
+//		fprintf(wishVel, "%f %f\n", timer,mPoint.wishVelocity.norm());
+//
+//		timer+=0.1;
+//	}
+//	fclose(output);
+//	fclose(velocity_file);
+//	fclose(acceleration_file);
+//	fclose(path_file);
+//	fclose(wishPos);
+//	fclose(wishVel);
+//
+//	return 0;
+//}
+
 
 
 
