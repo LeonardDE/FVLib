@@ -10,7 +10,7 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(DynamicData, t, x, y,z, v_x, v_y, v_z, positi
 
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(OutputFV, parameters,dynamic_data);
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(OutputJsonData,version, FVs );
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(OutputJsonData, FVs, version);
 
 
 void writeJsonData(const string& file_name, const OutputJsonData& output_json_data)

@@ -9,6 +9,7 @@
         "v_x": 0,
         "v_y": 0,
         "v_z": 0,
+        "acceleration": 1,
         "maxAcceleration": 1,
         "k_xz": -1,
         "k_y": -1
@@ -53,7 +54,8 @@
         "k_y": -1,
         "maxVelocity_xz": 1,
         "maxVelocity_y": 0.5,
-        "minVelocity_y": -0.5
+        "minVelocity_y": -0.5,
+        "maxAcceleration": 1
 
       },
       "path": [
