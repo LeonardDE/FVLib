@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Src\GlobalSituation.h" />
     <ClInclude Include="Src\DataParser.h" />
     <ClInclude Include="Src\FV.h" />
     <ClInclude Include="Src\json.hpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="Src\Vector3.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\GlobalSituation.cpp" />
     <ClCompile Include="Src\lib\library.cpp" />
     <ClCompile Include="Src\lib\simulation.cpp" />
     <ClCompile Include="Src\main.cpp" />

@@ -4,12 +4,12 @@
 Modeler::Modeler(string file_name)
 {
 	// Собираем данные о ЛА
-	ParseFVToList(file_name, fv_list);
+	ParseFVToList(file_name, globalSituation);
 	// Собираем данные для вычислений
 	ParseSolveDataFromJSON(file_name, solve_time, integral_h, solve_part_count);
 
 	// Ищем максимальное и минимальное значение времени
-	for (auto& fv : fv_list)
+	for (auto& fv : globalSituation.FVs)
 	{
 		for (auto& point : fv->getDynamicPath().getPath())
 		{
@@ -25,7 +25,7 @@ void Modeler::startModeling()
 	double h = solve_time / solve_part_count;
 
 	OutputJsonData data;
-	for (auto& fv : fv_list)
+	for (auto& fv : globalSituation.FVs)
 	{
 		OutputFV out_fv;
 		Plane plane = fv->getPlane();
@@ -39,15 +39,16 @@ void Modeler::startModeling()
 	while (timer < end_time)
 	{
 		timer += solve_time;
-		for (auto& fv : fv_list)
+		for (auto& fv : globalSituation.FVs)
 		{
 			fv->next(h, timer);
+			//fv->writeFVState(solve_time);
 
 		}
 	
 		for (int i = 0; i < data.FVs.size(); i++)
 		{
-			FV* fv = fv_list[i];
+			FV* fv = globalSituation.FVs[i];
 			OutputFV& out_fv = data.FVs[i];
 			DynamicData dynamic_data;
 			Plane plane = fv->getPlane();

@@ -15,11 +15,41 @@ using namespace std;
 
 int main()
 {
-	string file_name = "test.json";
-	Modeler modeler = Modeler(file_name);
-	
-	modeler.startModeling();
+	//string file_name = "test.json";
+	//Modeler modeler = Modeler(file_name);
+	//
+	//modeler.startModeling();
 
+	vector<Point> arr1;
+	//{
+	//	//Point{Vector3(0,0,0), 0},
+	//	//Point{Vector3(10,0,0), 10},
+	//	//Point{Vector3(10,10,0), 20},
+	//	//Point{Vector3(0,10,0), 30}
+	//};
+	vector<Point> arr2;
+	//{
+	//	//Point{Vector3(0,0,0), 5},
+	//	//Point{Vector3(10,0,0), 15},
+	//	//Point{Vector3(10,10,0), 25},
+	//	//Point{Vector3(0,10,0), 35}
+	//};
+
+	vector<Point> res1;
+	vector<Point> res2;
+
+	mergeShortPlans(arr1, arr2, res1, res2);
+
+	for (auto& p : res1)
+	{
+		cout << p.arrivalTime << " (" << p.position.x << ", " << p.position.y << " ," << p.position.z << ")" << endl;
+	}
+	cout << "-" << endl;
+	for (auto& p : res2)
+	{
+		cout << p.arrivalTime << " (" << p.position.x << ", " << p.position.y << " ," << p.position.z << ")" << endl;
+	}
+	
 	return 0;
 }
 

@@ -35,7 +35,7 @@ void ParsePathFromJSON(const json& path_data, vector<Point>& path)
 	}
 };
 
-void ParseFVToList(string json_name, vector<FV*>& fv_list)
+void ParseFVToList(string json_name, GlobalSituation& gs)
 {
 	ifstream f(json_name);
 	json data = json::parse(f);
@@ -54,28 +54,30 @@ void ParseFVToList(string json_name, vector<FV*>& fv_list)
 		ParsePathFromJSON(fv_path, path);
 		//
 
-		if (sub_j["type"] == 0)
+		if (sub_j["type"] == "MaterialPoint")
 		{
 			MaterialPoint* point = new MaterialPoint(
-				sub_j["model_id"],
+				sub_j["fv_id"],
 				path[0].position.x, path[0].position.y, path[0].position.z,
 				fv_param["v_x"], fv_param["v_y"], fv_param["v_z"],
-				fv_param["acceleration"], fv_param["k_xz"], fv_param["k_y"]);
+				fv_param["maxAcceleration"], fv_param["k_xz"], fv_param["k_y"],
+				fv_param["broadcastStep"],&gs);
 			point->setPath(path);
-			fv_list.push_back(point);
+			gs.FVs.push_back(point);
 		}
-		else if (sub_j["type"] == 1)
+		else if (sub_j["type"] == "Copter")
 		{
 			Copter* copter = new Copter(
-				sub_j["model_id"],
+				sub_j["fv_id"],
 				path[0].position.x, path[0].position.y, path[0].position.z,
 				fv_param["v_x"], fv_param["v_y"], fv_param["v_z"],
-				fv_param["maxAcceleration"],
 				fv_param["inertial_xz"], fv_param["inertial_y"],
-				fv_param["k_xz"], fv_param["k_y"]);
+				fv_param["k_xz"], fv_param["k_y"],
+				fv_param["maxVelocity_xz"], fv_param["maxVelocity_y"], fv_param["minVelocity_y"],
+				fv_param["broadcastStep"], &gs);
 
 			copter->setPath(path);
-			fv_list.push_back(copter);
+			gs.FVs.push_back(copter);
 		}
 	}
 	f.close();

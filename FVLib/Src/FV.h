@@ -3,9 +3,10 @@
 #include <vector>
 #include <map>
 #include <fstream>
+
 #include "Vector3.h"
 #include "lib/plane.h"
-
+#include "GlobalSituation.h"
 
 struct TurnData
 {
@@ -105,11 +106,29 @@ public:
         return time;
     }
 
+    //void writeFVState(double timeStep);
+
 protected:
+    string name;
     vector<Point> basePath;
     Path dynamicPath;
-    double maxAcceleration;
+    //double maxAcceleration;
     double time = 0;
+
+    double radiusFilter = 0;
+    double broadcastStep;
+    double nextBroadcastInstant = 0;
+
+    double radiusWarn;
+
+    virtual double solveTurnRadius(const Vector3& v1, const Vector3& v2) =0;
+
+    GlobalSituation* globalSituation;
+
+    virtual void checkConflict();
+
+    friend void mergeShortPlans(const vector<Point>& arr1, const vector<Point>& arr2,
+                                      vector<Point>& res1,       vector<Point>& res2);
 };
 
 
@@ -120,7 +139,8 @@ public:
     MaterialPoint(string name,
         double x, double y, double z,
         double speedX, double speedY, double speedZ,
-        double maxAcceleration, double k_x, double k_v);
+        double maxAcceleration, double k_x, double k_v,
+        double writeTime, GlobalSituation* gs);
     ~MaterialPoint();
     Plane getPlane() override;
 
@@ -128,11 +148,12 @@ public:
 
     string getName();
     int32_t getType();
+    // текущее ускорение 
     Vector3 acceleration;
+    
     Vector3 wishPosition;
     Vector3 wishVelocity;
 private:
-    string name;
     int32_t type;
 
     Vector3* curPosition;
@@ -140,8 +161,12 @@ private:
     Vector3* curVelocity;
     Vector3* newVelocity;
 
+    double maxAcceleration;
+
     double k_v;
     double k_x;
+
+    double solveTurnRadius(const Vector3& v1, const Vector3& v2) override;
 
     void computeWishData(double time_solve);
 };
@@ -149,10 +174,11 @@ private:
 class Copter : public FV
 {
 public:
-    Copter(string name,double x, double y, double z,
+    Copter(const string& name,double x, double y, double z,
         double speedX, double speedY, double speedZ,
-        double maxAcceleration,
-        double inertialXZ, double inertialY,double k_x, double k_v);
+        double inertialXZ, double inertialY,double k_x, double k_v,
+        double maxVelocity_xz,double maxVelocity_y,double minVelocity_y,
+        double writeTime, GlobalSituation* gs);
     ~Copter();
     Plane getPlane() override;
     void next(double h, double end_time) override;
@@ -162,7 +188,6 @@ public:
     Vector3 wishVelocity;
     Vector3 wishPosition;
 private:
-    string name;
     int32_t type;
     double inertialXZ;
     double inertialY;
@@ -173,6 +198,65 @@ private:
     Vector3* curVelocity;
     Vector3* newVelocity;
 
+    double maxVelocity_xz;
+    double maxVelocity_y;
+    double minVelocity_y;
+
+    double solveTurnRadius(const Vector3& v1, const Vector3& v2) override;
+
     void computeWishData(double time_solve);
 };
 
+
+
+// слияние Путей
+
+///
+void mergeShortPlans(const vector<Point>& arr1, const vector<Point>& arr2,
+                vector<Point>& res1 , vector<Point>& res2) 
+{
+    res1.clear();
+    res2.clear();
+
+    size_t i = 0;
+    size_t j = 0;
+
+    double maxStart = max(arr1[0].arrivalTime,arr2[0].arrivalTime);
+    double minEnd = min(arr2[arr2.size() - 1].arrivalTime, arr1[arr1.size() - 1].arrivalTime);
+
+    while (i < arr1.size() && j < arr2.size()) {
+        if (arr1[i].arrivalTime < arr2[j].arrivalTime) {
+            if (arr1[i].arrivalTime >= maxStart && arr1[i].arrivalTime <= minEnd)
+            {
+                Point p;
+                p.arrivalTime = arr1[i].arrivalTime;
+                p.position = arr2[j].position + (arr2[j + 1].position - arr2[j].position)
+                    * (p.arrivalTime - arr2[j].arrivalTime)
+                    / (arr2[j + 1].arrivalTime - arr2[j].arrivalTime);
+                res2.push_back(p);
+                res1.push_back(arr1[i]);
+            }
+            i++;
+        }
+        else if (arr1[i].arrivalTime > arr2[j].arrivalTime) {
+            if (arr2[j].arrivalTime >= maxStart && arr2[j].arrivalTime <= minEnd)
+            {
+                Point p;
+                p.arrivalTime = arr2[j].arrivalTime;
+                p.position = arr1[i].position + (arr1[i + 1].position - arr1[i].position)
+                    * (p.arrivalTime - arr1[i].arrivalTime)
+                    / (arr1[i + 1].arrivalTime - arr1[i].arrivalTime);
+                res1.push_back(p);
+                res2.push_back(arr2[j]);
+            }
+            j++;
+        }
+        else
+        {
+            res1.push_back(arr1[i]);
+            res2.push_back(arr2[j]);
+            i++;
+            j++;
+        }
+    }
+}

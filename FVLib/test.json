@@ -3,13 +3,12 @@
   "solve_part_count": 10,
   "AirCraftList": [
     {
-      "type": 0,
-      "model_id": "R2D2",
+      "type": "MaterialPoint",
+      "fv_id": "R2D2",
       "parameters": {
         "v_x": 0,
         "v_y": 0,
-        "v_z": 0,
-        "acceleration": 1,
+        "v_z": 0,ы
         "maxAcceleration": 1,
         "k_xz": -1,
         "k_y": -1
@@ -42,8 +41,8 @@
       ]
     },
     {
-      "type": 1,
-      "model_id": "R2D2123",
+      "type": "Copter",
+      "fv_id": "R2D2123",
       "parameters": {
         "v_x": 0,
         "v_y": 0,
@@ -54,8 +53,7 @@
         "k_y": -1,
         "maxVelocity_xz": 1,
         "maxVelocity_y": 0.5,
-        "minVelocity_y": -0.5,
-        "maxAcceleration": 1
+        "minVelocity_y": -0.5
 
       },
       "path": [

@@ -3,7 +3,8 @@
 MaterialPoint::MaterialPoint(string name,
 	double x, double y, double z,
 	double speedX, double speedY, double speedZ,
-	double maxAcceleration, double k_x, double k_v)
+	double maxAcceleration, double k_x, double k_v,
+	double broadcastStep,GlobalSituation* gs)
 {
 	this->name = name;
 	this->type = 0;
@@ -15,13 +16,15 @@ MaterialPoint::MaterialPoint(string name,
 	this->maxAcceleration = maxAcceleration;
 	this->k_x = k_x;
 	this->k_v = k_v;
+	globalSituation = gs;
+	this->broadcastStep = broadcastStep;
 }
-// переделать передачу массивая
+
 void FV::setPath(vector<Point> path)
 {
 	
 	this->basePath = path;
-	double turnAcceleration = this->maxAcceleration / 2;
+	//double turnAcceleration = this->maxAcceleration / 2;
 
 	Path new_path = Path();
 
@@ -29,7 +32,7 @@ void FV::setPath(vector<Point> path)
 	{
 		for (int i = 0; i < path.size() - 2; i++)
 		{
-			Vector3 AB = path[i+1].position - path[i ].position;
+			Vector3 AB = path[i + 1].position - path[i ].position;
 			Vector3 BC = path[i + 2].position - path[i + 1].position;
 			double cos_a = getCosBetweenVectors(AB * (-1), BC);
 			
@@ -38,7 +41,7 @@ void FV::setPath(vector<Point> path)
 				Vector3 vel_1 = AB / (path[i + 1].arrivalTime - path[i].arrivalTime);
 				Vector3 vel_2 = BC / (path[i + 2].arrivalTime - path[i + 1].arrivalTime);
 
-				double r = vel_1.norm() * vel_1.norm() / turnAcceleration;
+				double r = solveTurnRadius(vel_1,vel_2);
 				double l = r * sqrt((1 + cos_a) / (1 - cos_a));
 
 				Vector3 turnPosition_1 = path[i ].position + vel_1 * (AB.norm() - l) / vel_1.norm();
@@ -75,6 +78,63 @@ void FV::setPath(vector<Point> path)
 	}
 
 	dynamicPath = new_path;
+}
+
+void FV::checkConflict()
+{
+	vector<FV*>& fvs = globalSituation->FVs;
+	map<string, FVState>& states = globalSituation->aetherInfo.states;
+	for (auto& fv : fvs)
+	{
+		string fv_name = fv->getPlane().name;
+		if (fv_name == this->name) continue;
+
+		Plane plane = getPlane();
+		Vector3 pos = Vector3(plane.x, plane.y, plane.z);
+		
+		Vector3 hisPos = Vector3(states[fv_name].plane.x, 
+								 states[fv_name].plane.y, 
+								 states[fv_name].plane.z);
+		Vector3 relPosition = hisPos - pos;
+
+		if (relPosition.norm() > radiusFilter) continue;
+
+		Vector3 vel = Vector3(plane.speedX, plane.speedY, plane.speedZ);
+
+		Vector3 hisVel = Vector3(states[fv_name].plane.speedX, 
+								 states[fv_name].plane.speedY, 
+								 states[fv_name].plane.speedZ);
+
+		if (scalarProduct(relPosition, hisVel - vel) < 0) continue;
+
+		// Сюда нужна проверка с норированием сетки
+		
+		// Нормируем сетки
+		vector<Point> my_plan;
+		vector<Point> his_plan;
+		mergeShortPlans(states[this->name].shortPlan, states[fv_name].shortPlan, my_plan, his_plan);
+		// Проверка
+		for (int i = 0; i < my_plan.size() - 1; i++)
+		{
+			/// Считаем коэффэциенты  для квадратного уравнения
+			double A;
+			double B;
+			double C;
+			/// Находим корни
+			double D = B * B - 4 * A * C;
+			if (D < 0) continue;
+			double t1 = (-B - sqrt(D)) / 2 * A;
+			double t2 = (-B + sqrt(D)) / 2 * A;
+		}
+
+		// ну и вот тут надо что то делать так как мы понмиаем что у нас тут конфликт
+	}
+}
+
+ double MaterialPoint::solveTurnRadius(const Vector3& v1, const Vector3& v2)
+{
+
+	 return v1.norm() * v2.norm() / (maxAcceleration / 2);
 }
 
 void MaterialPoint::next(double h, double end_time)
@@ -120,6 +180,27 @@ void MaterialPoint::next(double h, double end_time)
 		
 		swap(curPosition, newPosition);
 		swap(curVelocity, newVelocity);
+		// Сюда нужно сделать проверку nextBroadcastStep и запись данных радио канал
+		if (nextBroadcastInstant <= time)
+		{
+			nextBroadcastInstant += broadcastStep;
+			Plane plane = getPlane();
+			globalSituation->aetherInfo.broadcastState(plane);
+
+			// Тут нужно формировать 4 точки из dynamicPath
+			vector<Point> short_plan;
+			for (auto& p : dynamicPath.getPath())
+			{
+				Point p1 = p;
+				if (short_plan.size() > 4) break;
+				if (p.arrivalTime < time) continue;
+				short_plan.push_back(p1);
+			}
+
+			globalSituation->aetherInfo.broadcastPlan(plane.name,short_plan);
+
+			nextBroadcastInstant += broadcastStep;
+		}
 	}
 
 }
@@ -160,6 +241,7 @@ int32_t MaterialPoint::getType()
 {
 	return type;
 }
+
 
 
 void MaterialPoint::computeWishData(double time_solve)
@@ -228,10 +310,11 @@ void MaterialPoint::computeWishData(double time_solve)
 }
 
 
-Copter::Copter(string name, double x, double y, double z,
+Copter::Copter(const string& name , double x, double y, double z,
 	double speedX, double speedY, double speedZ, 
-	double maxAcceleration,
-	double inertialXZ, double inertialY,double k_x, double k_v)
+	double inertialXZ, double inertialY,double k_x, double k_v,
+	double maxVelocity_xz, double maxVelocity_y, double minVelocity_y,
+	double broadcastStep, GlobalSituation* gs)
 {
 	this->name = name;
 	this->type = 1;
@@ -247,7 +330,12 @@ Copter::Copter(string name, double x, double y, double z,
 
 	this->k_x = k_x;
 	this->k_v = k_v;
-	this->maxAcceleration = maxAcceleration;
+	this->maxVelocity_xz = maxVelocity_xz;
+	this->maxVelocity_y = maxVelocity_y;
+	this->minVelocity_y = minVelocity_y;
+
+	this->broadcastStep = broadcastStep;
+	globalSituation = gs;
 }
 
 Copter::~Copter()
@@ -301,10 +389,17 @@ void Copter::next(double h, double end_time)
 
 }
 
+
+double Copter::solveTurnRadius(const Vector3& v1, const Vector3& v2)
+{
+	// ТУТ ЧТО ТО БУДЕТ
+	return 1;
+}
+
 void Copter::computeWishData(double time_solve)
 {
 	int l = 0; 
-	int r = dynamicPath.getPath().size() - 1; 
+	int r = (int)dynamicPath.getPath().size() - 1; 
 	int mid;
 	
 
