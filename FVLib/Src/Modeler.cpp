@@ -1,6 +1,8 @@
 #include "Modeler.h"
 #include "DataParser.h"
 #include "OutputData.h"
+#include "FV.h"
+
 Modeler::Modeler(string file_name)
 {
 	// Собираем данные о ЛА
@@ -42,7 +44,7 @@ void Modeler::startModeling()
 		for (auto& fv : globalSituation.FVs)
 		{
 			fv->next(h, timer);
-			//fv->writeFVState(solve_time);
+			
 
 		}
 	

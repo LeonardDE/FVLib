@@ -1,7 +1,8 @@
 #pragma once
-#include "FV.h"
-#include "GlobalSituation.h"
+#include <string>
 #include <limits>
+#include "GlobalSituation.h"
+
 
 class Modeler
 {
@@ -11,9 +12,6 @@ public:
 	void startModeling();
 	
 private:
-	// Перенести в GlobalSituation
-	//vector<FV*> fv_list;
-
 	double solve_time;
 	double integral_h;
 	int solve_part_count;

@@ -127,29 +127,39 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Copter.h" />
+    <ClInclude Include="Src\global.h" />
     <ClInclude Include="Src\GlobalSituation.h" />
     <ClInclude Include="Src\DataParser.h" />
     <ClInclude Include="Src\FV.h" />
     <ClInclude Include="Src\json.hpp" />
-    <ClInclude Include="Src\lib\flight_plan.h" />
-    <ClInclude Include="Src\lib\library.h" />
     <ClInclude Include="Src\lib\plane.h" />
-    <ClInclude Include="Src\lib\simulation.h" />
+    <ClInclude Include="Src\MaterialPoint.h" />
     <ClInclude Include="Src\Modeler.h" />
     <ClInclude Include="Src\Obstacle.h" />
     <ClInclude Include="Src\OutputData.h" />
     <ClInclude Include="Src\ParamReader.h" />
+    <ClInclude Include="Src\Path.h" />
+    <ClInclude Include="Src\PathPoint.h" />
+    <ClInclude Include="Src\Point.h" />
+    <ClInclude Include="Src\TurnData.h" />
     <ClInclude Include="Src\Vector3.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Copter.cpp" />
+    <ClCompile Include="Src\DataParser.cpp" />
+    <ClCompile Include="Src\global.cpp" />
     <ClCompile Include="Src\GlobalSituation.cpp" />
-    <ClCompile Include="Src\lib\library.cpp" />
-    <ClCompile Include="Src\lib\simulation.cpp" />
     <ClCompile Include="Src\main.cpp" />
     <ClCompile Include="Src\FV.cpp" />
+    <ClCompile Include="Src\MaterialPoint.cpp" />
     <ClCompile Include="Src\Modeler.cpp" />
     <ClCompile Include="Src\OutputData.cpp" />
     <ClCompile Include="Src\ParamReader.cpp" />
+    <ClCompile Include="Src\Path.cpp" />
+    <ClCompile Include="Src\PathPoint.cpp" />
+    <ClCompile Include="Src\Point.cpp" />
+    <ClCompile Include="Src\TurnData.cpp" />
     <ClCompile Include="Src\Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +169,7 @@
     <None Include="lorenzgplot.dat" />
     <None Include="Src\data_plot.plt" />
     <None Include="Src\velocity.plt" />
+    <None Include="test.json" />
     <None Include="tex\Диплом.zip" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

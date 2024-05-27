@@ -4,14 +4,18 @@
   "AirCraftList": [
     {
       "type": "MaterialPoint",
-      "fv_id": "R2D2",
+      "fv_id": "first",
       "parameters": {
         "v_x": 0,
         "v_y": 0,
-        "v_z": 0,ы
+        "v_z": 0,
         "maxAcceleration": 1,
         "k_xz": -1,
-        "k_y": -1
+        "k_y": -1,
+        "broadcastStep": 2,
+        "radiusFilter": 5,
+        "heightWarn": 2,
+        "radiusWarn": 3
       },
       "path": [
         {
@@ -40,21 +44,21 @@
         }
       ]
     },
+
     {
-      "type": "Copter",
-      "fv_id": "R2D2123",
+      "type": "MaterialPoint",
+      "fv_id": "second",
       "parameters": {
         "v_x": 0,
         "v_y": 0,
         "v_z": 0,
-        "inertial_xz": 1,
-        "inertial_y": 1,
+        "maxAcceleration": 1,
         "k_xz": -1,
         "k_y": -1,
-        "maxVelocity_xz": 1,
-        "maxVelocity_y": 0.5,
-        "minVelocity_y": -0.5
-
+        "broadcastStep": 2,
+        "radiusFilter": 5,
+        "heightWarn": 2,
+        "radiusWarn": 3
       },
       "path": [
         {
@@ -83,6 +87,7 @@
         }
       ]
     }
+    
 
   ]
 }

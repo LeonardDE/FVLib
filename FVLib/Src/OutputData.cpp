@@ -16,7 +16,7 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(OutputJsonData, FVs, version);
 void writeJsonData(const string& file_name, const OutputJsonData& output_json_data)
 {
 	json j = output_json_data;
-	cout << j.dump(1)<< endl;
+	//cout << j.dump(1)<< endl;
 	ofstream f(file_name);
 	f << setw(4) << j << endl;
 
