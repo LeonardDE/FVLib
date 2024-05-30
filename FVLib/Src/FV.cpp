@@ -1,7 +1,7 @@
 #include "FV.h"
 #include "GlobalSituation.h"
 #include "global.h"
-
+#include <cmath>
 
 void FV::setPath(vector<Point> path)
 {

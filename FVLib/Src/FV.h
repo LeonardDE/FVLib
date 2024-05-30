@@ -18,8 +18,8 @@ class FV
 {
 public:
 
-    virtual Plane getPlane() abstract;
-    virtual void next(double h, double end_time) abstract;
+    virtual Plane getPlane() = 0;
+    virtual void next(double h, double end_time) = 0;
     virtual void setPath(vector<Point> path);
     vector<Point> getBasePath()
     {
