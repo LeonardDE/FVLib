@@ -33,9 +33,8 @@ void Modeler::startModeling()
 		Plane plane = fv->getPlane();
 		out_fv.parameters.type = plane.type;
 		out_fv.parameters.name = plane.name;
-		out_fv.parameters.plan = vector<Point>();
+		out_fv.parameters.plan = fv->getBasePath();
 		data.FVs.push_back(out_fv);
-
 	}
 
 	while (timer < end_time)
@@ -61,10 +60,8 @@ void Modeler::startModeling()
 			dynamic_data.v_x = plane.speedX;
 			dynamic_data.v_y = plane.speedY;
 			dynamic_data.v_z = plane.speedZ;
-			for (auto& p : fv->getDynamicPath().getPath())
-			{
-				dynamic_data.new_plan.push_back(Point(p.position,p.arrivalTime));
-			}
+			
+			dynamic_data.new_plan = globalSituation.aetherInfo.states[plane.name].shortPlan;
 
 			out_fv.dynamic_data.push_back(dynamic_data);
 

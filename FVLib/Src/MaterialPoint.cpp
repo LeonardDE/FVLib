@@ -10,7 +10,6 @@ MaterialPoint::MaterialPoint(string name,
 	GlobalSituation* gs)
 {
 	this->name = name;
-	this->type = 0;
 	time = 0;
 	curPosition = new Vector3(x, y, z);
 	newPosition = new Vector3(x, y, z);
@@ -139,7 +138,7 @@ string MaterialPoint::getName()
 	return name;
 }
 
-int32_t MaterialPoint::getType()
+string MaterialPoint::getType()
 {
 	return type;
 }

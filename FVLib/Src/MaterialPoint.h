@@ -16,14 +16,14 @@ public:
     void next(double h, double end_time) override;
 
     string getName();
-    int32_t getType();
+    string getType();
     // текущее ускорение 
     Vector3 acceleration;
 
     Vector3 wishPosition;
     Vector3 wishVelocity;
 private:
-    int32_t type;
+     string type = "MaterialPoint";
 
     Vector3* curPosition;
     Vector3* newPosition;

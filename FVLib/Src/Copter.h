@@ -19,7 +19,7 @@ public:
     Vector3 wishVelocity;
     Vector3 wishPosition;
 private:
-    int32_t type;
+    string type = "Copter";
     double inertialXZ;
     double inertialY;
     double k_x;

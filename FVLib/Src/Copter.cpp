@@ -10,7 +10,6 @@ Copter::Copter(const string& name, double x, double y, double z,
 	double heightWarn, double radiusWarn, GlobalSituation* gs)
 {
 	this->name = name;
-	this->type = 1;
 	time = 0;
 
 	this->inertialXZ = inertialXZ;
