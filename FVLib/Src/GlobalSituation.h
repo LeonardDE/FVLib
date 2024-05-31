@@ -13,6 +13,7 @@ struct FVState
 	Plane plane;
 
 	//bool isExist = false;
+	double translationTime;
 	vector<Point> shortPlan;
 	
 };
@@ -22,7 +23,7 @@ class AEtherInfo
 public:
 	map<string,FVState> states;
 	void broadcastState(const Plane& plane);
-	void broadcastPlan(const string& name, const vector<Point>& shortPlan);
+	void broadcastPlan(const string& name,double time, const vector<Point>& shortPlan);
 };
 
 class GlobalSituation

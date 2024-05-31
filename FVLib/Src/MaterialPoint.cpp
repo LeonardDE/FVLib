@@ -99,7 +99,7 @@ void MaterialPoint::next(double h, double end_time)
 				short_plan.push_back(Point(p.position,p.arrivalTime));
 			}
 
-			globalSituation->aetherInfo.broadcastPlan(plane.name, short_plan);
+			globalSituation->aetherInfo.broadcastPlan(plane.name,time, short_plan);
 		}
 		
 	}

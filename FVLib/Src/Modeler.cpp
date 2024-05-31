@@ -60,8 +60,8 @@ void Modeler::startModeling()
 			dynamic_data.v_x = plane.speedX;
 			dynamic_data.v_y = plane.speedY;
 			dynamic_data.v_z = plane.speedZ;
-			
-			dynamic_data.new_plan = globalSituation.aetherInfo.states[plane.name].shortPlan;
+			if (abs(globalSituation.aetherInfo.states[plane.name].translationTime - timer) < solve_time)
+				dynamic_data.new_plan = globalSituation.aetherInfo.states[plane.name].shortPlan;
 
 			out_fv.dynamic_data.push_back(dynamic_data);
 
