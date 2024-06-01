@@ -171,6 +171,7 @@
     <None Include="Src\velocity.plt" />
     <None Include="test.json" />
     <None Include="tex\Диплом.zip" />
+    <None Include="x64\a.py" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

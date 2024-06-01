@@ -12,7 +12,7 @@ public:
 	void startModeling();
 	
 private:
-	double solve_time;
+	double timeStep;
 	double integral_h;
 	int solve_part_count;
 	double start_time = std::numeric_limits<double>::max();

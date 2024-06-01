@@ -2,13 +2,14 @@
 #include "DataParser.h"
 #include "OutputData.h"
 #include "FV.h"
+#include "global.h"
 
 Modeler::Modeler(string file_name)
 {
 	// Собираем данные о ЛА
 	ParseFVToList(file_name, globalSituation);
 	// Собираем данные для вычислений
-	ParseSolveDataFromJSON(file_name, solve_time, integral_h, solve_part_count);
+	ParseSolveDataFromJSON(file_name, timeStep, integral_h, solve_part_count);
 
 	// Ищем максимальное и минимальное значение времени
 	for (auto& fv : globalSituation.FVs)
@@ -24,7 +25,7 @@ Modeler::Modeler(string file_name)
 void Modeler::startModeling()
 {
 	double timer = start_time;
-	double h = solve_time / solve_part_count;
+	double h = timeStep / solve_part_count;
 
 	OutputJsonData data;
 	for (auto& fv : globalSituation.FVs)
@@ -39,12 +40,10 @@ void Modeler::startModeling()
 
 	while (timer < end_time)
 	{
-		timer += solve_time;
+		
 		for (auto& fv : globalSituation.FVs)
 		{
 			fv->next(h, timer);
-			
-
 		}
 	
 		for (int i = 0; i < data.FVs.size(); i++)
@@ -60,12 +59,19 @@ void Modeler::startModeling()
 			dynamic_data.v_x = plane.speedX;
 			dynamic_data.v_y = plane.speedY;
 			dynamic_data.v_z = plane.speedZ;
-			if (abs(globalSituation.aetherInfo.states[plane.name].translationTime - timer) < solve_time)
+
+			if (timer + timeStep >= globalSituation.aetherInfo.states[plane.name].translationTime - EPS &&
+				timer < globalSituation.aetherInfo.states[plane.name].translationTime - EPS)
+			{
 				dynamic_data.new_plan = globalSituation.aetherInfo.states[plane.name].shortPlan;
+			}
+			
+			
 
 			out_fv.dynamic_data.push_back(dynamic_data);
 
 		}
+		timer += timeStep;
 	}
 	writeJsonData("output.json", data);
 }
