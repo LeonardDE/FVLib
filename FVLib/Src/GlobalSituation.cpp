@@ -9,5 +9,6 @@ void AEtherInfo::broadcastPlan(const string& name,double time, const vector<Poin
 {
 	states[name].shortPlan = shortPlan;
 	states[name].translationTime = time;
-	//states[name].shortPlan = vector<Point>();
+	cout << "TRANSLATION TIME "  << time << endl;
+	
 }

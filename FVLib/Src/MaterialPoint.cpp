@@ -1,5 +1,6 @@
 #include "MaterialPoint.h"
 #include "GlobalSituation.h"
+#include "global.h"
 
 MaterialPoint::MaterialPoint(string name,
 	double x, double y, double z,
@@ -50,7 +51,7 @@ void MaterialPoint::next(double h, double end_time)
 
 	double deltatime = end_time - time;
 
-
+	doBroadcast();
 	while (deltatime > 0) {
 
 		computeWishData(time);
@@ -77,30 +78,7 @@ void MaterialPoint::next(double h, double end_time)
 		swap(curPosition, newPosition);
 		swap(curVelocity, newVelocity);
 		// Сюда нужно сделать проверку nextBroadcastStep и запись данных радио канал
-		if (nextBroadcastInstant <= time)
-		{
-			nextBroadcastInstant += broadcastStep;
-			Plane plane = getPlane();
-			globalSituation->aetherInfo.broadcastState(plane);
-			
-			nextBroadcastInstant += broadcastStep;
-		}
-
-		if (globalSituation->aetherInfo.states[this->name].shortPlan.empty() || 
-			globalSituation->aetherInfo.states[this->name].shortPlan[0].arrivalTime < time)
-		{
-			Plane plane = getPlane();
-			vector<Point> short_plan;
-			for (auto& p : dynamicPath.getPath())
-			{
-				
-				if (short_plan.size() > 3) break;
-				if (p.arrivalTime < time) continue;
-				short_plan.push_back(Point(p.position,p.arrivalTime));
-			}
-
-			globalSituation->aetherInfo.broadcastPlan(plane.name,time, short_plan);
-		}
+		doBroadcast();
 		
 	}
 	checkConflict();

@@ -54,6 +54,8 @@ protected:
 
     virtual double solveTurnRadius(const Vector3& v1, const Vector3& v2) =0;
 
+    virtual void doBroadcast();
+
     GlobalSituation* globalSituation;
 
     virtual void checkConflict();

@@ -221,3 +221,32 @@ void mergeShortPlans(const vector<Point>& arr1, const vector<Point>& arr2,
 		}
 	}
 }
+
+void FV::doBroadcast()
+{
+	if (nextBroadcastInstant <= time)
+	{
+		nextBroadcastInstant += broadcastStep;
+		Plane plane = getPlane();
+		globalSituation->aetherInfo.broadcastState(plane);
+
+		nextBroadcastInstant += broadcastStep;
+	}
+
+
+	if (globalSituation->aetherInfo.states[this->name].shortPlan.empty() ||
+		globalSituation->aetherInfo.states[this->name].shortPlan[0].arrivalTime - EPS <= time)
+	{
+		Plane plane = getPlane();
+		vector<Point> short_plan;
+		for (auto& p : dynamicPath.getPath())
+		{
+
+			if (short_plan.size() > 3) break;
+			if (p.arrivalTime < time) continue;
+			short_plan.push_back(Point(p.position, p.arrivalTime));
+		}
+
+		globalSituation->aetherInfo.broadcastPlan(plane.name, time, short_plan);
+	}
+}

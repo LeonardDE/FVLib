@@ -123,5 +123,6 @@
     <None Include="Src\data_plot.plt" />
     <None Include="tex\Диплом.zip" />
     <None Include="test.json" />
+    <None Include="x64\a.py" />
   </ItemGroup>
 </Project>

@@ -375,3 +375,6 @@ FodyWeavers.xsd
 *.abs
 *.xmpdata
 *.xmpi
+
+.vscode
+build
