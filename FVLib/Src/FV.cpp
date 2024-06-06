@@ -7,6 +7,7 @@ void FV::setPath(vector<Point> path)
 {
 	
 	this->basePath = path;
+	this->dynamicPath = path;
 	//double turnAcceleration = this->maxAcceleration / 2;
 
 	Path new_path = Path();
@@ -60,7 +61,7 @@ void FV::setPath(vector<Point> path)
 		new_path.addNewPoint(path[path.size() - 1]);
 	}
 
-	dynamicPath = new_path;
+	turnPath = new_path;
 }
 
 void FV::checkConflict()
@@ -228,7 +229,7 @@ void FV::doBroadcast()
 	{
 		nextBroadcastInstant += broadcastStep;
 		Plane plane = getPlane();
-		globalSituation->aetherInfo.broadcastState(plane);
+		globalSituation->aetherInfo.broadcastState(time,plane);
 
 		nextBroadcastInstant += broadcastStep;
 	}
@@ -239,7 +240,7 @@ void FV::doBroadcast()
 	{
 		Plane plane = getPlane();
 		vector<Point> short_plan;
-		for (auto& p : dynamicPath.getPath())
+		for (auto& p : dynamicPath)
 		{
 
 			if (short_plan.size() > 3) break;

@@ -10,6 +10,7 @@ using namespace std;
 
 struct FVState
 {
+	double planeTranslationTime;
 	Plane plane;
 
 	//bool isExist = false;
@@ -22,7 +23,7 @@ class AEtherInfo
 {
 public:
 	map<string,FVState> states;
-	void broadcastState(const Plane& plane);
+	void broadcastState(double time,const Plane& plane);
 	void broadcastPlan(const string& name,double time, const vector<Point>& shortPlan);
 };
 

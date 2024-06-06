@@ -27,7 +27,7 @@ public:
     };
     Path getDynamicPath()
     {
-        return dynamicPath;
+        return turnPath;
     };
     double getTime()
     {
@@ -41,7 +41,8 @@ public:
 protected:
     string name;
     vector<Point> basePath;
-    Path dynamicPath;
+    vector<Point> dynamicPath;
+    Path turnPath;
     //double maxAcceleration;
     double time = 0;
 

@@ -96,12 +96,12 @@ double Copter::solveTurnRadius(const Vector3& v1, const Vector3& v2)
 void Copter::computeWishData(double time_solve)
 {
 	int l = 0;
-	int r = (int)dynamicPath.getPath().size() - 1;
+	int r = (int)turnPath.getPath().size() - 1;
 	int mid;
 
 
-	if (time_solve < dynamicPath.getPointForIndex(l).arrivalTime ||
-		time_solve > dynamicPath.getPointForIndex(r).arrivalTime)
+	if (time_solve < turnPath.getPointForIndex(l).arrivalTime ||
+		time_solve > turnPath.getPointForIndex(r).arrivalTime)
 	{
 		cout << "Time moment not in path time" << endl;
 		exit(0);
@@ -110,33 +110,33 @@ void Copter::computeWishData(double time_solve)
 	while ((r - l > 1)) {
 		mid = (l + r) / 2;
 
-		if (dynamicPath.getPointForIndex(mid).arrivalTime > time_solve) r = mid;
+		if (turnPath.getPointForIndex(mid).arrivalTime > time_solve) r = mid;
 		else l = mid;
 	}
 
 
-	Vector3 wishPos = dynamicPath.getPointForIndex(r).position;
-	if (dynamicPath.getPointForIndex(l).type == PointType::DEFAULT) {
+	Vector3 wishPos = turnPath.getPointForIndex(r).position;
+	if (turnPath.getPointForIndex(l).type == PointType::DEFAULT) {
 
 		if (r == 0)
 		{
-			wishVelocity = (dynamicPath.getPointForIndex(r).position - *curPosition) /
-				(dynamicPath.getPointForIndex(r).arrivalTime - time_solve);
+			wishVelocity = (turnPath.getPointForIndex(r).position - *curPosition) /
+				(turnPath.getPointForIndex(r).arrivalTime - time_solve);
 		}
 		else {
-			wishVelocity = (dynamicPath.getPointForIndex(r).position - dynamicPath.getPointForIndex(l).position) /
-				(dynamicPath.getPointForIndex(r).arrivalTime - dynamicPath.getPointForIndex(l).arrivalTime);
+			wishVelocity = (turnPath.getPointForIndex(r).position - turnPath.getPointForIndex(l).position) /
+				(turnPath.getPointForIndex(r).arrivalTime - turnPath.getPointForIndex(l).arrivalTime);
 		}
 
-		wishPos = dynamicPath.getPointForIndex(l).position
-			+ wishVelocity * (time_solve - dynamicPath.getPointForIndex(l).arrivalTime);
+		wishPos = turnPath.getPointForIndex(l).position
+			+ wishVelocity * (time_solve - turnPath.getPointForIndex(l).arrivalTime);
 
 	}
-	else if (dynamicPath.getPointForIndex(l).type == PointType::START_TURN)
+	else if (turnPath.getPointForIndex(l).type == PointType::START_TURN)
 	{
 
-		TurnData turn_data = dynamicPath.getPointForIndex(l).turnData;
-		double deltaT = time_solve - dynamicPath.getPointForIndex(l).arrivalTime;
+		TurnData turn_data = turnPath.getPointForIndex(l).turnData;
+		double deltaT = time_solve - turnPath.getPointForIndex(l).arrivalTime;
 
 		double w = turn_data.angularVelocity + deltaT * turn_data.angularAcceleration;
 
@@ -144,7 +144,7 @@ void Copter::computeWishData(double time_solve)
 
 		wishVelocity = v;
 
-		wishPos = dynamicPath.getPointForIndex(l).position;
+		wishPos = turnPath.getPointForIndex(l).position;
 
 		wishPos.rotate(
 			turn_data.axis,

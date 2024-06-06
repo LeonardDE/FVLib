@@ -56,14 +56,34 @@ void Modeler::startModeling()
 			dynamic_data.x = plane.x;
 			dynamic_data.y = plane.y;
 			dynamic_data.z = plane.z;
-			dynamic_data.v_x = plane.speedX;
-			dynamic_data.v_y = plane.speedY;
-			dynamic_data.v_z = plane.speedZ;
+			//dynamic_data.v_x = plane.speedX;
+			//dynamic_data.v_y = plane.speedY;
+			//dynamic_data.v_z = plane.speedZ;
+
+			
+
+			if (timer + timeStep >= globalSituation.aetherInfo.states[plane.name].planeTranslationTime - EPS &&
+				timer < globalSituation.aetherInfo.states[plane.name].planeTranslationTime + EPS)
+			{
+				BroadcastData broadcastdata;
+				broadcastdata.t = globalSituation.aetherInfo.states[plane.name].planeTranslationTime;
+				broadcastdata.type = "position";
+				broadcastdata.x = globalSituation.aetherInfo.states[plane.name].plane.x;
+
+				broadcastdata.y = globalSituation.aetherInfo.states[plane.name].plane.y;
+
+				broadcastdata.z = globalSituation.aetherInfo.states[plane.name].plane.z;
+				out_fv.broadcasts.push_back(broadcastdata);
+			}
 
 			if (timer + timeStep >= globalSituation.aetherInfo.states[plane.name].translationTime - EPS &&
-				timer < globalSituation.aetherInfo.states[plane.name].translationTime - EPS)
+				timer < globalSituation.aetherInfo.states[plane.name].translationTime + EPS)
 			{
-				dynamic_data.new_plan = globalSituation.aetherInfo.states[plane.name].shortPlan;
+				BroadcastData broadcastdata;
+				broadcastdata.t = globalSituation.aetherInfo.states[plane.name].translationTime;
+				broadcastdata.type = "plan";
+				broadcastdata.plan = globalSituation.aetherInfo.states[plane.name].shortPlan;
+				out_fv.broadcasts.push_back(broadcastdata);
 			}
 			
 			

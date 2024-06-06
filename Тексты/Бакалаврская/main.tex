@@ -33,7 +33,7 @@
 \usepackage{icomma}
 \usepackage{multirow}
 \usepackage{indentfirst}
-
+\usepackage{tabularx}
 
 \title{DataMatrix}
 \author{LeonarD DE}
@@ -54,52 +54,76 @@
 
 %========================================================
 % титульная страница
+
 \begin{titlepage}
 
 \begin{center}
-{\bfseries Министерство науки и высшего образования Российской Федерации ФГАОУ ВО «УрФУ имени первого Президента России Б.Н. Ельцина»}
+\MakeUppercase{министерство науки и высшего образования Российской Федерации} 
+
+федеральное государственное автономное образовательное учреждение высшего образования
+
+\MakeUppercase{уральский федеральный университет} 
+
+имени первого Президента России Б.Н. Ельцина
 \end{center}
-\begin{center}
-Департамент математики, механики и компьютерных наук ФГАОУ ВО УрФУ ИЕНиМ.
+\vspace{5mm}
+\begin{center}    
+\MakeUppercase{институт естественных наук и математики} 
 \end{center}
-
-\vspace{15mm}
-
-\begin{flushright}
-Оценка работы
-\makebox[2in]{\hrulefill}\\
-Руководитель от УрФУ Кумков С.С
-\end{flushright}
-
-\vspace{20mm}
-
-\begin{center}
-{\large Тема задания на практику}\\
-\vspace{2mm}
-Разработка программного комплекса моделирования и визуализации движения беспилотных летательных аппаратов
-\end{center}
-
-\vspace{2mm}
-
-\begin{center}
-{\large Отчет} \\
-Вид практики Производственная практика\\
-Тип практики Производственная практика, Преддипломная
-\end{center}
-\vspace{30mm}
-\begin{flushleft}
-Руководитель практики от предприятия (организации) Кумков С.С.\\
-Студент Дербенев Л.О.\\
-Специальность (направление подготовки) 01.03.01 Математика \\
-Группа МЕН-400101
-\end{flushleft}
-
 \vspace{20mm}
 \begin{center}
-Екатеринбург 2024
+Кафедра ???
+\end{center}
+\vspace{10mm}
+\begin{center}
+    \bfseries \MakeUppercase{Разработка программного комплекса моделирования и визуализации движения беспилотных летательных аппаратовы}
+\end{center}
+\vspace{5mm}
+\begin{center}
+    Направление подготовки 01.03.01 «Математика»
+\end{center}
+\vspace{20mm}
+
+\newcolumntype{I}{!{\vrule width 3pt}}
+\newlength\savedwidth
+
+\newcommand\whline[1]{%
+  \noalign{%
+    \global\savedwidth\arrayrulewidth\global\arrayrulewidth 1.5pt%
+  }%
+  \cline{#1}%
+  \noalign{\vskip\arrayrulewidth}%
+  \noalign{\global\arrayrulewidth\savedwidth}%
+}
+
+\begin{table}[h]
+    \centering 
+    \begin{tabular}[t]{p{5.5cm} p{1cm} c}
+         Зав. кафедрой && Выпускная квалификационная
+ \\ 
+ &&работа бакалавра\\ 
+        ??? & \\
+        &&\bfseries{Дербенева } \\
+        && \bfseries{Леонида Олеговича}\\\whline{1-1}
+        && \\
+        && \\  \cline{3-3}
+        && \\ 
+        Нормоконтролер: && Научный руководитель:\\
+        ??? && ??? Кумков С.С.\\ 
+        && \\
+        && \\ \cline{1-1} \cline{3-3}
+        
+    \end{tabular}
+\end{table}
+\vspace{25mm}
+\begin{center}
+Екатеринбург 
+
+2024
 \end{center}
 
 \end{titlepage}
+
 
 %========================================================
 % Реферат

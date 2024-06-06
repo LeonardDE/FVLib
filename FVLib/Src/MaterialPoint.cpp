@@ -38,12 +38,12 @@ void MaterialPoint::next(double h, double end_time)
 {
 	// Проверка что end_time на промежуток
 	int l = 0; // левая граница
-	int r = dynamicPath.getPath().size() - 1; // правая граница
+	int r = turnPath.getPath().size() - 1; // правая граница
 	int mid;
 	// проверка с концами
 
-	if (end_time < dynamicPath.getPointForIndex(l).arrivalTime ||
-		end_time > dynamicPath.getPointForIndex(r).arrivalTime)
+	if (end_time < turnPath.getPointForIndex(l).arrivalTime ||
+		end_time > turnPath.getPointForIndex(r).arrivalTime)
 	{
 		//cout << "Time moment not in path time" << endl;
 		return;
@@ -77,7 +77,7 @@ void MaterialPoint::next(double h, double end_time)
 
 		swap(curPosition, newPosition);
 		swap(curVelocity, newVelocity);
-		// Сюда нужно сделать проверку nextBroadcastStep и запись данных радио канал
+		
 		doBroadcast();
 		
 	}
@@ -127,12 +127,12 @@ void MaterialPoint::computeWishData(double time_solve)
 {
 
 	int l = 0; // левая граница
-	int r = dynamicPath.getPath().size() - 1; // правая граница
+	int r = turnPath.getPath().size() - 1; // правая граница
 	int mid;
 	// проверка с концами
 
-	if (time_solve < dynamicPath.getPointForIndex(l).arrivalTime ||
-		time_solve > dynamicPath.getPointForIndex(r).arrivalTime)
+	if (time_solve < turnPath.getPointForIndex(l).arrivalTime ||
+		time_solve > turnPath.getPointForIndex(r).arrivalTime)
 	{
 		cout << "Time moment = "<< time_solve << " not in path time." << " FV_id = " << name << endl;
 		return;//exit(0);
@@ -141,33 +141,33 @@ void MaterialPoint::computeWishData(double time_solve)
 	while ((r - l > 1)) {
 		mid = (l + r) / 2; // считываем срединный индекс отрезка [l,r]
 
-		if (dynamicPath.getPointForIndex(mid).arrivalTime > time_solve) r = mid; // проверяем, какую часть нужно отбросить
+		if (turnPath.getPointForIndex(mid).arrivalTime > time_solve) r = mid; // проверяем, какую часть нужно отбросить
 		else l = mid;
 	}
 
 
-	Vector3 wishPos = dynamicPath.getPointForIndex(r).position;
-	if (dynamicPath.getPointForIndex(l).type == PointType::DEFAULT) {
+	Vector3 wishPos = turnPath.getPointForIndex(r).position;
+	if (turnPath.getPointForIndex(l).type == PointType::DEFAULT) {
 		//
 		if (r == 0)
 		{
-			wishVelocity = (dynamicPath.getPointForIndex(r).position - *curPosition) /
-				(dynamicPath.getPointForIndex(r).arrivalTime - time_solve);
+			wishVelocity = (turnPath.getPointForIndex(r).position - *curPosition) /
+				(turnPath.getPointForIndex(r).arrivalTime - time_solve);
 		}
 		else {
-			wishVelocity = (dynamicPath.getPointForIndex(r).position - dynamicPath.getPointForIndex(l).position) /
-				(dynamicPath.getPointForIndex(r).arrivalTime - dynamicPath.getPointForIndex(l).arrivalTime);
+			wishVelocity = (turnPath.getPointForIndex(r).position - turnPath.getPointForIndex(l).position) /
+				(turnPath.getPointForIndex(r).arrivalTime - turnPath.getPointForIndex(l).arrivalTime);
 		}
 
-		wishPos = dynamicPath.getPointForIndex(l).position
-			+ wishVelocity * (time_solve - dynamicPath.getPointForIndex(l).arrivalTime);
+		wishPos = turnPath.getPointForIndex(l).position
+			+ wishVelocity * (time_solve - turnPath.getPointForIndex(l).arrivalTime);
 
 	}
-	else if (dynamicPath.getPointForIndex(l).type == PointType::START_TURN)
+	else if (turnPath.getPointForIndex(l).type == PointType::START_TURN)
 	{
 
-		TurnData turn_data = dynamicPath.getPointForIndex(l).turnData;
-		double deltaT = time_solve - dynamicPath.getPointForIndex(l).arrivalTime;
+		TurnData turn_data = turnPath.getPointForIndex(l).turnData;
+		double deltaT = time_solve - turnPath.getPointForIndex(l).arrivalTime;
 
 		double w = turn_data.angularVelocity + deltaT * turn_data.angularAcceleration;
 
@@ -175,7 +175,7 @@ void MaterialPoint::computeWishData(double time_solve)
 
 		wishVelocity = v;
 
-		wishPos = dynamicPath.getPointForIndex(l).position;
+		wishPos = turnPath.getPointForIndex(l).position;
 
 		wishPos.rotate(
 			turn_data.axis,

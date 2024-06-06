@@ -7,7 +7,8 @@ using namespace std;
 #include "json.hpp"
 using json = nlohmann::json;
 
-#include "FV.h"
+#include "Vector3.h"
+#include "Point.h"
 
 
 struct OutputObstacle
@@ -28,18 +29,25 @@ struct DynamicData
 	double x;
 	double y;
 	double z;
-	double v_x;
-	double v_y;
-	double v_z;
-	bool position_transmitted = false;
-	vector<Point> new_plan;
 
 };
+struct BroadcastData
+{
+	double t;
+	string type;
+
+	double x = 0;
+	double y = 0;
+	double z = 0;
+	vector<Point> plan;
+};
+
 
 struct OutputFV
 {
 	Parameters parameters;
 	vector<DynamicData> dynamic_data;
+	vector<BroadcastData> broadcasts;
 };
 
 struct OutputJsonData
@@ -50,3 +58,5 @@ struct OutputJsonData
 };
 
 void writeJsonData(const string& file_name, const OutputJsonData& output_json_data);
+
+
