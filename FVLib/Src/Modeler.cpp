@@ -50,16 +50,18 @@ void Modeler::startModeling()
 		{
 			FV* fv = globalSituation.FVs[i];
 			OutputFV& out_fv = data.FVs[i];
-			DynamicData dynamic_data;
 			Plane plane = fv->getPlane();
-			dynamic_data.t = timer;
-			dynamic_data.x = plane.x;
-			dynamic_data.y = plane.y;
-			dynamic_data.z = plane.z;
-			//dynamic_data.v_x = plane.speedX;
-			//dynamic_data.v_y = plane.speedY;
-			//dynamic_data.v_z = plane.speedZ;
 
+			if (fv->getBasePath()[fv->getBasePath().size() - 1].arrivalTime >= timer &&
+				fv->getBasePath()[0].arrivalTime <= timer)
+			{
+				DynamicData dynamic_data;
+				dynamic_data.t = timer;
+				dynamic_data.x = plane.x;
+				dynamic_data.y = plane.y;
+				dynamic_data.z = plane.z;
+				out_fv.dynamic_data.push_back(dynamic_data);
+			}
 			
 
 			if (timer + timeStep >= globalSituation.aetherInfo.states[plane.name].planeTranslationTime - EPS &&
@@ -85,10 +87,6 @@ void Modeler::startModeling()
 				broadcastdata.plan = globalSituation.aetherInfo.states[plane.name].shortPlan;
 				out_fv.broadcasts.push_back(broadcastdata);
 			}
-			
-			
-
-			out_fv.dynamic_data.push_back(dynamic_data);
 
 		}
 		timer += timeStep;

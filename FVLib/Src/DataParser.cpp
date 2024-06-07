@@ -4,12 +4,12 @@
 #include "Copter.h"
 
 
-void ParseSolveDataFromJSON(string json_name, double& solve_time, double& integration_h, int& solve_part_count)
+void ParseSolveDataFromJSON(string json_name, double& time_step, double& integration_h, int& solve_part_count)
 {
 	ifstream f(json_name);
 	json data = json::parse(f);
 
-	solve_time = data["solve_time"];
+	time_step = data["timeStep"];
 	solve_part_count = data["solve_part_count"];
 	f.close();
 };
