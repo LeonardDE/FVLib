@@ -8,7 +8,7 @@ using namespace std;
 
 int main()
 {
-	string file_name = "test.json";
+	string file_name = "test2.json";
 	Modeler modeler = Modeler(file_name);
 	
 	modeler.startModeling();

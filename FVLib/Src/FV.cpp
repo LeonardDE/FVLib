@@ -99,6 +99,9 @@ void FV::checkConflict()
 		if (states[this->name].shortPlan.empty() || states[fv_name].shortPlan.empty()) continue;
 
 		mergeShortPlans(states[this->name].shortPlan, states[fv_name].shortPlan, my_plan, his_plan);
+
+		if (my_plan.empty()) continue;
+
 		double left_t_min_xz = INFINITY;
 		double right_t_max_xz = -INFINITY;
 
@@ -115,7 +118,7 @@ void FV::checkConflict()
 
 			double A = (my_vel.x - his_vel.x)* (my_vel.x - his_vel.x) + (my_vel.z - his_vel.z) * (my_vel.z - his_vel.z);
 			
-			double B = 2 * (my_plan[i].arrivalTime * A + ((my_plan[i].position.x - his_plan[i].position.x) + (my_vel.x - hisVel.x)) 
+			double B = - 2 * (my_plan[i].arrivalTime * A + ((my_plan[i].position.x - his_plan[i].position.x) + (my_vel.x - hisVel.x)) 
 														* ((my_plan[i].position.z - his_plan[i].position.z) + (my_vel.z - hisVel.z)));
 			
 			double C = -2 * my_plan[i].arrivalTime * ((my_plan[i].position.x - his_plan[i].position.x) + (my_vel.x - hisVel.x))
@@ -164,7 +167,7 @@ void FV::checkConflict()
 		conflict["tEnd"] = min(right_t_max_xz, right_t_max_y);
 
 		conflicts.push_back(conflict);
-		cout << conflicts.dump(1) << endl;
+		cout << conflict.dump(1) << endl;
 		
 		// ну и вот тут надо что то делать так как мы понмиаем что у нас тут конфликт
 	}
@@ -177,8 +180,8 @@ void FV::checkConflict()
 void mergeShortPlans(const vector<Point>& arr1, const vector<Point>& arr2,
 	vector<Point>& res1, vector<Point>& res2)
 {
-	//res1.clear();
-	//res2.clear();
+	res1.clear();
+	res2.clear();
 
 	size_t i = 0;
 	size_t j = 0;
@@ -225,7 +228,7 @@ void mergeShortPlans(const vector<Point>& arr1, const vector<Point>& arr2,
 
 void FV::doBroadcast()
 {
-	if (nextBroadcastInstant <= time)
+	if ( nextBroadcastInstant <= time)
 	{
 		nextBroadcastInstant += broadcastStep;
 		Plane plane = getPlane();
@@ -236,7 +239,7 @@ void FV::doBroadcast()
 
 
 	if (globalSituation->aetherInfo.states[this->name].shortPlan.empty() ||
-		globalSituation->aetherInfo.states[this->name].shortPlan[0].arrivalTime - EPS <= time)
+		check::leqCheckDouble(globalSituation->aetherInfo.states[this->name].shortPlan[0].arrivalTime , time))
 	{
 		Plane plane = getPlane();
 		vector<Point> short_plan;
@@ -244,7 +247,7 @@ void FV::doBroadcast()
 		{
 
 			if (short_plan.size() > 3) break;
-			if (p.arrivalTime < time) continue;
+			if (p.arrivalTime <= time + EPS) continue;
 			short_plan.push_back(Point(p.position, p.arrivalTime));
 		}
 

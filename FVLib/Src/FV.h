@@ -37,7 +37,7 @@ public:
     //void writeFVState(double timeStep);
     friend void mergeShortPlans(const vector<Point>& arr1, const vector<Point>& arr2,
         vector<Point>& res1, vector<Point>& res2);
-
+    json conflicts;
 protected:
     string name;
     vector<Point> basePath;
@@ -60,8 +60,7 @@ protected:
     GlobalSituation* globalSituation;
 
     virtual void checkConflict();
-
-    json conflicts; 
+ 
 
     
 };
