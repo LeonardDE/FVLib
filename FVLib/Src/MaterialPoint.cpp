@@ -81,7 +81,7 @@ void MaterialPoint::next(double h, double end_time)
 		doBroadcast();
 		
 	}
-	checkConflict();
+	// !!!! checkConflict();
 }
 
 
