@@ -52,8 +52,8 @@ void Modeler::startModeling()
 			OutputFV& out_fv = data.FVs[i];
 			Plane plane = fv->getPlane();
 
-			if (fv->getBasePath()[fv->getBasePath().size() - 1].arrivalTime  >= timer - EPS &&
-				fv->getBasePath()[0].arrivalTime <= timer + EPS )
+			if (check::LEQ(timer, fv->getBasePath()[fv->getBasePath().size() - 1].arrivalTime) &&
+				check::LEQ(fv->getBasePath()[0].arrivalTime , timer))
 			{
 				DynamicData dynamic_data;
 				dynamic_data.t = timer;
@@ -64,8 +64,8 @@ void Modeler::startModeling()
 			}
 			
 
-			if (check::leqCheckDouble(globalSituation.aetherInfo.states[plane.name].planeTranslationTime, timer + timeStep) &&
-				check::lCheckDouble(timer ,globalSituation.aetherInfo.states[plane.name].planeTranslationTime ))
+			if (check::LEQ(globalSituation.aetherInfo.states[plane.name].planeTranslationTime, timer + timeStep) &&
+				check::LE(timer ,globalSituation.aetherInfo.states[plane.name].planeTranslationTime ))
 			{
 				BroadcastData broadcastdata;
 				broadcastdata.t = globalSituation.aetherInfo.states[plane.name].planeTranslationTime;
@@ -78,8 +78,8 @@ void Modeler::startModeling()
 				out_fv.broadcasts.push_back(broadcastdata);
 			}
 
-			if (check::leqCheckDouble(globalSituation.aetherInfo.states[plane.name].translationTime,timer + timeStep) &&
-				check::lCheckDouble(timer , globalSituation.aetherInfo.states[plane.name].translationTime))
+			if (check::LEQ(globalSituation.aetherInfo.states[plane.name].translationTime,timer + timeStep) &&
+				check::LE(timer , globalSituation.aetherInfo.states[plane.name].translationTime))
 			{
 				BroadcastData broadcastdata;
 				broadcastdata.t = globalSituation.aetherInfo.states[plane.name].translationTime;

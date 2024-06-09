@@ -2,30 +2,30 @@
 #include <cmath>
 double EPS = 0.01;
 
-bool check::absCheckDouble(double value_1, double value_2)
+bool check::EQ(double value_1, double value_2)
 {
 	return abs(value_1 - value_2) < EPS;
 }
 
-bool check::absEqCheckDouble(double value_1, double value_2)
+static bool NOTEQ(double value_1, double value_2)
 {
-	return abs(value_1 - value_2) <= EPS;
+	return abs(value_1 - value_2) >= EPS;
 }
 
-bool check::lCheckDouble(double value_1, double value_2)
+bool check::LE(double value_1, double value_2)
 {
 	return value_1 - value_2 < EPS;
 }
-bool check::leqCheckDouble(double value_1, double value_2)
+bool check::LEQ(double value_1, double value_2)
 {
 	return value_1 - value_2 <= EPS;
 }
 
-bool check::rCheckDouble(double value_1, double value_2)
+bool check::RE(double value_1, double value_2)
 {
 	return value_1 - value_2 > EPS;
 }
-bool check::reqCheckDouble(double value_1, double value_2)
+bool check::REQ(double value_1, double value_2)
 {
 	return value_1 - value_2 >= EPS;
 }

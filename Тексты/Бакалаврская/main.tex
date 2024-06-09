@@ -108,17 +108,16 @@
 \begin{table}[h]
     \centering 
     \begin{tabular}[t]{p{5.5cm} p{1cm} c}
-         Зав. кафедрой && Выпускная квалификационная
- \\ 
- &&работа бакалавра\\ 
-        ??? & \\
+        Директор департамента && Выпускная квалификационная\\ 
+         к.ф.-м.н., Е. С. Пьяньзина  &&работа бакалавра\\ 
+        %к.ф.-м.н., Е. С. Пьяньзина & \\
         &&\bfseries{Дербенева } \\
-        && \bfseries{Леонида Олеговича}\\\whline{1-1}
-        && \\
-        && \\  \cline{3-3}
+        && \bfseries{Леонида Олеговича}\\
+        && \\ 
+        && \\ \whline{1-1} \cline{3-3}
         && \\ 
         Нормоконтролер: && Научный руководитель:  \\
-        Суслова О.А.    && к.ф.-м.н., Кумков С.С. \\ 
+        О.А. Суслова    && к.ф.-м.н., С.С. Кумков \\ 
         && \\
         && \\ \cline{1-1} \cline{3-3}
         
@@ -574,6 +573,77 @@ $$n=\frac{c\times a}{|c\times a|}$$
 
 Вещание нужно для общения летательных аппаратов между собой, чтобы предотвращать конфликты.
 
+\subsection{Обнаружение конфликтов}
+Как уже упоминалось в пункте выше, каждый ЛА сообщает в радио канал свои будущие позиции для определения конфликтных промежутков времени.
+
+Проверка делится на несколько этапов, а именно на фильтрацию по дальности, фильтрацию по сближению и на детальный анализ планов движения
+
+Разберемся как происходит фильтрация тех аппаратов, с которыми точно не может быть конфликта. 
+Первой проверкой является проверка расстояния, у каждого ЛА есть радиус фильтрации, если расстояние между аппаратами превышает заданное, то дальнейшее рассмотрение не требуется. 
+
+\begin{figure}[ht!]
+    \begin{tikzpicture}[>=latex]
+        \draw[thick,dotted] (1,1) circle (2cm); % окружность
+        \fill[blue] (1,1) circle (2pt); % центр
+        \draw[blue, -]  (1,1) -- node[left=3pt] {$R$}  (1,3) ; % радиу
+        \fill[red] (2,3) circle (2pt);
+        \fill[red] (2,1.5) circle (2pt);
+    \end{tikzpicture}
+    \caption{Радиус фильтрации}\label{radius_filter}
+\end{figure}
+
+Если же БПЛА находятся на меньшем расстоянии, то переходим к следующей проверке, фильтрации по сближению. Она заключается в том, что считается скалярное произведение по следующей формуле:
+$<p_2 - p_1, v_2 - v_1 >,$
+где $p_1, p_2$ - точки позиций в пространстве первого и второго судна соответственно, 
+$v_1, v_2$ - векторы скорости первого и второго судна соответственно.
+\begin{figure}[ht!]
+    \begin{tikzpicture}[>=latex]
+        \draw[thick,dotted] (1,1) circle (2cm); % окружность
+        \fill[blue] (1,1) circle  (2pt); % ла 1
+        \fill[red] (2,1.5) circle (2pt); % ла 2
+
+        \coordinate [label=left:$p_1$] (A) at (1,1); % обозн точки ла 1
+        \coordinate [label=right:$p_2$] (B) at (2,1.5); % обозн точки ла 2
+        \coordinate [label=left:$v_1$] (A1) at (1,2);
+        \coordinate [label=right:$v_2$] (B1) at (1.5,2);
+
+        \draw [->] (A) -- (B);
+
+        \draw [->,blue] (A) -- (A1);
+
+        \draw [->,red] (B) -- (B1);
+
+        \draw [->] (A1) -- (B1);
+    \end{tikzpicture}
+    \caption{Отфильтрованный ЛА}\label{check_scalar_product}
+\end{figure}
+
+Если скалярное произведение больше либо равно нуля, значит конфликта нет, если же оно отрицательно, то нужно переходить к вычислению конфликтных промежутков.
+
+Теперь рассмотрим, как происходит анализ планов. Так как, у будущих точек, которые транслируют ЛА, чаще всего имеют разные моменты времени, то требуется провести подготовительные работы, а именно "нормировать" сетку у плановых точек перемещения. Под "нормированием", имеется ввиду добавление вспомогательных точек, в те моменты времени, которых нет в пути, который сообщил ЛА в радиоканал. На всех промежутках, считаем, что БПЛА двигаются равномерно-прямолинейно от начала до конца отрезка движения. Новые точки, вычисляются следущим образом:
+\begin{align*}
+    &x = x_i^0 + v_i^x(t - t_{i}),\\
+    &y = y_i^0 + v_i^y(t - t_{i}),\\
+    &z = z_i^0 + v_i^z(t - t_{i}),
+\end{align*}
+где $i$ --- номер промежутка, $x, y, z$ --- координаты новых точек маршрута, $t_i$ --- время начала рассматриваемого промежутка, $t$ - время вычисляемой точки, $v_i^x,v_i^y,v_i^z$ --- координаты вектора скорости на данном промежутке.
+
+Теперь, когда сетки пути номинированные, можно приступить к анализу. Весь анализ сводится к нахождению временных промежутков конфликта. Для этого нужно пройтись по каждому отрезку движения и проверить, есть ли на нем конфликт в плоскости $OXZ$ и оси $Y$. Под конфликтом имеется ввиду, попадает ли другой ЛА, в радиус защитного объема(ЗО) в горизонтальной плоскости и в высоту защитного объема по вертикальной оси. Каждую точку рассматриваемого отрезка для каждого ЛА можно представить следующим образом:
+\begin{align*}
+    &x_i(t) = x_0 + v_i^x(t - t_0),\\
+    &y_i(t) = y_0 + v_i^y(t - t_0),\\
+    &z_i(t) = z_0 + v_i^z(t - t_0)
+\end{align*}
+, где $i$ --- номер ЛА.
+
+Теперь рассмотрим ситуацию, где у нас всего два ЛА с номерами 1 и 2. Тогда имеем  следующие условия:
+
+\begin{align*}
+    ||(x_1(t), z_1(t))^T - (x_2(t), z_2(t))^T|| &\leq R_{30},\\
+    |y_1(t) - y_2(t)| &\leq H_{30}\\
+\end{align*}
+
+Продолжая раскрывать , получим два квадратных уравнения, решения которых будут являться концы промежутков конфликта.
 
 \newpage
 \section{Практическая часть}
@@ -643,6 +713,55 @@ $$n=\frac{c\times a}{|c\times a|}$$
         \item \texttt{vector<FV*> FVs}~---  поле для хранения ссылок на каждый ЛА, участвующий в моделировании.
         \item \texttt{AEtherInfo aetherInfo}~--- поле для хранения радиоканала моделирования.
     \end{itemize}
+    \item \texttt{DataParser.h}~--- файл с методами для подгрузки входных данных по ЛА.   
+    \begin{itemize}
+        \item \texttt{void ParseSolveDataFromJSON(string json\_name, double\& time\_step,\\ double\& integration\_h, int\& solve\_part\_count)}~--- метод для сбора данных для вычислений из файла.
+        \item \texttt{void ParsePathFromJSON(const json\& path\_data, vector<Point>\& path);}~--- метод для сбора данных пути ЛА.
+        \item \texttt{void ParseFVToList(string json\_name, GlobalSituation\& gs);}~--- метод для сбора данных об ЛА из файла в список.
+    \end{itemize}
+    \item \texttt{check}~--- класс предназначенный для сравнения по точности.   
+    \begin{itemize}
+        \item \texttt{static bool EQ(double value\_1, double value\_2);}~---  метод сравнения равенства по точности 
+        \item \texttt{static bool NOTEQ(double value\_1, double value\_2);}~--- метод сравнения не равенства по точности
+        \item \texttt{static bool RE(double value\_1, double value\_2);}~--- метод сравнения больше по точности
+        \item \texttt{static bool REQ(double value\_1, double value\_2);}~--- метод сравнения больше меньше по точности
+        \item \texttt{static bool LE(double value\_1, double value\_2);}~--- метод сравнения меньше по точности
+        \item \texttt{static bool LEQ(double value\_1, double value\_2);}~--- метод сравнения меньше равно по точности
+    \end{itemize}
+    \item \texttt{Parameters}~--- структура для параметров, которые будут записаны в выходном файле, предназначенные для описания ЛА.
+    \begin{itemize}
+        \item \texttt{string name;}~--- поле для ранения имени ЛА
+        \item \texttt{string type;}~--- поле для хранения типа ЛА.
+        \item \texttt{vector<Point> plan;}~--- поле для планового пути движения ЛА.
+    \end{itemize}
+    \item \texttt{DynamicData}~--- структура для динамичных данных, которые будут записаны в выходной файл. 
+    \begin{itemize}
+        \item \texttt{double t}~--- поле для хранения времени 
+        \item \texttt{double x}~--- поле для хранения координаты x
+        \item \texttt{double y}~--- поле для хранения координаты y
+        \item \texttt{double z}~--- поле для хранения координаты z 
+    \end{itemize}
+    \item \texttt{BroadcastData}~--- структура для данных, которые транслируются каждым ЛА в радио канал
+    \begin{itemize}
+        \item \texttt{double t}~--- поле для хранения времени 
+        \item \texttt{double x}~--- поле для хранения координаты x
+        \item \texttt{double y}~--- поле для хранения координаты y
+        \item \texttt{double z}~--- поле для хранения координаты z
+        \item \texttt{string type;}~--- поле для типа транслируемых данных
+       \item \texttt{vector<Point> plan;}~--- поле для короткого плана
+    \end{itemize}
+    \item \texttt{OutputFV}~--- структура для описания данных вывода в файл описывающих ЛА
+    \begin{itemize}
+        \item \texttt{Parameters parameters;}~--- поле для параметров
+        \item \texttt{vector<DynamicData> dynamic\_data;}~--- поле для списка динамичских данных
+        \item \texttt{vector<BroadcastData> broadcasts;}~--- поле для списка тарнслируемых данных
+    \end{itemize}
+    \item \texttt{OutputJsonData}~--- структура для описания выходных данных
+    \begin{itemize}
+        \item \texttt{string version}~--- поле для версии файла
+        \item \texttt{vector<OutputFV> FVs}~--- поле для списка выходных данных по каждому ЛА.
+    \end{itemize}
+    \item \texttt{void writeJsonData(const string\& file\_name,\\ const OutputJsonData\& output\_json\_data)}~--- метод для записи выходных данных в формате json.
      \item \texttt{Modeler}~--- класс для инкапсуляции всего процесса моделирования.
     \begin{itemize}
         \item \texttt{void startModeling()}~---  метод для запуска процесса  моделирования.
@@ -653,17 +772,142 @@ $$n=\frac{c\times a}{|c\times a|}$$
         \item \texttt{double end\_time}~--- поле для хранения момента времени конца вычислений.
         \item \texttt{GlobalSituation globalSituation}~--- поле для хранения глобальных данных моделирования.
     \end{itemize}
+    \item \texttt{void mergeShortPlans(const vector<Point>\& arr1, const vector<Point>\& arr2,
+	vector<Point>\& res1, vector<Point>\& res2)}~--- метод нормирования сеток трнаслируемых планов движения в радио канал.
+\end{itemize}
+\subsection{Входные данные}
+Входные данные программы представляют собой json файл следующей структуры:
+\begin{verbatim}
+{
+  "timeStep": 1,
+  "solve_part_count": 10,
+  "AirCraftList": [
+    {
+      "type": "MaterialPoint",
+      "fv_id": "first",
+      "parameters": {
+        "v_x": 0,
+        "v_y": 0,
+        "v_z": 0,
+        "maxAcceleration": 1,
+        "k_xz": -1,
+        "k_y": -1,
+        "broadcastStep": 2,
+        "radiusFilter": 5,
+        "heightWarn": 2,
+        "radiusWarn": 3
+      },
+      "path": [
+        {
+          "time": 0,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        ...
+      ]
+    }
+\end{verbatim}
+\begin{itemize}
+    \item \texttt{timeStep}~--- шаг вывода вычислений
+    \item \texttt{solve\_part\_count}~--- кол-во вычислений итегрирования
+    \item \texttt{AirCraftList}~--- список описаний ЛА.
+    \begin{itemize}
+        \item \texttt{type}~--- тип ЛА.
+        \item \texttt{fv\_id}~---  id ЛА.
+        \item \texttt{parameters}~--- параеметры ЛА.
+        \begin{itemize}
+            \item  \texttt{v\_x}~--- координата вектора скорости по оси X
+            \item  \texttt{v\_y}~--- координата вектора скорости по оси Y
+            \item  \texttt{v\_z}~--- координата вектора скорости по оси z
+            \item \texttt{maxAcceleration}~--- максимальное ускорение
+            \item\texttt{k\_xz}~--- коэффициент управления по xz
+            \item\texttt{k\_y}~--- коэффициент управления по y
+            \item\texttt{broadcastStep}~---шаг трансляции
+            \item\texttt{radiusFilter}~--- радиус фильтрации
+            \item\texttt{heightWarn}~--- высота защитного объема 
+            \item\texttt{radiusWarn}~--- радиус защитного объема
+        \end{itemize}
+        \item \texttt{path}~--- список точек пути
+        \begin{itemize}
+            \item \texttt{time}~--- момоент времени
+            \item \texttt{x}~--- координата x
+            \item \texttt{y}~--- координата y
+            \item\texttt{z}~--- координата z
+        \end{itemize}
+    \end{itemize}
 \end{itemize}
 
+\subsection{Выходные данные}
+Выходные данные программы представляют собой json файл следующей структуры:
+\begin{verbatim}
+{FVs: [
+  {
+    parameters : { 
+        name: ...,
+        plane: [...],
+        type: ...
+    },
+    dynamic_data : { 
+        {
+            t: ...,
+            x: ...,
+            y: ...,
+            z: ...,
+        },
+        ...
+    },
+    broadcasts : [
+        {
+            "plan": [...],
+            "t": ...,
+            "type": ...,
+            "x": ...,
+            "y": ...,
+            "z": ...,
+        },
+        ...
+    ]
+  },
+  { ... }
+]}
+\end{verbatim}
+\begin{itemize}
+    \item \texttt{parameters}~--- параеметры ЛА.
+    \begin{itemize}
+            \item  \texttt{name}~--- имя ЛА.
+            \item  \texttt{plane}~--- плановый путь ЛА.
+            \item  \texttt{type}~--- тип ЛА.
+    \end{itemize}
+    \item \texttt{dynamicData}~--- список точек движения ЛА вычисленных на каждой итерации
+    \begin{itemize}
+            \item \texttt{t}~--- момоент времени
+            \item \texttt{x}~--- координата x
+            \item \texttt{y}~--- координата y
+            \item\texttt{z}~--- координата z
+    \end{itemize}
+    \item \texttt{broadcasts}~--- список сообщений ЛА в радиоканал.
+    \begin{itemize}
+            \item  \texttt{plane}~--- короткий плановый путь, на следующие 4 точки.
+            \item  \texttt{t}~--- время вещания.
+            \item  \texttt{type}~--- тип вещания, либо позиции либо короткого плана.
+            \item  \texttt{x}~--- координата позиции x.
+            \item  \texttt{y}~--- координата позиции y.
+            \item  \texttt{z}~--- координата позиции z.
+    \end{itemize}
+\end{itemize}
 \subsection{Реализация динамических моделей}
 Для реализации динамических моделей был создан базовый абстрактный класс FV. Он определяет базовые свойства присущие каждой модели движения, такие как:
 \begin{itemize}
     \item     \texttt{virtual void next(double h, double end\_time) = 0}~--- виртуальная функция, которая служит для вычисления следующего состояния БПЛА с шагом $h$ до момента $end\_time$.
     \item \texttt{virtual void setPath(vector<Point> path)}~--- виртуальная функция, которая служит для вычисления прокладки пути. По умолчанию вычисляется по схеме прокладки с упреждением поворота.
+    \item \texttt{void doBroadcast()}~--- метод для трансляции данных в радио канал.
+    \item \texttt{void checkConflict()} -- метод для проверки конфликтов.
     \item \texttt{vector<Point> getBasePath()}~--- возвращает базовый путь, введенный пользователем.
     \item \texttt{Path getDynamicPath()}~--- возвращает построенный путь прокладки при задании пути.
     \item \texttt{vector<Point> basePath}~--- поле для хранения базового пути, который вводит пользователь.
-    \item \texttt{Path dynamicPath}~--- поле для хранения, пути прокладки, заданной с помощью метода  \texttt{setPath}.
+    \item \texttt{Path turnPath}~--- поле для хранения, пути прокладки, заданной с помощью метода  \texttt{setPath}.
+    \item \texttt{Path dynamicPath}~--- поле для хранения динамически изменяемого пути  \texttt{setPath}.
     \item \texttt{virtual double solveTurnRadius(const Vector3\& v1, const Vector3\& v2)}~---\\ метод,  принимающий две скорости ЛА на соседних промежутках. Вычисляет радиус поворота.
     \item \texttt{double time}~--- поле для хранения времени текущего состояния БПЛА
      \item \texttt{double broadсastStep}~--- поле, в котором записан шаг вещания.

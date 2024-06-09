@@ -239,7 +239,7 @@ void FV::doBroadcast()
 
 
 	if (globalSituation->aetherInfo.states[this->name].shortPlan.empty() ||
-		check::leqCheckDouble(globalSituation->aetherInfo.states[this->name].shortPlan[0].arrivalTime , time))
+		check::LEQ(globalSituation->aetherInfo.states[this->name].shortPlan[0].arrivalTime , time))
 	{
 		Plane plane = getPlane();
 		vector<Point> short_plan;
