@@ -991,6 +991,145 @@ v = (*curVelocity)[2];
 (*newVelocity)[2] = v + h * 
         ((k_v * wishVelocity.z + k_x * wishPosition.x) - v) / inertialXZ;
 \end{verbatim}
+\subsection{Реализация радиовещания}
+Для реализации радиовещания был создан класс \texttt{AetherInfo}.
+\begin{verbatim}
+class AEtherInfo
+{
+public:
+    map<string,FVState> states;
+    void broadcastState(double time,const Plane& plane);
+    void broadcastPlan(const string& name,double time,
+                       const vector<Point>& shortPlan);
+};
+\end{verbatim}
+Симуляцию радиоканала выполнял словарь \texttt{states}, где ключом является идентификатор БПЛА, а значением выступает специальная структура \texttt{FVState}.
+\begin{verbatim}
+struct FVState
+{
+    double planeTranslationTime;
+    Plane plane;
+    double translationTime;
+    vector<Point> shortPlan;
+};
+\end{verbatim}
+У каждого ЛА есть указатель на радиоканал и метод \texttt{doBroadcast}.
+\begin{verbatim}
+void FV::doBroadcast()
+{
+    if ( nextBroadcastInstant <= time)
+    {
+            nextBroadcastInstant += broadcastStep;
+            Plane plane = getPlane();
+            globalSituation->aetherInfo.broadcastState(time,plane);  
+            nextBroadcastInstant += broadcastStep;
+    }
+    
+    if (globalSituation->aetherInfo.states[this->name].shortPlan.empty() ||
+        check::LEQ(globalSituation->aetherInfo.states[this->name].
+            shortPlan[0].arrivalTime , time))
+    {
+            Plane plane = getPlane();
+            vector<Point> short_plan;
+            for (auto& p : dynamicPath)
+            {
+                    if (short_plan.size() > 3) break;
+                    if (p.arrivalTime <= time + EPS) continue;
+                    short_plan.push_back(Point(p.position, p.arrivalTime));
+            }
+        
+            globalSituation->aetherInfo.
+                broadcastPlan(plane.name, time, short_plan);
+    }
+}
+\end{verbatim}
+В данном методе производятся проверки условий при которых нужно вызывать соответствующий метод отправки данных в радио канал. Для сообщения новой позиции каждый аппарат имеет встроенный временной период с которым требуется производить отправку, для сообщения "короткого плана" все немного сложнее. Отправка новых будущих позиций происходит, если ЛА достиг очередной точки.
+\subsection{Реализация обнаружения конфликтов}
+Обнаружение конфликтов была реализовано в методе \texttt{checkConflict}. Каждый БПЛА вызывает этот метод после произведения расчетов перемещения. Все проверки происходят в цикле \texttt{for} по каждому ЛА.
+Первым делом происходит проверка расстояния:
+\begin{verbatim}
+    Plane plane = getPlane();
+    Vector3 pos = Vector3(plane.x, plane.y, plane.z);
+    Vector3 hisPos = Vector3(states[fv_name].plane.x, 
+                             states[fv_name].plane.y, 
+                             states[fv_name].plane.z);
+    Vector3 relPosition = hisPos - pos;
+    if (relPosition.norm() > radiusFilter) continue;
+\end{verbatim}
+Затем проверка на сближение:
+\begin{verbatim}
+    Vector3 vel = Vector3(plane.speedX, plane.speedY, plane.speedZ);
+    Vector3 hisVel = Vector3(states[fv_name].plane.speedX, 
+                             states[fv_name].plane.speedY, 
+                             states[fv_name].plane.speedZ);
+    if (scalarProduct(relPosition, hisVel - vel) < 0) continue;
+\end{verbatim}
+Если определяется, что текущий ЛА сближается с рассматриваемым, то происходит вычисление промежутка конфликта  для условий плоскости \texttt{OXZ} по всем промежуткам:
+\begin{verbatim}
+    Vector3 my_vel = (my_plan[i + 1].position - my_plan[i].position) /
+                     (my_plan[i + 1].arrivalTime - my_plan[i].arrivalTime);
+    Vector3 his_vel = (his_plan[i + 1].position - his_plan[i].position) /
+                      (his_plan[i + 1].arrivalTime - his_plan[i].arrivalTime);
+    
+    double A = (my_vel.x - his_vel.x)* (my_vel.x - his_vel.x) +
+               (my_vel.z - his_vel.z) * (my_vel.z - his_vel.z);
+    double B = - 2 * (my_plan[i].arrivalTime * A + 
+                     ((my_plan[i].position.x - his_plan[i].position.x)+ 
+                      (my_vel.x - hisVel.x)) *
+                ((my_plan[i].position.z - his_plan[i].position.z) +
+                 (my_vel.z - hisVel.z)));
+    
+    double C = -2 * my_plan[i].arrivalTime * 
+                    ((my_plan[i].position.x - his_plan[i].position.x) + 
+                     (my_vel.x - hisVel.x)) * 
+                     ((my_plan[i].position.z - his_plan[i].position.z) + 
+                      (my_vel.z - hisVel.z)) + 
+                    my_plan[i].arrivalTime * my_plan[i].arrivalTime * A +
+                    (my_plan[i].position.x - his_plan[i].position.x) *
+                    (my_plan[i].position.z - his_plan[i].position.z) - 
+                    radiusWarn;
+    
+    /// Находим корни
+    double D = B * B - 4 * A * C;
+    if (D >= 0) 
+    {
+        double t1 = (-B - sqrt(D)) / (2 * A);
+        double t2 = (-B + sqrt(D)) / (2 * A);
+        
+        left_t_min_xz = min(t1,left_t_min_xz);
+        right_t_max_xz = max(t2, right_t_max_xz);
+    }
+\end{verbatim}
+Затем делаем то же самое но для оси \texttt{Y}:
+\begin{verbatim}
+    // Проверка по Y
+    double Ay = (my_vel.y - his_vel.y) * (my_vel.y - his_vel.y);
+    double By = 2 * (my_vel.y - his_vel.y) * 
+                    ((my_plan[i].position.y - his_plan[i].position.y) +
+                    my_plan[i].arrivalTime * (my_vel.y - his_vel.y));
+    
+    double Cy = ((my_plan[i].position.y - his_plan[i].position.y) +
+                  my_plan[i].arrivalTime * (my_vel.y - his_vel.y)) *
+                  ((my_plan[i].position.y - his_plan[i].position.y) + 
+                    my_plan[i].arrivalTime * (my_vel.y - his_vel.y))
+                - heightWarn;
+    
+    /// Находим корни
+    double Dy = By * By - 4 * Ay * Cy;
+    if (Dy >= 0) {
+        double t1_y = (-By - sqrt(Dy)) / (2 * Ay);
+        double t2_y = (-By + sqrt(Dy)) / (2 * Ay);
+    
+        left_t_min_y = min(t1_y, left_t_min_y);
+        right_t_max_y = max(t2_y, right_t_max_y);
+    }
+\end{verbatim}
+В самом конце делаем проверку, на пересечение, если пересечений нет, то значит конфликта тоже нет
+\begin{verbatim}
+    if ((left_t_min_xz - right_t_max_y) * 
+        (left_t_min_y - right_t_max_xz) <= 0) return;
+\end{verbatim}
+
 \subsection{Результаты}
 
 В данном пункте пошагово пройдемся по этапам вычисления. Пусть пользователь задал такой маршрут состоящий из 4 точек: 
