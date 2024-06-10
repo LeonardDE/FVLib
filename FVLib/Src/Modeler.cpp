@@ -38,7 +38,7 @@ void Modeler::startModeling()
 		data.FVs.push_back(out_fv);
 	}
 
-	while (timer < end_time)
+	while (timer <= end_time)
 	{
 		
 		for (auto& fv : globalSituation.FVs)
