@@ -6,9 +6,14 @@ using namespace std;
 
 
 
-int main()
+int main(int argc, char* argv[])
 {
-	string file_name = "test2.json";
+	if (argc != 2 || strcmp(argv[1], "-h") == 0) {
+		printf("USAGE: main[.exe] input_file\n");
+		return 0;
+	}
+	
+	string file_name = argv[1];
 	Modeler modeler = Modeler(file_name);
 	
 	modeler.startModeling();

@@ -1,5 +1,5 @@
 {
-  "timeStep": 1,
+  "timeStep": 0.25,
   "solve_part_count": 10,
   "AirCraftList": [
     {

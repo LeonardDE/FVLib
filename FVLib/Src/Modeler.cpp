@@ -91,5 +91,6 @@ void Modeler::startModeling()
 		}
 		timer += timeStep;
 	}
+	data.dt = timeStep;
 	writeJsonData("output.json", data);
 }
