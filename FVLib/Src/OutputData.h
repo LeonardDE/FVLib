@@ -55,6 +55,7 @@ struct OutputJsonData
 	string version = "1.0";
 	vector<OutputObstacle> obstacls;
 	vector<OutputFV> FVs;
+	double dt;
 };
 
 void writeJsonData(const string& file_name, const OutputJsonData& output_json_data);

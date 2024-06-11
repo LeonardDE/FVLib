@@ -12,7 +12,7 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(BroadcastData, t, type,x,y,z,plan);
 
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(OutputFV, parameters,dynamic_data,broadcasts);
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(OutputJsonData, FVs, version);
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(OutputJsonData, version, dt, FVs);
 
 
 
@@ -22,5 +22,5 @@ void writeJsonData(const string& file_name, const OutputJsonData& output_json_da
 	//cout << j.dump(1)<< endl;
 	ofstream f(file_name);
 	f << setw(4) << j << endl;
-
+	f.close();
 };
