@@ -468,30 +468,30 @@ $v_1, v_2$ --- векторы скорости первого и второго 
 		\coordinate [label=above:$t_{23}$] (t23) at (4,2);
     \coordinate [label=right:$t_{24}$] (t24) at (6,2);
     
-		\coordinate [label=left:$t_{1}$] (t1) at (0,0);
-		\coordinate [label=above:$t_{2}$] (t2) at (1,0);
-		\coordinate [label=above:$t_{3}$] (t3) at (2,0);
-		\coordinate [label=above:$t_{4}$] (t4) at (3,0);
-		\coordinate [label=above:$t_{5}$] (t5) at (4,0);
-		\coordinate [label=above:$t_{6}$] (t6) at (5,0);
-    \coordinate [label=right:$t_{7}$] (t7) at (6,0);
+		%\coordinate [label=left:$t_{1}$] (t1) at (0,0);
+		\coordinate [label=above:$t_{1}$] (t2) at (1,0);
+		\coordinate [label=above:$t_{2}$] (t3) at (2,0);
+		\coordinate [label=above:$t_{3}$] (t4) at (3,0);
+		\coordinate [label=above:$t_{4}$] (t5) at (4,0);
+		\coordinate [label=above:$t_{5}$] (t6) at (5,0);
+    %\coordinate [label=right:$t_{7}$] (t7) at (6,0);
 
     \draw [line width=1pt,-] (t11) -- (t12);
 		\draw [line width=1pt,-] (t12) -- (t13);
 		\draw [line width=1pt,-] (t13) -- (t14);
 
-    \draw [-,thick,dotted,gray] (t11) -- (t1);
+    %\draw [-,thick,dotted,gray] (t11) -- (t1);
 		\draw [-,thick,dotted,gray] (t21) -- (t2);
 		\draw [-,thick,dotted,gray] (t12) -- (t3);
 		\draw [-,thick,dotted,gray] (t13) -- (t4);
 		\draw [-,thick,dotted,gray] (t23) -- (t5);
 		\draw [-,thick,dotted,gray] (t14) -- (t6);
 
-    \draw [-,thick,dotted,gray] (t24) -- (t7);
+    %\draw [-,thick,dotted,gray] (t24) -- (t7);
 
     \draw [-,line width=1pt] (t21) -- (t24);
 		
-		\draw [line width=1pt,-] (t1) -- (t7);
+		\draw [line width=1pt,-] (t2) -- (t6);
 		
   \end{tikzpicture}
 \end{center}  
