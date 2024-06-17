@@ -17,7 +17,6 @@ add_executable(UMVmodelling
   Src/Modeler.h
   Src/Obstacle.h
   Src/OutputData.h
-  Src/ParamReader.h
   Src/Path.h
   Src/PathPoint.h
   Src/Plane.h
@@ -37,7 +36,6 @@ add_executable(UMVmodelling
   Src/MaterialPoint.cpp
   Src/Modeler.cpp
   Src/OutputData.cpp
-  Src/ParamReader.cpp
   Src/Path.cpp
   Src/PathPoint.cpp
   Src/Point.cpp

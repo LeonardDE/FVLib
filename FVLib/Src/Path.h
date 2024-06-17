@@ -2,15 +2,14 @@
 #include <vector>
 #include "PathPoint.h"
 
-class Path
-{
+class Path {
 public:
-    Path(vector<PathPoint> path = vector<PathPoint>{}, int index = 0) : path(path) {};
+  Path(vector<PathPoint> path = vector<PathPoint>{}) : path(path) {};
 
-    PathPoint getPointForIndex(int ind);
-    void addNewPoint(PathPoint p);
-    vector<PathPoint> getPath();
+  PathPoint getPointForIndex(int ind);
+  void addNewPoint(PathPoint p);
+  vector<PathPoint> getPath();
 
 private:
-    vector<PathPoint> path;
+  vector<PathPoint> path;
 };

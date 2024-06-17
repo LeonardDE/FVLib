@@ -14,55 +14,45 @@ using json = nlohmann::json;
 
 class GlobalSituation;
 
-class FV
-{
+class FV {
 public:
+  virtual Plane getPlane() = 0;
+  virtual void next(double h, double end_time) = 0;
+  virtual void setPath(vector<Point> path);
+  vector<Point> getBasePath() {
+    return basePath;
+  };
+  Path getDynamicPath() {
+    return turnPath;
+  };
+  double getTime() {
+    return time;
+  }
 
-    virtual Plane getPlane() = 0;
-    virtual void next(double h, double end_time) = 0;
-    virtual void setPath(vector<Point> path);
-    vector<Point> getBasePath()
-    {
-        return basePath;
-    };
-    Path getDynamicPath()
-    {
-        return turnPath;
-    };
-    double getTime()
-    {
-        return time;
-    }
-
-    //void writeFVState(double timeStep);
-    friend void mergeShortPlans(const vector<Point>& arr1, const vector<Point>& arr2,
-        vector<Point>& res1, vector<Point>& res2);
-    json conflicts;
+  friend void mergeShortPlans(const vector<Point>& arr1, const vector<Point>& arr2,
+    vector<Point>& res1, vector<Point>& res2);
+  json conflicts;
 protected:
-    string name;
-    vector<Point> basePath;
-    vector<Point> dynamicPath;
-    Path turnPath;
-    //double maxAcceleration;
-    double time = 0;
+  string name;
+  vector<Point> basePath;
+  vector<Point> dynamicPath;
+  Path turnPath;
+  double time = 0;
 
-    double radiusFilter = 0;
-    double broadcastStep;
-    double nextBroadcastInstant = 0;
+  double radiusFilter = 0;
+  double broadcastStep;
+  double nextBroadcastInstant = 0;
 
-    double radiusWarn;
-    double heightWarn;
+  double radiusWarn;
+  double heightWarn;
 
-    virtual double solveTurnRadius(const Vector3& v1, const Vector3& v2) =0;
+  virtual double solveTurnRadius(const Vector3& v1, const Vector3& v2) = 0;
 
-    virtual void doBroadcast();
+  virtual void doBroadcast();
 
-    GlobalSituation* globalSituation;
+  GlobalSituation* globalSituation;
 
-    virtual void checkConflict();
- 
-
-    
+  virtual void checkConflict();
 };
 
 
@@ -70,4 +60,4 @@ protected:
 
 
 void mergeShortPlans(const vector<Point>& arr1, const vector<Point>& arr2,
-    vector<Point>& res1, vector<Point>& res2);
+  vector<Point>& res1, vector<Point>& res2);

@@ -36,11 +36,11 @@ double MaterialPoint::solveTurnRadius(const Vector3& v1, const Vector3& v2)
 
 void MaterialPoint::next(double h, double end_time)
 {
-	// Проверка что end_time на промежуток
-	int l = 0; // левая граница
-	int r = turnPath.getPath().size() - 1; // правая граница
+	// РџСЂРѕРІРµСЂРєР° С‡С‚Рѕ end_time РЅР° РїСЂРѕРјРµР¶СѓС‚РѕРє
+	int l = 0; // Р»РµРІР°СЏ РіСЂР°РЅРёС†Р°
+	int r = turnPath.getPath().size() - 1; // РїСЂР°РІР°СЏ РіСЂР°РЅРёС†Р°
 	int mid;
-	// проверка с концами
+	// РїСЂРѕРІРµСЂРєР° СЃ РєРѕРЅС†Р°РјРё
 
 	if (end_time < turnPath.getPointForIndex(l).arrivalTime ||
 		end_time > turnPath.getPointForIndex(r).arrivalTime)
@@ -126,22 +126,22 @@ string MaterialPoint::getType()
 void MaterialPoint::computeWishData(double time_solve)
 {
 
-	int l = 0; // левая граница
-	int r = turnPath.getPath().size() - 1; // правая граница
+	int l = 0; // Р»РµРІР°СЏ РіСЂР°РЅРёС†Р°
+	int r = turnPath.getPath().size() - 1; // РїСЂР°РІР°СЏ РіСЂР°РЅРёС†Р°
 	int mid;
-	// проверка с концами
+	// РїСЂРѕРІРµСЂРєР° СЃ РєРѕРЅС†Р°РјРё
 
 	if (check::LT(turnPath.getPointForIndex(l).arrivalTime, time_solve) ||
 		check::LT(time_solve , turnPath.getPointForIndex(r).arrivalTime))
 	{
 		cout << "Time moment = "<< time_solve << " not in path time." << " FV_id = " << name << endl;
-		return;//exit(0);
+		return;
 	}
 
 	while ((r - l > 1)) {
-		mid = (l + r) / 2; // считываем срединный индекс отрезка [l,r]
+		mid = (l + r) / 2; // СЃС‡РёС‚С‹РІР°РµРј СЃСЂРµРґРёРЅРЅС‹Р№ РёРЅРґРµРєСЃ РѕС‚СЂРµР·РєР° [l,r]
 
-		if (turnPath.getPointForIndex(mid).arrivalTime > time_solve) r = mid; // проверяем, какую часть нужно отбросить
+		if (turnPath.getPointForIndex(mid).arrivalTime > time_solve) r = mid; // РїСЂРѕРІРµСЂСЏРµРј, РєР°РєСѓСЋ С‡Р°СЃС‚СЊ РЅСѓР¶РЅРѕ РѕС‚Р±СЂРѕСЃРёС‚СЊ
 		else l = mid;
 	}
 

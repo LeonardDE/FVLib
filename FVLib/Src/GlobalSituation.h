@@ -9,36 +9,28 @@ using namespace std;
 #include "FV.h"
 
 
-struct FVState
-{
-	double planeTranslationTime;
-	Plane plane;
-
-	//bool isExist = false;
-	double translationTime;
-	vector<Point> shortPlan;
-	
+struct FVState {
+  double planeTranslationTime;
+  Plane plane;
+  
+  double translationTime;
+  vector<Point> shortPlan;
 };
 
-class AEtherInfo
-{
+class AEtherInfo {
 public:
-	map<string,FVState> states;
-	void broadcastState(double time,const Plane& plane);
-	void broadcastPlan(const string& name,double time, const vector<Point>& shortPlan);
+  map<string, FVState> states;
+  void broadcastState(double time, const Plane& plane);
+  void broadcastPlan(const string& name, double time, const vector<Point>& shortPlan);
 };
 
-class GlobalSituation
-{
+class GlobalSituation {
 public:
-	vector<FV*> FVs;
-	AEtherInfo aetherInfo;
-	~GlobalSituation()
-	{
-		for (auto p : FVs)
-		{
-			delete p;
-		}
-	};
-private:
+  vector<FV*> FVs;
+  AEtherInfo aetherInfo;
+  ~GlobalSituation() {
+    for (FV* p : FVs) {
+      delete p;
+    }
+  }
 };

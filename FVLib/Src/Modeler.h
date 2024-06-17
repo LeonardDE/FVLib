@@ -4,7 +4,7 @@
 #include <limits>
 
 #include "GlobalSituation.h"
-
+#include "OutputData.h"
 
 class Modeler
 {
@@ -23,5 +23,6 @@ private:
   string in_file;
   string out_file;
 
-	GlobalSituation globalSituation;
+  GlobalSituation globalSituation;
+  OutputJsonData data;
 };

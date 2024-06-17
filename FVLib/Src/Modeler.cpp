@@ -9,15 +9,15 @@ Modeler::Modeler(const string& in_file, const string& out_file) {
   this->in_file = in_file;
   this->out_file = out_file;
 
-  // Ñîáèðàåì äàííûå î ËÀ
+  // Ð¡Ð¾Ð±Ð¸Ñ€Ð°ÐµÐ¼ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¾ Ð›Ð
   ParseFVToList(this->in_file, globalSituation);
   
-  // Ñîáèðàåì äàííûå äëÿ âû÷èñëåíèé
+  // Ð¡Ð¾Ð±Ð¸Ñ€Ð°ÐµÐ¼ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð´Ð»Ñ Ð²Ñ‹Ñ‡Ð¸ÑÐ»ÐµÐ½Ð¸Ð¹
   ParseSolveDataFromJSON(this->in_file, timeStep, integral_h, solve_part_count);
 
-  // Èùåì ìàêñèìàëüíîå è ìèíèìàëüíîå çíà÷åíèå âðåìåíè
-  for (auto& fv : globalSituation.FVs) {
-    for (auto& point : fv->getDynamicPath().getPath()) {
+  // Ð˜Ñ‰ÐµÐ¼ Ð¼Ð°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ð¾Ðµ Ð¸ Ð¼Ð¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½Ð¾Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸
+  for (FV* & fv : globalSituation.FVs) {
+    for (PathPoint& point : fv->getDynamicPath().getPath()) {
       start_time = start_time > point.arrivalTime ? point.arrivalTime : start_time;
       end_time = end_time < point.arrivalTime ? point.arrivalTime : end_time;
     }
@@ -28,7 +28,6 @@ void Modeler::startModeling() {
   double timer = start_time;
   double h = timeStep / solve_part_count;
 
-  OutputJsonData data;
   for (auto& fv : globalSituation.FVs) {
     OutputFV out_fv;
     Plane plane = fv->getPlane();
@@ -38,17 +37,23 @@ void Modeler::startModeling() {
     data.FVs.push_back(out_fv);
   }
 
+  // The global loop over time
   while (timer <= end_time) {
 
-    for (auto& fv : globalSituation.FVs) {
+    // Moving the FVs
+    for (FV* & fv : globalSituation.FVs) {
       fv->next(h, timer);
     }
 
+    // Loop over all FVs to store data to be written to the output and to simulate broadcasts
     for (int i = 0; i < data.FVs.size(); i++) {
+
+      // Storing trajectory data for final output
       FV* fv = globalSituation.FVs[i];
       OutputFV& out_fv = data.FVs[i];
       Plane plane = fv->getPlane();
 
+      // Simulating broadcast of the FV's position
       if (check::LE(timer, fv->getBasePath()[fv->getBasePath().size() - 1].arrivalTime) &&
         check::LE(fv->getBasePath()[0].arrivalTime, timer)) {
         DynamicData dynamic_data;
@@ -59,7 +64,7 @@ void Modeler::startModeling() {
         out_fv.dynamic_data.push_back(dynamic_data);
       }
 
-
+      // Simulating broadcast of the FV's motion forecast
       if (check::LE(globalSituation.aetherInfo.states[plane.name].planeTranslationTime, timer + timeStep) &&
         check::LT(timer, globalSituation.aetherInfo.states[plane.name].planeTranslationTime)) {
         BroadcastData broadcastdata;

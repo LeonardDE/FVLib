@@ -89,7 +89,7 @@ void Copter::next(double h, double end_time)
 
 double Copter::solveTurnRadius(const Vector3& v1, const Vector3& v2)
 {
-	// рср врн рн асдер
+	// я─я│я─ п╡я─п╫ я─п╫ п╟я│п╢п╣я─
 	return 1;
 }
 

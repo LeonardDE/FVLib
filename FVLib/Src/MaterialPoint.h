@@ -17,7 +17,7 @@ public:
 
     string getName();
     string getType();
-    // текущее ускорение 
+    // С‚РµРєСѓС‰РµРµ СѓСЃРєРѕСЂРµРЅРёРµ 
     Vector3 acceleration;
 
     Vector3 wishPosition;
