@@ -1,5 +1,8 @@
-#include "OutputData.h"
 #include <fstream>
+using namespace std;
+
+#include "OutputData.h"
+
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Vector3, x, y, z);
 
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Point, position, arrivalTime);
@@ -21,6 +24,6 @@ void writeJsonData(const string& file_name, const OutputJsonData& output_json_da
 	json j = output_json_data;
 	//cout << j.dump(1)<< endl;
 	ofstream f(file_name);
-	f << setw(4) << j << endl;
+	f << setw(3) << j << endl;
 	f.close();
 };

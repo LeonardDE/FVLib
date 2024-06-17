@@ -2,11 +2,12 @@ cmake_minimum_required(VERSION 3.25)
 
 set(CMAKE_CXX_STANDARD 20)
 
-project(FVLib)
+project(UMVmodelling)
 
 include_directories(Src Src/lib)
 
-add_executable(FVLib 
+add_executable(UMVmodelling 
+
 #  Include files
   Src/Copter.h
   Src/DataParser.h
@@ -19,12 +20,14 @@ add_executable(FVLib
   Src/ParamReader.h
   Src/Path.h
   Src/PathPoint.h
+  Src/Plane.h
   Src/Point.h
   Src/TurnData.h
   Src/Vector3.h
   Src/global.h
-  Src/json.hpp    
-  Src/lib/plane.h
+
+  Src/lib/cxxopts.h
+  Src/lib/json.h
 
 #  Source files
   Src/Copter.cpp

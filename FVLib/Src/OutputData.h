@@ -4,7 +4,7 @@
 #include <fstream>
 using namespace std;
 
-#include "json.hpp"
+#include "json.h"
 using json = nlohmann::json;
 
 #include "Vector3.h"

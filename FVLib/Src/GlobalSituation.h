@@ -2,10 +2,11 @@
 #include <vector>
 #include <string>
 #include <map>
-#include "lib/plane.h"
+using namespace std;
+
+#include "Plane.h"
 #include "Point.h"
 #include "FV.h"
-using namespace std;
 
 
 struct FVState

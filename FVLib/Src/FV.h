@@ -6,9 +6,9 @@
 
 #include "Vector3.h"
 #include "Path.h"
-#include "lib/plane.h"
+#include "Plane.h"
 
-#include "json.hpp"
+#include "lib/json.h"
 using json = nlohmann::json;
 
 

@@ -1,105 +1,74 @@
 #include <iostream>
 #include <string>
-#include "Modeler.h"
-#include "FV.h"
 using namespace std;
 
+#include "lib/cxxopts.h"
+using namespace cxxopts;
 
+#include "Modeler.h"
+#include "FV.h"
 
+/*
+,
+    {
+      "name": "C++ Debug",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${command:cmake.launchTargetPath}",
+      "cwd": "${workspaceFolder}/Tests/",
+      "stopAtEntry": false,
+      "args" : [ "-i", "../Tests/test3.json", "-o", "../Tests/output3.json" ],
+      "customLaunchSetupCommands": [
+        {
+          "text": "target-run",
+          "description": "run target",
+          "ignoreFailures": false
+        }
+      ],
+      "launchCompleteCommand": "exec-run",
+      "linux": {
+        "MIMode": "gdb",
+        "miDebuggerPath": "/usr/bin/gdb"
+      }
+    }
+    */
 int main(int argc, char* argv[])
 {
-	if (argc != 2 || strcmp(argv[1], "-h") == 0) {
-		printf("USAGE: main[.exe] input_file\n");
-		return 0;
-	}
-	
-	string file_name = argv[1];
-	Modeler modeler = Modeler(file_name);
-	
-	modeler.startModeling();
+  Options options("UMVmodelling", "Program for modelling UFV motion and conflict avoidance");
+  options.add_options()
+    ("h, help", "Show the help instructions")
+    ("i, input", "Name of the input file", value<string>())
+    ("o, output", "Name of the output file", value<string>());
 
-	return 0;
+  ParseResult result = options.parse(argc, argv);
+
+  //  Shows the help if needed
+  if (result.count("h") > 0 || result.arguments().empty()) {
+    cout << options.help({ "" });
+    exit(0);
+  }
+
+  string in_file, out_file;
+
+  if (result.count("input") > 0) {
+    in_file = result["input"].as<string>();
+  } else {
+    cout << "Input file name is needed!" << endl;
+    cout << options.help({ "" });
+    exit(1);
+  }
+
+  if (result.count("output") > 0) {
+    out_file = result["output"].as<string>();
+  } else {
+    cout << "Output file name is needed!" << endl;
+    cout << options.help({ "" });
+    exit(2);
+  }
+
+  Modeler modeler = Modeler(in_file, out_file);
+
+  modeler.startModeling();
+
+  return 0;
 }
-
-//int main()
-//{
-//	output = fopen("position.dat", "w");
-//	velocity_file = fopen("velocity.dat", "w");
-//	path_file = fopen("path.dat", "w");
-//	path_file_2 = fopen("path2.dat", "w");
-//	acceleration_file = fopen("acceleration.dat", "w");
-//	wishPos = fopen("wishPos.dat", "w");
-//	wishVel = fopen("wishVel.dat", "w");
-//
-//	// Получать время
-//	// Получаем шаг вычисления состояния
-//	// Получаем шаг интегрирования для моделей/аппаратов
-//	double solve_time = 1;
-//	double integral_h = 0.001;
-//	double h = 0.001;
-//	double timer = 0;
-//
-//	MaterialPoint mPoint = MaterialPoint("point",0,0,0,0,0,0,1,-1,-1);
-//
-//	Vector3 p1 = Vector3(  0,0,0 );
-//	Vector3 p2 = Vector3(  10,0,0);
-//	Vector3 p3 = Vector3(  10,0,-5 );
-//	Vector3 p4 = Vector3( 15, 0, -10);
-//
-//	vector<Point> path =
-//	{
-//		Point(p1,0),
-//		Point{p2,10},
-//		Point{p3,20},
-//		Point{p4,25},
-//	};
-//
-//	mPoint.setPath(path);
-//
-//	for (const Point& pathPoint : path//mPoint.getPath()
-//		)
-//	{
-//		fprintf(path_file, "%f %f\n", pathPoint.position.x, pathPoint.position.z);
-//	}
-//
-//	for (PathPoint pathPoint : mPoint.getDynamicPath().getPath())
-//	{
-//		pathPoint.position.print("POINT and Time");
-//		cout << pathPoint.arrivalTime << endl;
-//		cout << (int)pathPoint.type << endl;
-//		fprintf(path_file_2, "%f %f\n", pathPoint.position.x, pathPoint.position.z);
-//	}
-//
-//	Plane plane;
-//	while (timer < 25)
-//	{
-//		mPoint.next(0.01, timer);
-//		plane = mPoint.getPlane();
-//		cout << "-------" << timer << "------" << endl;
-//		cout << "Position(" << plane.x << ", " << plane.y << ", " << plane.z << ")" << endl;
-//		cout << "Velocity(" << plane.speedX << ", " << plane.speedY << ", " << plane.speedZ << ")" << endl;
-//		cout << "|Velocity| = " << plane.speed << endl;
-//		cout << "-------------" << endl;
-//
-//		fprintf(output, "%f %f\n", plane.x, plane.z);
-//		fprintf(velocity_file, "%f %f %f\n", timer,plane.speedX, plane.speedZ);
-//		fprintf(acceleration_file, "%f %f\n",  timer, mPoint.acceleration.norm());
-//
-//		fprintf(wishPos, "%f %f %f\n", mPoint.wishPosition.x, mPoint.wishPosition.z, mPoint.wishPosition.y);
-//		fprintf(wishVel, "%f %f\n", timer,mPoint.wishVelocity.norm());
-//
-//		timer+=0.1;
-//	}
-//	fclose(output);
-//	fclose(velocity_file);
-//	fclose(acceleration_file);
-//	fclose(path_file);
-//	fclose(wishPos);
-//	fclose(wishVel);
-//
-//	return 0;
-//}
-
-
-
-

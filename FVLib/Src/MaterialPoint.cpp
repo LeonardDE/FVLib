@@ -131,8 +131,8 @@ void MaterialPoint::computeWishData(double time_solve)
 	int mid;
 	// проверка с концами
 
-	if (check::RE(turnPath.getPointForIndex(l).arrivalTime, time_solve) ||
-		check::RE(time_solve , turnPath.getPointForIndex(r).arrivalTime))
+	if (check::LT(turnPath.getPointForIndex(l).arrivalTime, time_solve) ||
+		check::LT(time_solve , turnPath.getPointForIndex(r).arrivalTime))
 	{
 		cout << "Time moment = "<< time_solve << " not in path time." << " FV_id = " << name << endl;
 		return;//exit(0);

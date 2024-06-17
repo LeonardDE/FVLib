@@ -190,7 +190,7 @@ void mergeShortPlans(const vector<Point>& arr1, const vector<Point>& arr2,
 	double minEnd = min(arr2[arr2.size() - 1].arrivalTime, arr1[arr1.size() - 1].arrivalTime);
 
 	while (i < arr1.size() && j < arr2.size()) {
-		if (arr1[i].arrivalTime + EPS < arr2[j].arrivalTime) {
+		if (check::LT(arr1[i].arrivalTime, arr2[j].arrivalTime)) {
 			if (arr1[i].arrivalTime >= maxStart && arr1[i].arrivalTime <= minEnd)
 			{
 				Point p;
@@ -203,7 +203,7 @@ void mergeShortPlans(const vector<Point>& arr1, const vector<Point>& arr2,
 			}
 			i++;
 		}
-		else if (arr1[i].arrivalTime - EPS > arr2[j].arrivalTime) {
+		else if (check::GT(arr1[i].arrivalTime, arr2[j].arrivalTime)) {
 			if (arr2[j].arrivalTime >= maxStart && arr2[j].arrivalTime <= minEnd)
 			{
 				Point p;
@@ -239,7 +239,7 @@ void FV::doBroadcast()
 
 
 	if (globalSituation->aetherInfo.states[this->name].shortPlan.empty() ||
-		check::LEQ(globalSituation->aetherInfo.states[this->name].shortPlan[0].arrivalTime , time))
+		check::LE(globalSituation->aetherInfo.states[this->name].shortPlan[0].arrivalTime , time))
 	{
 		Plane plane = getPlane();
 		vector<Point> short_plan;
@@ -247,7 +247,7 @@ void FV::doBroadcast()
 		{
 
 			if (short_plan.size() > 3) break;
-			if (p.arrivalTime <= time + EPS) continue;
+			if (check::LE(p.arrivalTime, time)) continue;
 			short_plan.push_back(Point(p.position, p.arrivalTime));
 		}
 

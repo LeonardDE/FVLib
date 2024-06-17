@@ -1,15 +1,18 @@
 #pragma once
+
 #include <string>
 #include <vector>
-#include "json.hpp"
-#include "Point.h"
 using namespace std;
+
+#include "json.h"
 using json = nlohmann::json;
+
+#include "Point.h"
 
 class GlobalSituation;
 
-void ParseSolveDataFromJSON(string json_name, double& time_step, double& integration_h, int& solve_part_count);
+void ParseSolveDataFromJSON(const string& json_name, double& time_step, double& integration_h, int& solve_part_count);
 
 void ParsePathFromJSON(const json& path_data, vector<Point>& path);
 
-void ParseFVToList(string json_name, GlobalSituation& gs);
+void ParseFVToList(const string& json_name, GlobalSituation& gs);
