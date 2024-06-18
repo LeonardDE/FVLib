@@ -15,8 +15,20 @@ protected:
   // The final instant of the segment
   double tFinal;
 
+  // The starting position
+  Vector3 posStart;
+
+  // The final position
+  Vector3 posFinal;
+
+  // The starting velocity
+  Vector3 velStart;
+
+  // The final velocity
+  Vector3 velFinal;
+
 public:
-  // Get the state along this part of th navigation plan
+  // Get the state along this part of the navigation plan
   virtual FVState getStateAt(double t) = 0;
 
   // Getter for the starting time
@@ -27,6 +39,26 @@ public:
   // Getter for the final time
   virtual double getTFinal() {
     return tFinal;
+  }
+
+  // Getter for the starting position
+  virtual Vector3 getPosStart() {
+    return posStart;
+  }
+
+  // Getter for the final position
+  virtual Vector3 getPosFinal() {
+    return posFinal;
+  }
+
+  // Getter for the starting velocity
+  virtual Vector3 getVelStart() {
+    return velStart;
+  }
+
+  // Getter for the final velocity
+  virtual Vector3 getVelFinal() {
+    return velFinal;
   }
 };
 

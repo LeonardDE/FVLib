@@ -41,7 +41,7 @@ double NavigationPlan::getTFinal() {
 // Return value:
 //    true  - the segment is added successfully
 //    false - the segment has wrong initial instant
-bool NavigationPlan::addSegment(NavigationSegment* newSeg, bool exOnError = true) {
+bool NavigationPlan::addSegment(NavigationSegment* newSeg, bool exOnError) {
   if (isEmpty()) {
     segs.push_back(newSeg);
     return true;

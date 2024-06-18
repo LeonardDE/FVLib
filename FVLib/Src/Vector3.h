@@ -22,10 +22,8 @@ public:
   friend Vector3 operator/(const Vector3& v1, const Vector3& v2);
 
   friend Vector3 operator*(const Vector3& v1, const double& n);
-  friend Vector3 operator/(const Vector3& v1, const double& n);
   friend Vector3 operator*(const double& n, const Vector3& v1);
-  friend Vector3 operator/(const double& n, const Vector3& v1);
-
+  friend Vector3 operator/(const Vector3& v1, const double& n);
 
   Vector3& operator+=(const Vector3& v2);
   Vector3& operator-=(const Vector3& v2);

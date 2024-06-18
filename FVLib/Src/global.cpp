@@ -9,7 +9,7 @@ bool check::EQ(double value_1, double value_2) {
 	return abs(value_1 - value_2) < check::EPS;
 }
 
-static bool NE(double value_1, double value_2) {
+bool check::NE(double value_1, double value_2) {
 	return abs(value_1 - value_2) >= check::EPS;
 }
 
