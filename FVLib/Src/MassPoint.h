@@ -11,7 +11,7 @@ public:
     double broadcastStep, double radiusFilter,
     double heightWarn, double radiusWarn, GlobalSituation* gs);
   ~MassPoint();
-  FVState getState() override;
+  FVOutputState getOutputState() override;
 
   void next(double h, double end_time) override;
 

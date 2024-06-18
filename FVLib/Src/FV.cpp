@@ -63,10 +63,10 @@ void FV::checkConflict() {
   vector<FV*>& fvs = globalSituation->FVs;
   map<string, BroadcastBatch>& states = globalSituation->aetherInfo.states;
   for (FV* & fv : fvs) {
-    string fv_name = fv->getState().name;
+    string fv_name = fv->getOutputState().name;
     if (fv_name == this->name) continue;
 
-    FVState plane = getState();
+    FVOutputState plane = getOutputState();
     Vector3 pos = Vector3(plane.x, plane.y, plane.z);
 
     Vector3 hisPos = Vector3(states[fv_name].plane.x,
@@ -215,7 +215,7 @@ void mergeShortPlans(const vector<Point>& arr1, const vector<Point>& arr2,
 void FV::doBroadcast() {
   if (check::LE(nextBroadcastInstant, time)) {
     nextBroadcastInstant += broadcastStep;
-    FVState plane = getState();
+    FVOutputState plane = getOutputState();
     globalSituation->aetherInfo.broadcastState(time, plane);
 
     nextBroadcastInstant += broadcastStep;
@@ -224,7 +224,7 @@ void FV::doBroadcast() {
 
   if (globalSituation->aetherInfo.states[this->name].shortPlan.empty() ||
     check::LE(globalSituation->aetherInfo.states[this->name].shortPlan[0].arrivalTime, time)) {
-    FVState plane = getState();
+    FVOutputState plane = getOutputState();
     vector<Point> short_plan;
     for (auto& p : dynamicPath) {
 

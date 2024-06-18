@@ -11,7 +11,7 @@ public:
     double radiusFilter, double broadcastStep,
     double heightWarn, double radiusWarn, GlobalSituation* gs);
   ~Copter();
-  FVState getState() override;
+  FVOutputState getOutputState() override;
   void next(double h, double end_time) override;
 
 

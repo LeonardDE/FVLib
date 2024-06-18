@@ -11,7 +11,7 @@ using namespace std;
 
 struct BroadcastBatch {
   double planeTranslationTime;
-  FVState plane;
+  FVOutputState plane;
   
   double translationTime;
   vector<Point> shortPlan;
@@ -20,7 +20,7 @@ struct BroadcastBatch {
 class AEtherInfo {
 public:
   map<string, BroadcastBatch> states;
-  void broadcastState(double time, const FVState& plane);
+  void broadcastState(double time, const FVOutputState& plane);
   void broadcastPlan(const string& name, double time, const vector<Point>& shortPlan);
 };
 

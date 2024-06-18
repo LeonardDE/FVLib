@@ -1,6 +1,6 @@
 #include "GlobalSituation.h"
 
-void AEtherInfo::broadcastState(double time, const FVState& plane) {
+void AEtherInfo::broadcastState(double time, const FVOutputState& plane) {
   states[plane.name].plane = plane;
   states[plane.name].planeTranslationTime = time;
 }

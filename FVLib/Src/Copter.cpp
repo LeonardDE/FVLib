@@ -158,11 +158,11 @@ void Copter::computeWishData(double time_solve)
 	wishPosition = wishPos;
 }
 
-FVState Copter::getState()
+FVOutputState Copter::getOutputState()
 {
   type = COPTER;
   
-  FVState plane = FVState();
+  FVOutputState plane = FVOutputState();
 	plane.x = (*curPosition)[0];
 	plane.y = (*curPosition)[1];
 	plane.z = (*curPosition)[2];

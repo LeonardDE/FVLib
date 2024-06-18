@@ -7,6 +7,8 @@
 
 using namespace std;
 
+#include "Vector3.h"
+
 // Enumeration of FV types
 enum FVType {
   // Material point
@@ -37,10 +39,23 @@ extern map<string, FVType> FVNameToType;
 extern map<FVType, string> FVTypeToName;
 
 
-// Record of the current FV state for output writing
+// Record for keeping a state of a generic FV
 struct FVState {
+  // The position of the FV
+  Vector3 position;
+
+  // The velocity of the FV
+  Vector3 velocity;
+};
+
+
+// Record of the current FV state for output writing
+struct FVOutputState {
   // The ID of the FV
   string name;
+
+  // The type of the FV
+  string type;
 
   // The current X-coordinate
   double x;
@@ -62,9 +77,6 @@ struct FVState {
 
   // The magnitude of the current velocity
   double speed;
-
-  // The current X-velocity
-  string type;
 };
 
 

@@ -15,6 +15,7 @@ add_executable(UMVmodelling
   Src/GlobalSituation.h
   Src/MassPoint.h
   Src/Modeler.h
+  Src/NavigationSegment.h
   Src/Obstacle.h
   Src/OutputData.h
   Src/Path.h
@@ -35,6 +36,7 @@ add_executable(UMVmodelling
   Src/GlobalSituation.cpp
   Src/MassPoint.cpp
   Src/Modeler.cpp
+  Src/NavigationSegment.cpp
   Src/OutputData.cpp
   Src/Path.cpp
   Src/PathPoint.cpp

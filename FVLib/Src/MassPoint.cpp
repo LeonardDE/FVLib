@@ -96,9 +96,9 @@ MassPoint::~MassPoint()
 	delete newVelocity;
 }
 
-FVState MassPoint::getState()
+FVOutputState MassPoint::getOutputState()
 {
-	FVState plane = FVState();
+	FVOutputState plane = FVOutputState();
 	plane.x = (*curPosition)[0];
 	plane.y = (*curPosition)[1];
 	plane.z = (*curPosition)[2];
