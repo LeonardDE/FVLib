@@ -103,7 +103,7 @@ void Copter::computeWishData(double time_solve)
 	if (time_solve < turnPath.getPointForIndex(l).arrivalTime ||
 		time_solve > turnPath.getPointForIndex(r).arrivalTime)
 	{
-		cout << "Time moment not in path time" << endl;
+		//cout << "Time moment not in path time" << endl;
 		exit(0);
 	}
 
@@ -158,9 +158,11 @@ void Copter::computeWishData(double time_solve)
 	wishPosition = wishPos;
 }
 
-Plane Copter::getPlane()
+FVState Copter::getState()
 {
-	Plane plane = Plane();
+  type = COPTER;
+  
+  FVState plane = FVState();
 	plane.x = (*curPosition)[0];
 	plane.y = (*curPosition)[1];
 	plane.z = (*curPosition)[2];

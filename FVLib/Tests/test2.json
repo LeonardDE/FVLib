@@ -3,7 +3,7 @@
   "solve_part_count": 10,
   "AirCraftList": [
     {
-      "type": "MaterialPoint",
+      "type": "MassPoint",
       "fv_id": "first",
       "parameters": {
         "v_x": 0,
@@ -46,7 +46,7 @@
     },
 
     {
-      "type": "MaterialPoint",
+      "type": "MassPoint",
       "fv_id": "second",
       "parameters": {
         "v_x": 0,

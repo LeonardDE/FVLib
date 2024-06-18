@@ -9,9 +9,9 @@ using namespace std;
 #include "FV.h"
 
 
-struct FVState {
+struct BroadcastBatch {
   double planeTranslationTime;
-  Plane plane;
+  FVState plane;
   
   double translationTime;
   vector<Point> shortPlan;
@@ -19,8 +19,8 @@ struct FVState {
 
 class AEtherInfo {
 public:
-  map<string, FVState> states;
-  void broadcastState(double time, const Plane& plane);
+  map<string, BroadcastBatch> states;
+  void broadcastState(double time, const FVState& plane);
   void broadcastPlan(const string& name, double time, const vector<Point>& shortPlan);
 };
 

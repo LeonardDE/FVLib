@@ -10,6 +10,8 @@ using namespace cxxopts;
 
 int main(int argc, char* argv[])
 {
+  system("pwd");
+  
   Options options("UMVmodelling", "Program for modelling UFV motion and conflict avoidance");
   options.add_options()
     ("h, help", "Show the help instructions")

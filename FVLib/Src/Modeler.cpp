@@ -1,5 +1,5 @@
 #include "global.h"
-
+#include "Plane.h"
 #include "Modeler.h"
 #include "DataParser.h"
 #include "OutputData.h"
@@ -30,7 +30,7 @@ void Modeler::startModeling() {
 
   for (auto& fv : globalSituation.FVs) {
     OutputFV out_fv;
-    Plane plane = fv->getPlane();
+    FVState plane = fv->getState();
     out_fv.parameters.type = plane.type;
     out_fv.parameters.name = plane.name;
     out_fv.parameters.plan = fv->getBasePath();
@@ -51,7 +51,7 @@ void Modeler::startModeling() {
       // Storing trajectory data for final output
       FV* fv = globalSituation.FVs[i];
       OutputFV& out_fv = data.FVs[i];
-      Plane plane = fv->getPlane();
+      FVState plane = fv->getState();
 
       // Simulating broadcast of the FV's position
       if (check::LE(timer, fv->getBasePath()[fv->getBasePath().size() - 1].arrivalTime) &&

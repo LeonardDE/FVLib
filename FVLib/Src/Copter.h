@@ -1,39 +1,38 @@
 #pragma once
+
 #include "FV.h"
 
-class Copter : public FV
-{
+class Copter : public FV {
 public:
-    Copter(const string& name, double x, double y, double z,
-        double speedX, double speedY, double speedZ,
-        double inertialXZ, double inertialY, double k_x, double k_v,
-        double maxVelocity_xz, double maxVelocity_y, double minVelocity_y,
-        double radiusFilter, double broadcastStep,
-        double heightWarn, double radiusWarn, GlobalSituation* gs);
-    ~Copter();
-    Plane getPlane() override;
-    void next(double h, double end_time) override;
+  Copter(const string& name, double x, double y, double z,
+    double speedX, double speedY, double speedZ,
+    double inertialXZ, double inertialY, double k_x, double k_v,
+    double maxVelocity_xz, double maxVelocity_y, double minVelocity_y,
+    double radiusFilter, double broadcastStep,
+    double heightWarn, double radiusWarn, GlobalSituation* gs);
+  ~Copter();
+  FVState getState() override;
+  void next(double h, double end_time) override;
 
 
 
-    Vector3 wishVelocity;
-    Vector3 wishPosition;
+  Vector3 wishVelocity;
+  Vector3 wishPosition;
 private:
-    string type = "Copter";
-    double inertialXZ;
-    double inertialY;
-    double k_x;
-    double k_v;
-    Vector3* curPosition;
-    Vector3* newPosition;
-    Vector3* curVelocity;
-    Vector3* newVelocity;
+  double inertialXZ;
+  double inertialY;
+  double k_x;
+  double k_v;
+  Vector3* curPosition;
+  Vector3* newPosition;
+  Vector3* curVelocity;
+  Vector3* newVelocity;
 
-    double maxVelocity_xz;
-    double maxVelocity_y;
-    double minVelocity_y;
+  double maxVelocity_xz;
+  double maxVelocity_y;
+  double minVelocity_y;
 
-    double solveTurnRadius(const Vector3& v1, const Vector3& v2) override;
+  double solveTurnRadius(const Vector3& v1, const Vector3& v2) override;
 
-    void computeWishData(double time_solve);
+  void computeWishData(double time_solve);
 };

@@ -786,7 +786,7 @@
                   }
                }
             ],
-            "type": "MaterialPoint"
+            "type": "MassPoint"
          }
       },
       {
@@ -1583,7 +1583,7 @@
                   }
                }
             ],
-            "type": "MaterialPoint"
+            "type": "MassPoint"
          }
       }
    ],

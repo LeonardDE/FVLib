@@ -13,7 +13,7 @@ add_executable(UMVmodelling
   Src/DataParser.h
   Src/FV.h
   Src/GlobalSituation.h
-  Src/MaterialPoint.h
+  Src/MassPoint.h
   Src/Modeler.h
   Src/Obstacle.h
   Src/OutputData.h
@@ -33,11 +33,12 @@ add_executable(UMVmodelling
   Src/DataParser.cpp
   Src/FV.cpp
   Src/GlobalSituation.cpp
-  Src/MaterialPoint.cpp
+  Src/MassPoint.cpp
   Src/Modeler.cpp
   Src/OutputData.cpp
   Src/Path.cpp
   Src/PathPoint.cpp
+  Src/Plane.cpp
   Src/Point.cpp
   Src/TurnData.cpp
   Src/Vector3.cpp

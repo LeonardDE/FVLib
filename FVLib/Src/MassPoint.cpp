@@ -1,8 +1,9 @@
-#include "MaterialPoint.h"
-#include "GlobalSituation.h"
 #include "global.h"
+#include "Plane.h"
+#include "GlobalSituation.h"
+#include "MassPoint.h"
 
-MaterialPoint::MaterialPoint(string name,
+MassPoint::MassPoint(string name,
 	double x, double y, double z,
 	double speedX, double speedY, double speedZ,
 	double maxAcceleration, double k_x, double k_v,
@@ -10,7 +11,8 @@ MaterialPoint::MaterialPoint(string name,
 	double heightWarn,double radiusWarn,
 	GlobalSituation* gs)
 {
-	this->name = name;
+  type = MASSPOINT;
+  this->name = name;
 	time = 0;
 	curPosition = new Vector3(x, y, z);
 	newPosition = new Vector3(x, y, z);
@@ -28,13 +30,13 @@ MaterialPoint::MaterialPoint(string name,
 	this->broadcastStep = broadcastStep;
 }
 
-double MaterialPoint::solveTurnRadius(const Vector3& v1, const Vector3& v2)
+double MassPoint::solveTurnRadius(const Vector3& v1, const Vector3& v2)
 {
 
 	return v1.norm() * v2.norm() / (maxAcceleration / 2);
 }
 
-void MaterialPoint::next(double h, double end_time)
+void MassPoint::next(double h, double end_time)
 {
 	// Проверка что end_time на промежуток
 	int l = 0; // левая граница
@@ -86,7 +88,7 @@ void MaterialPoint::next(double h, double end_time)
 
 
 
-MaterialPoint::~MaterialPoint()
+MassPoint::~MassPoint()
 {
 	delete curPosition;
 	delete curVelocity;
@@ -94,9 +96,9 @@ MaterialPoint::~MaterialPoint()
 	delete newVelocity;
 }
 
-Plane MaterialPoint::getPlane()
+FVState MassPoint::getState()
 {
-	Plane plane = Plane();
+	FVState plane = FVState();
 	plane.x = (*curPosition)[0];
 	plane.y = (*curPosition)[1];
 	plane.z = (*curPosition)[2];
@@ -107,23 +109,11 @@ Plane MaterialPoint::getPlane()
 		plane.speedY * plane.speedY +
 		plane.speedZ * plane.speedZ);
 	plane.name = name;
-	plane.type = type;
+	plane.type = FVTypeToName[type];
 	return plane;
 }
 
-string MaterialPoint::getName()
-{
-	return name;
-}
-
-string MaterialPoint::getType()
-{
-	return type;
-}
-
-
-
-void MaterialPoint::computeWishData(double time_solve)
+void MassPoint::computeWishData(double time_solve)
 {
 
 	int l = 0; // левая граница
@@ -134,7 +124,7 @@ void MaterialPoint::computeWishData(double time_solve)
 	if (check::LT(turnPath.getPointForIndex(l).arrivalTime, time_solve) ||
 		check::LT(time_solve , turnPath.getPointForIndex(r).arrivalTime))
 	{
-		cout << "Time moment = "<< time_solve << " not in path time." << " FV_id = " << name << endl;
+		//cout << "Time moment = "<< time_solve << " not in path time." << " FV_id = " << name << endl;
 		return;
 	}
 

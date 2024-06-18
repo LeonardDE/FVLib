@@ -1,6 +1,13 @@
+#include <stdexcept>
+using namespace std;
+
 #include "DataParser.h"
+
 #include "GlobalSituation.h"
-#include "MaterialPoint.h"
+
+#include "Plane.h"
+
+#include "MassPoint.h"
 #include "Copter.h"
 
 
@@ -28,8 +35,6 @@ void ParsePathFromJSON(const json& path_data, vector<Point>& path) {
       )
     );
     time = point_data["time"];
-    cout << path[path.size() - 1].arrivalTime << endl;
-    path[path.size() - 1].position.print();
   }
 };
 
@@ -38,9 +43,6 @@ void ParseFVToList(const string& json_name, GlobalSituation& gs) {
   json data = json::parse(f);
 
   for (auto& sub_j : data["AirCraftList"]) {
-    cout << "---------" << endl;
-    cout << sub_j << endl;
-    cout << "---------" << endl;
 
     auto& fv_param = sub_j["parameters"];
 
@@ -48,8 +50,15 @@ void ParseFVToList(const string& json_name, GlobalSituation& gs) {
     vector<Point> path;
     ParsePathFromJSON(fv_path, path);
 
-    if (sub_j["type"] == "MaterialPoint") {
-      MaterialPoint* point = new MaterialPoint(
+    string typeName = sub_j["type"];
+    if (!FVNameToType.contains(sub_j["type"])) {
+      throw invalid_argument("Unknown vehicle type '" + typeName + "'");
+    }
+    FVType type = FVNameToType[typeName];
+
+    switch (type) {
+    case MASSPOINT: {
+      MassPoint* point = new MassPoint(
         sub_j["fv_id"],
         path[0].position.x, path[0].position.y, path[0].position.z,
         fv_param["v_x"], fv_param["v_y"], fv_param["v_z"],
@@ -58,8 +67,10 @@ void ParseFVToList(const string& json_name, GlobalSituation& gs) {
         fv_param["heightWarn"], fv_param["radiusWarn"], &gs);
       point->setPath(path);
       gs.FVs.push_back(point);
+      break;
     }
-    else if (sub_j["type"] == "Copter") {
+
+    case COPTER: {
       Copter* copter = new Copter(
         sub_j["fv_id"],
         path[0].position.x, path[0].position.y, path[0].position.z,
@@ -72,6 +83,11 @@ void ParseFVToList(const string& json_name, GlobalSituation& gs) {
 
       copter->setPath(path);
       gs.FVs.push_back(copter);
+      break;
+    }
+
+    default:
+      throw invalid_argument("The procession of the type '" + typeName + "' is not implemented");
     }
   }
   f.close();
