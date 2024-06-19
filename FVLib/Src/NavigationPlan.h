@@ -4,6 +4,7 @@
 using namespace std;
 
 #include "Plane.h"
+#include "PathPoint.h"
 
 // Abstract basic class for classes representing navigation plan 
 // parts of different kind
@@ -77,17 +78,22 @@ public:
   ~NavigationPlan();
 
   // Checking whether the plan is empty
-  bool isEmpty() {
+  bool isEmpty() const {
     return segs.size() == 0;
   }
 
   // Getter for the initial instant of the plan
   // Exception is thrown if the plan is empty
-  double getTStart();
+  double getTStart() const;
 
   // Getter for the final instant of the plan
   // Exception is thrown if the plan is empty
-  double getTFinal();
+  double getTFinal() const;
+
+  // Method for clearing the plan
+  void clear() {
+    segs.clear();
+  }
 
   // Method for adding a segment to the plan just after the last one
   // exOnError: what to do if the new segment has incorrect time interval
@@ -104,5 +110,28 @@ public:
   
   // Get the navigation point of the plan at a given instant
   FVState getStateAt(double t);
+
+  // Create naive navigation plan
+  void CreateNaivePlan(vector<PathPoint> flightPlan);
+
+  // Create navigation plan with impossible circular turns
+  void CreateArcTurnPlan(vector<PathPoint> flightPlan, double turnRadius);
 };
 
+
+// Enum of possible methods for constructing navigation plan
+enum NavigationMethods {
+  // Naive navigation when the aiming point goes just along the current flight plan
+  NAIVE,
+
+  // Navigation with cutting corners along a circular arc
+  CIRCULAR
+};
+
+
+// Structure to convert a string to the NavigationMethods enum
+extern map<string, NavigationMethods> NavMethodNameToType;
+
+
+// Structure to convert a NavigationMethods enum to the string
+extern map<NavigationMethods, string> NavMethodTypeToName;

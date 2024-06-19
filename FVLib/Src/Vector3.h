@@ -42,7 +42,8 @@ public:
   friend bool isRightThree(const Vector3& v1, const Vector3& v2, const Vector3& v3);
   friend Vector3 findNormalVector(Vector3 p1, Vector3 p2, Vector3 p3, Vector3 point, Vector3 direction);
   friend double getCosBetweenVectors(const Vector3& v1, const Vector3& v2);
-
+  friend double distance(const Vector3& v1, const Vector3& v2);
+  
   Vector3 getNormVector();
 
   void print(string name = "") {

@@ -4,49 +4,28 @@
 #include <map>
 #include <fstream>
 
+using namespace std;
+
 #include "Vector3.h"
-#include "Path.h"
 #include "Plane.h"
+#include "NavigationPlan.h"
+#include "RectilinearSegment.h"
+#include "CircularSegment.h"
+#include "PathPoint.h"
+#include "FlightPlan.h"
 
 #include "lib/json.h"
+
 using json = nlohmann::json;
+
 
 // Forward declaration of the global situation class
 // to declare a reference to the object from an FV instance
 class GlobalSituation;
 
+
 // The basic abstract class of a FV
 class FV {
-public:
-
-  // Method to take data of the current position for final writing
-  virtual FVOutputState getOutputState() = 0;
-
-  // Method to integrate motion of the FV up to the given time with the given time step
-  virtual void next(double h, double end_time) = 0;
-
-  virtual void setPath(vector<Point> path);
-  
-  vector<Point> getBasePath() {
-    return basePath;
-  };
-  Path getDynamicPath() {
-    return turnPath;
-  };
-  double getTime() {
-    return time;
-  }
-  FVType getType() {
-    return type;
-  }
-  string getName() {
-    return name;
-  }
-
-  friend void mergeShortPlans(const vector<Point>& arr1, const vector<Point>& arr2,
-    vector<Point>& res1, vector<Point>& res2);
-  json conflicts;
-
 protected:
   // The pointer to the global data structure
   GlobalSituation* globalSituation;
@@ -57,14 +36,17 @@ protected:
   // The type of the FV
   FVType type;
 
+  // Method for navigation near checkpoints
+  NavigationMethods navType;
+
   // The apriori flight plan
-  vector<Point> basePath;
+  FlightPlan basePath;
 
   // The actual flight plan
-  vector<Point> dynamicPath;
+  FlightPlan currentPath;
 
   // The navigator plan
-  Path turnPath;
+  NavigationPlan navigationPath;
 
   // Current time of the vehicle
   double time = 0;
@@ -78,20 +60,55 @@ protected:
   // Method for broadcasting
   virtual void doBroadcast();
 
+  // Distance to filter FVs for further procession
   double radiusFilter;
-  double radiusWarn;
-  double heightWarn;
 
-  virtual double solveTurnRadius(const Vector3& v1, const Vector3& v2) = 0;
+  // The parameters of the safety zone of the FV - the radius of the cylinder
+  double safetyRadius;
 
+  // The parameters of the safety zone of the FV - the semi-height of the cylinder
+  double safetyHeight;
 
+public:
+  // Method to take data of the current position for final writing
+  virtual FVOutputState getOutputState() = 0;
 
-  virtual void checkConflict();
+  // Method to integrate motion of the FV up to the given time with the given time step
+  virtual void next(double h, double end_time) = 0;
+
+  // Getting the base flight plan of the FV
+  virtual const FlightPlan& getBasePath() const {
+    return basePath;
+  };
+
+  // Getting the current flight plan of the FV
+  virtual const FlightPlan& getCurrentPath() const {
+    return currentPath;
+  };
+
+  // Getting the navigation path
+  const NavigationPlan& getNavigationPath() {
+    return navigationPath;
+  };
+
+  // Getting the current time of the FV
+  virtual double getTime() const {
+    return time;
+  }
+
+  // Getting name of the FV
+  virtual const string& getName() const {
+    return name;
+  }
+
+  // Getting the dynamics type of the FV
+  virtual FVType getType() const {
+    return type;
+  }
+
+  // Getting the navigation type of the FV
+  virtual NavigationMethods getNavigationType() const {
+    return navType;
+  }
+
 };
-
-
-
-
-
-void mergeShortPlans(const vector<Point>& arr1, const vector<Point>& arr2,
-  vector<Point>& res1, vector<Point>& res2);

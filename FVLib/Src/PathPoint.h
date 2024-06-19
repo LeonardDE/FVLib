@@ -1,23 +1,15 @@
 #pragma once
-#include "Point.h"
-#include "TurnData.h"
+#include "Vector3.h"
 
-struct PathPoint : public Point {
-  PathPoint(
-    Vector3 position = Vector3(0, 0, 0),
-    double arrivalTime = 0,
-    PointType type = PointType::DEFAULT, TurnData turnData = TurnData()) :
-    position(position), arrivalTime(arrivalTime), type(type), turnData(turnData) {};
+// The structure of a control point: instant, coordinates
+struct PathPoint {
+  PathPoint(Vector3 position = Vector3(0, 0, 0), double arrivalTime = 0) : position(position), arrivalTime(arrivalTime) {};
 
-  PathPoint(
-    Point point = Point(),
-    PointType type = PointType::DEFAULT,
-    TurnData turnData = TurnData()) : position(point.position), arrivalTime(point.arrivalTime), type(type), turnData(turnData) {};
-
-  Vector3 position;
+  // The passing instant
   double arrivalTime;
 
-  PointType type;
-  TurnData turnData;
-
+  // The location of the point
+  Vector3 position;
 };
+
+

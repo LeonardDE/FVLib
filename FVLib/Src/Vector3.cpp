@@ -210,10 +210,9 @@ double getCosBetweenVectors(const Vector3 &v1, const Vector3 &v2)
   return scalarProduct(v1, v2) / (v1.norm() * v2.norm());
 }
 
-// double angleBetween(const Vector3& v1, const Vector3& v2)
-//{
-//	return atan2(getSinBetweenVectors(v1, v2), getCosBetweenVectors(v1, v2));
-// }
+double distance(const Vector3& v1, const Vector3& v2) {
+  return sqrt(pow(v1.x - v2.x, 2) + pow(v1.y - v2.y, 2) + pow(v1.z - v2.z, 2));
+}
 
 Vector3 crossProduct(const Vector3 &v1, const Vector3 &v2)
 {

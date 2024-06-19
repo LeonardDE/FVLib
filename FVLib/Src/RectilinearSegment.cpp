@@ -5,11 +5,9 @@ using namespace std;
 #include "RectilinearSegment.h"
 
 // The constructor
-RectilinearSegment::RectilinearSegment(double t1, const Vector3 &pos1, const Vector3 &vel1,
-                                       double t2, const Vector3 &pos2, const Vector3 &vel2)
-{
-  if (check::EQ(t1, t2))
-  {
+RectilinearSegment::RectilinearSegment(double t1, const Vector3& pos1, const Vector3& vel1,
+  double t2, const Vector3& pos2, const Vector3& vel2) {
+  if (check::EQ(t1, t2)) {
     throw invalid_argument("RectilinearSegment constructor: equal time instants are given!");
   }
 
@@ -27,10 +25,8 @@ RectilinearSegment::RectilinearSegment(double t1, const Vector3 &pos1, const Vec
 }
 
 // Get the state along this part of the navigation plan
-FVState RectilinearSegment::getStateAt(double t)
-{
-  if (check::LT(t, tStart) || check::GT(t, tFinal))
-  {
+FVState RectilinearSegment::getStateAt(double t) {
+  if (check::LT(t, tStart) || check::GT(t, tFinal)) {
     throw domain_error("RectilinearSegment::getStateAt: time outside the segment interval!");
   }
 
