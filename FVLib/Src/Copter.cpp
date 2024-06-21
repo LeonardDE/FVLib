@@ -2,177 +2,163 @@
 #include "GlobalSituation.h"
 
 
-Copter::Copter(const string& name, double x, double y, double z,
-	double speedX, double speedY, double speedZ,
-	double inertialXZ, double inertialY, double k_x, double k_v,
-	double maxVelocity_xz, double maxVelocity_y, double minVelocity_y,
-	double broadcastStep, double radiusFilter,
-	double heightWarn, double radiusWarn, GlobalSituation* gs)
-{
-	this->name = name;
-	time = 0;
+// The constructor
+Copter::Copter(GlobalSituation* gs, const string& name,
+  double x, double y, double z,
+  double speedX, double speedY, double speedZ,
+  double inertialXZ, double inertialY,
+  double maxVelocity_xz, double maxVelocity_y, double minVelocity_y,
+  double k_xz, double k_v_xz, double k_y, double k_v_y,
+  double broadcastStep, double filterRadius,
+  double safetyHeight, double safetyRadius,
+  NavigationMethods navType, const FlightPlan& flightPlan,
+  double turnRadius
+) {
+  this->name = name;
+  time = 0;
 
-	this->inertialXZ = inertialXZ;
-	this->inertialY = inertialY;
+  curPosition = new Vector3{ x,y,z };
+  newPosition = new Vector3{ x,y,z };
+  curVelocity = new Vector3{ speedX,speedY,speedZ };
+  newVelocity = new Vector3{ speedX,speedY,speedZ };
 
-	curPosition = new Vector3{ x,y,z };
-	newPosition = new Vector3{ x,y,z };
-	curVelocity = new Vector3{ speedX,speedY,speedZ };
-	newVelocity = new Vector3{ speedX,speedY,speedZ };
+  this->navType = navType;
 
-	this->k_x = k_x;
-	this->k_v = k_v;
-	this->maxVelocity_xz = maxVelocity_xz;
-	this->maxVelocity_y = maxVelocity_y;
-	this->minVelocity_y = minVelocity_y;
+  this->maxVelocity_xz = maxVelocity_xz;
+  this->maxVelocity_y = maxVelocity_y;
+  this->minVelocity_y = minVelocity_y;
 
-	this->radiusFilter = radiusFilter;
-	this->radiusWarn = radiusWarn;
-	this->heightWarn = heightWarn;
+  this->inertialXZ = inertialXZ;
+  this->inertialY = inertialY;
 
+  this->k_xz = k_xz;
+  this->k_v_xz = k_v_xz;
+  this->k_y = k_y;
+  this->k_v_y = k_v_y;
 
-	globalSituation = gs;
-	this->broadcastStep = broadcastStep;
+  this->filterRadius = filterRadius;
+  this->safetyRadius = safetyRadius;
+  this->safetyHeight = safetyHeight;
+
+  globalSituation = gs;
+  this->broadcastStep = broadcastStep;
+
+  // Setting the turn radius
+  if (turnRadius > 0) {
+    this->turnRadius = turnRadius;
+  }
+  else {
+    // Some maximal acceleration the FV can achieve
+    double maxAccel = 4 * max(2 * maxVelocity_xz / inertialXZ, (maxVelocity_y - minVelocity_y) / inertialY);
+
+    // Some maximal velocity the FV can achieve
+    double maxVel = max(max(maxVelocity_xz, fabs(maxVelocity_y)), fabs(minVelocity_y));
+
+    turnRadius = pow(maxVel, 2) / maxAccel;
+  }
+
+  basePath = flightPlan;
+  currentPath = flightPlan;
+  navigationPath.CreatePlan(currentPath, navType, turnRadius);
 }
 
-Copter::~Copter()
-{
-	delete curPosition;
-	delete curVelocity;
-	delete newPosition;
-	delete newVelocity;
-}
-
-void Copter::next(double h, double end_time)
-{
-	double deltatime = end_time - time;
-	while (deltatime > 0) {
-
-
-		double x = (*curPosition)[0];
-		double v = (*curVelocity)[0];
-
-		(*newPosition)[0] = x + h * v;
-		(*newVelocity)[0] = v + h * ((k_v * wishVelocity.x + k_x * wishPosition.x) - v) / inertialXZ;
-
-		x = (*curPosition)[1];
-		v = (*curVelocity)[1];
-
-		(*newPosition)[1] = x + h * v;
-		(*newVelocity)[1] = v + h * ((k_v * wishVelocity.y + k_x * wishPosition.x) - v) / inertialY;
-
-		x = (*curPosition)[2];
-		v = (*curVelocity)[2];
-
-		(*newPosition)[2] = x + h * v;
-		(*newVelocity)[2] = v + h * ((k_v * wishVelocity.z + k_x * wishPosition.x) - v) / inertialXZ;
-
-
-		time += h;
-		if (deltatime < h)
-		{
-			h = deltatime;
-		}
-		else
-		{
-			deltatime -= h;
-		}
-		swap(curPosition, newPosition);
-		swap(curVelocity, newVelocity);
-	}
-	time = end_time;
-	swap(curPosition, newPosition);
-	swap(curVelocity, newVelocity);
-
+// The destructor
+Copter::~Copter() {
+  delete curPosition;
+  delete curVelocity;
+  delete newPosition;
+  delete newVelocity;
 }
 
 
-double Copter::solveTurnRadius(const Vector3& v1, const Vector3& v2)
-{
-	// рср врн рн асдер
-	return 1;
+// Integration of the motion
+void Copter::next(double h, double end_time) {
+  double dt = end_time - time;
+  FVState aimingState;
+  Vector3 control;
+  double horLen;
+  double vertControl;
+  double k;
+
+  doBroadcast();
+
+  while (dt > 0) {
+    aimingState = navigationPath.getStateAt(time);
+
+    // Generating the horizontal control
+    control[0] = k_xz * ((*curPosition)[0] - aimingState.position[0]) +
+      k_v_xz * ((*curVelocity)[0] - aimingState.velocity[0]);
+    control[1] = 0;
+    control[2] = k_xz * ((*curPosition)[2] - aimingState.position[2]) +
+      k_v_xz * ((*curVelocity)[2] - aimingState.velocity[2]);
+    horLen = control.norm();
+    if (horLen > maxVelocity_xz) {
+      control *= maxVelocity_xz / horLen;
+    }
+
+    // Generating the vertical control
+    vertControl = k_y * ((*curPosition)[1] - aimingState.position[1]) +
+      k_v_xz * ((*curVelocity)[1] - aimingState.velocity[1]);
+    if (vertControl > maxVelocity_y) {
+      vertControl = maxVelocity_y;
+    }
+    else if (vertControl < minVelocity_y) {
+      vertControl = minVelocity_y;
+    }
+    control[1] = vertControl;
+
+    for (int i = 0; i < 3; i++) {
+      k = i == 1 ? inertialXZ : inertialXZ;
+
+      (*newPosition)[i] = (*curPosition)[i] + h * (*curVelocity)[i];
+      (*newVelocity)[i] = (control[i] - (*curVelocity)[i]) / k;
+    }
+
+    time += h;
+    if (dt < h) {
+      h = dt;
+    }
+    else {
+      dt -= h;
+    }
+
+    swap(curPosition, newPosition);
+    swap(curVelocity, newVelocity);
+
+    doBroadcast();
+  }
+
+  time = end_time;
+
 }
 
-void Copter::computeWishData(double time_solve)
-{
-	int l = 0;
-	int r = (int)turnPath.getPath().size() - 1;
-	int mid;
 
 
-	if (time_solve < turnPath.getPointForIndex(l).arrivalTime ||
-		time_solve > turnPath.getPointForIndex(r).arrivalTime)
-	{
-		//cout << "Time moment not in path time" << endl;
-		exit(0);
-	}
+// Method to take data of the current position for computations
+FVState Copter::getState() const {
+  FVState state;
+  state.position = *curPosition;
+  state.velocity = *curVelocity;
 
-	while ((r - l > 1)) {
-		mid = (l + r) / 2;
-
-		if (turnPath.getPointForIndex(mid).arrivalTime > time_solve) r = mid;
-		else l = mid;
-	}
-
-
-	Vector3 wishPos = turnPath.getPointForIndex(r).position;
-	if (turnPath.getPointForIndex(l).type == PointType::DEFAULT) {
-
-		if (r == 0)
-		{
-			wishVelocity = (turnPath.getPointForIndex(r).position - *curPosition) /
-				(turnPath.getPointForIndex(r).arrivalTime - time_solve);
-		}
-		else {
-			wishVelocity = (turnPath.getPointForIndex(r).position - turnPath.getPointForIndex(l).position) /
-				(turnPath.getPointForIndex(r).arrivalTime - turnPath.getPointForIndex(l).arrivalTime);
-		}
-
-		wishPos = turnPath.getPointForIndex(l).position
-			+ wishVelocity * (time_solve - turnPath.getPointForIndex(l).arrivalTime);
-
-	}
-	else if (turnPath.getPointForIndex(l).type == PointType::START_TURN)
-	{
-
-		TurnData turn_data = turnPath.getPointForIndex(l).turnData;
-		double deltaT = time_solve - turnPath.getPointForIndex(l).arrivalTime;
-
-		double w = turn_data.angularVelocity + deltaT * turn_data.angularAcceleration;
-
-		Vector3 v = crossProduct(turn_data.axis * w, wishPosition - turn_data.axisPoint);
-
-		wishVelocity = v;
-
-		wishPos = turnPath.getPointForIndex(l).position;
-
-		wishPos.rotate(
-			turn_data.axis,
-			turn_data.axisPoint,
-
-			turn_data.angularVelocity_0 * deltaT);
-
-
-	}
-
-	wishPosition = wishPos;
+  return state;
 }
 
-FVOutputState Copter::getOutputState()
-{
-  type = COPTER;
-  
-  FVOutputState plane = FVOutputState();
-	plane.x = (*curPosition)[0];
-	plane.y = (*curPosition)[1];
-	plane.z = (*curPosition)[2];
-	plane.speedX = (*curVelocity)[0];
-	plane.speedY = (*curVelocity)[1];
-	plane.speedZ = (*curVelocity)[2];
-	plane.speed = sqrt(plane.speedX * plane.speedX +
-		plane.speedY * plane.speedY +
-		plane.speedZ * plane.speedZ);
-	plane.name = name;
-	plane.type = type;
-	return plane;
+
+// Method to take data of the current position for final writing
+FVOutputState Copter::getOutputState() const {
+  FVOutputState plane;
+
+  plane.x = (*curPosition)[0];
+  plane.y = (*curPosition)[1];
+  plane.z = (*curPosition)[2];
+  plane.speedX = (*curVelocity)[0];
+  plane.speedY = (*curVelocity)[1];
+  plane.speedZ = (*curVelocity)[2];
+  plane.speed = sqrt(pow(plane.speedX, 2) + pow(plane.speedY, 2) + pow(plane.speedZ, 2));
+  plane.name = name;
+  plane.type = FVTypeToName[type];
+
+  return plane;
 }
+
+

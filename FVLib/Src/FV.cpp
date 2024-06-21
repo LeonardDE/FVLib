@@ -3,30 +3,40 @@ using namespace std;
 
 #include "global.h"
 #include "FV.h"
+#include "Broadcast.h"
+#include "PathPoint.h"
 #include "GlobalSituation.h"
 
 
-void FV::doBroadcast() {
+// Method for broadcasting
+// broadcastPlan: if true, the the short plan is broadcast unconditionally
+void FV::doBroadcast(bool broadcastPlan) {
   if (check::LE(nextBroadcastInstant, time)) {
     nextBroadcastInstant += broadcastStep;
-    FVOutputState plane = getOutputState();
-    globalSituation->aetherInfo.broadcastState(time, plane);
+    FVState state = getState();
+    globalSituation->aetherInfo.broadcastState(name, time, getState());
 
     nextBroadcastInstant += broadcastStep;
   }
 
+  if (broadcastPlan ||
+    !globalSituation->aetherInfo.shortPlans.contains(name) ||
+    globalSituation->aetherInfo.shortPlans[name].shortPlan.isEmpty() ||
+    check::LE(globalSituation->aetherInfo.shortPlans[name].translationTime, time)) {
+    FVState curState = getState();
+    FlightPlan shortPlan;
+    shortPlan.addPoint(PathPoint(curState.position, time));
 
-  if (globalSituation->aetherInfo.states[this->name].shortPlan.empty() ||
-    check::LE(globalSituation->aetherInfo.states[this->name].shortPlan[0].arrivalTime, time)) {
-    FVOutputState plane = getOutputState();
-    vector<Point> short_plan;
-    for (auto& p : dynamicPath) {
+    for (int l = currentPath.size(), i = 0;
+      i < l && shortPlan.size() <= AEtherInfo::shortPlanLength;
+      i++) {
 
-      if (short_plan.size() > 3) break;
+      const PathPoint& p = currentPath[i];
       if (check::LE(p.arrivalTime, time)) continue;
-      short_plan.push_back(Point(p.position, p.arrivalTime));
+
+      shortPlan.addPoint(p);
     }
 
-    globalSituation->aetherInfo.broadcastPlan(plane.name, time, short_plan);
+    globalSituation->aetherInfo.broadcastPlan(name, time, shortPlan);
   }
 }

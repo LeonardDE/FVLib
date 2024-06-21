@@ -9,6 +9,7 @@ include_directories(Src Src/lib)
 add_executable(UMVmodelling 
 
 #  Include files
+  Src/Broadcast.h
   Src/CircularSegment.h
   Src/Copter.h
   Src/DataParser.h
@@ -31,6 +32,7 @@ add_executable(UMVmodelling
   Src/lib/json.h
 
 #  Source files
+  Src/Broadcast.cpp
   Src/CircularSegment.cpp
   Src/Copter.cpp
   Src/DataParser.cpp

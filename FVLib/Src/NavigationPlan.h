@@ -5,6 +5,26 @@ using namespace std;
 
 #include "Plane.h"
 #include "PathPoint.h"
+#include "FlightPlan.h"
+
+
+// Enum of possible methods for constructing navigation plan
+enum NavigationMethods {
+  // Naive navigation when the aiming point goes just along the current flight plan
+  NAIVE,
+
+  // Navigation with cutting corners along a circular arc
+  CIRCULAR
+};
+
+
+// Structure to convert a string to the NavigationMethods enum
+extern map<string, NavigationMethods> NavMethodNameToType;
+
+
+// Structure to convert a NavigationMethods enum to the string
+extern map<NavigationMethods, string> NavMethodTypeToName;
+
 
 // Abstract basic class for classes representing navigation plan 
 // parts of different kind
@@ -77,6 +97,11 @@ public:
   // The destructor
   ~NavigationPlan();
 
+  // Getting the size
+  size_t size() const {
+    return segs.size();
+  }
+  
   // Checking whether the plan is empty
   bool isEmpty() const {
     return segs.size() == 0;
@@ -90,6 +115,16 @@ public:
   // Exception is thrown if the plan is empty
   double getTFinal() const;
 
+  // Getting the first element
+  NavigationSegment * const & first() const {
+    return segs[0];
+  }
+
+  // Getting the last element
+  NavigationSegment * const & back() const {
+    return segs.back();
+  }
+  
   // Method for clearing the plan
   void clear() {
     segs.clear();
@@ -112,26 +147,11 @@ public:
   FVState getStateAt(double t);
 
   // Create naive navigation plan
-  void CreateNaivePlan(vector<PathPoint> flightPlan);
+  void CreateNaivePlan(const FlightPlan& flightPlan);
 
   // Create navigation plan with impossible circular turns
-  void CreateArcTurnPlan(vector<PathPoint> flightPlan, double turnRadius);
+  void CreateArcTurnPlan(const FlightPlan& flightPlan, double turnRadius);
+
+  // Create a navigation plan of the given type
+  void CreatePlan(const FlightPlan& flightPlan, NavigationMethods navMethod, double turnRaduis = 0);
 };
-
-
-// Enum of possible methods for constructing navigation plan
-enum NavigationMethods {
-  // Naive navigation when the aiming point goes just along the current flight plan
-  NAIVE,
-
-  // Navigation with cutting corners along a circular arc
-  CIRCULAR
-};
-
-
-// Structure to convert a string to the NavigationMethods enum
-extern map<string, NavigationMethods> NavMethodNameToType;
-
-
-// Structure to convert a NavigationMethods enum to the string
-extern map<NavigationMethods, string> NavMethodTypeToName;

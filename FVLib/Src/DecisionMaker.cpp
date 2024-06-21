@@ -1,3 +1,4 @@
+#include "global.h"
 #include "FlightPlan.h"
 #include "DecisionMaker.h"
 
@@ -9,37 +10,33 @@ void DecisionMaker::mergeShortPlans(const FlightPlan& arr1, const FlightPlan& ar
   size_t i = 0;
   size_t j = 0;
 
-  double maxStart = max(arr1[0].arrivalTime, arr2[0].arrivalTime);
-  double minEnd = min(arr2[arr2.size() - 1].arrivalTime, arr1[arr1.size() - 1].arrivalTime);
+  double maxStart = max(arr1.getTStart(), arr2.getTStart());
+  double minEnd = min(arr1.getTFinal(), arr2.getTFinal());
 
   while (i < arr1.size() && j < arr2.size()) {
     if (check::LT(arr1[i].arrivalTime, arr2[j].arrivalTime)) {
-      if (arr1[i].arrivalTime >= maxStart && arr1[i].arrivalTime <= minEnd) {
-        Point p;
+      if (check::GE(arr1[i].arrivalTime, maxStart) && check::LE(arr1[i].arrivalTime, minEnd)) {
+        PathPoint p;
         p.arrivalTime = arr1[i].arrivalTime;
-        p.position = arr2[j - 1].position + (arr2[j].position - arr2[j - 1].position)
-          * (p.arrivalTime - arr2[j - 1].arrivalTime)
-          / (arr2[j].arrivalTime - arr2[j - 1].arrivalTime);
-        res2.push_back(p);
-        res1.push_back(arr1[i]);
+        p.position = arr2.getStateAt(p.arrivalTime, j-1).position;
+        res2.addPoint(p);
+        res1.addPoint(arr1[i]);
       }
       i++;
     }
     else if (check::GT(arr1[i].arrivalTime, arr2[j].arrivalTime)) {
       if (arr2[j].arrivalTime >= maxStart && arr2[j].arrivalTime <= minEnd) {
-        Point p;
-        p.arrivalTime = arr2[j].arrivalTime;
-        p.position = arr1[i - 1].position + (arr1[i].position - arr1[i - 1].position)
-          * (p.arrivalTime - arr1[i - 1].arrivalTime)
-          / (arr1[i].arrivalTime - arr1[i - 1].arrivalTime);
-        res1.push_back(p);
-        res2.push_back(arr2[j]);
+        PathPoint p;
+        p.arrivalTime = arr1[j].arrivalTime;
+        p.position = arr1.getStateAt(p.arrivalTime, i-1).position;
+        res1.addPoint(p);
+        res2.addPoint(arr2[j]);
       }
       j++;
     }
     else {
-      res1.push_back(arr1[i]);
-      res2.push_back(arr2[j]);
+      res1.addPoint(arr1[i]);
+      res2.addPoint(arr2[j]);
       i++;
       j++;
     }

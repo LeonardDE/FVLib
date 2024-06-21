@@ -58,10 +58,10 @@ protected:
   double nextBroadcastInstant = 1e6;
 
   // Method for broadcasting
-  virtual void doBroadcast();
+  virtual void doBroadcast(bool broadcastPlan = false);
 
   // Distance to filter FVs for further procession
-  double radiusFilter;
+  double filterRadius;
 
   // The parameters of the safety zone of the FV - the radius of the cylinder
   double safetyRadius;
@@ -70,8 +70,11 @@ protected:
   double safetyHeight;
 
 public:
+  // Method to take data of the current position for computations
+  virtual FVState getState() const = 0;
+
   // Method to take data of the current position for final writing
-  virtual FVOutputState getOutputState() = 0;
+  virtual FVOutputState getOutputState() const = 0;
 
   // Method to integrate motion of the FV up to the given time with the given time step
   virtual void next(double h, double end_time) = 0;

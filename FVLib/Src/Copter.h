@@ -4,35 +4,70 @@
 
 class Copter : public FV {
 public:
-  Copter(const string& name, double x, double y, double z,
+  // The constructor
+  Copter(GlobalSituation* gs, const string& name,
+    double x, double y, double z,
     double speedX, double speedY, double speedZ,
-    double inertialXZ, double inertialY, double k_x, double k_v,
+    double inertialXZ, double inertialY, 
     double maxVelocity_xz, double maxVelocity_y, double minVelocity_y,
-    double radiusFilter, double broadcastStep,
-    double heightWarn, double radiusWarn, GlobalSituation* gs);
+    double k_xz, double k_v_xz, double k_y, double k_v_y,
+    double broadcastStep, double filterRadius, 
+    double safetyHeight, double safetyRadius,
+    NavigationMethods navType, const FlightPlan& flightPlan,
+    double turnRadius = -1);
+
+  // The destructor
   ~Copter();
-  FVOutputState getOutputState() override;
+
+  // Method to take data of the current position for computations
+  FVState getState() const override;
+
+  // Method to take data of the current position for final writing
+  FVOutputState getOutputState() const override;
+
+  // Method to integrate motion of the FV up to the given time with the given time step
   void next(double h, double end_time) override;
 
-
-
-  Vector3 wishVelocity;
-  Vector3 wishPosition;
 private:
-  double inertialXZ;
-  double inertialY;
-  double k_x;
-  double k_v;
+  // The current value of the position
   Vector3* curPosition;
+
+  // The storage for the position at the next time instant
   Vector3* newPosition;
+
+  // The current value of the velocity
   Vector3* curVelocity;
+
+  // The storage for the velocity at the next time instant
   Vector3* newVelocity;
 
+  // Some reasonable turn radius
+  double turnRadius;
+
+  // The maximal magnitude of the horizontal velocity
   double maxVelocity_xz;
+
+  // The maximal magnitude of the vertical velocity
   double maxVelocity_y;
+
+  // The minimal magnitude of the vertical velocity
   double minVelocity_y;
 
-  double solveTurnRadius(const Vector3& v1, const Vector3& v2) override;
+  // The inertia coefficient of the horizontal velocity
+  double inertialXZ;
 
-  void computeWishData(double time_solve);
+  // The inertia coefficient of the vertical velocity
+  double inertialY;
+
+  // The proportional coefficient of the horizontal control regulator
+  double k_xz;
+
+  // The differential coefficient of the horizontal control regulator
+  double k_v_xz;
+
+  // The proportional coefficient of the vertical control regulator
+  double k_y;
+
+  // The proportional coefficient of the vertical control regulator
+  double k_v_y;
 };

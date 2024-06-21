@@ -25,3 +25,7 @@ public:
 	static bool LE(double value_1, double value_2);
 
 };
+
+
+// The signum function
+int sign(double x);

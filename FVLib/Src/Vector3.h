@@ -11,6 +11,8 @@ public:
   Vector3();
   Vector3(const double x, const double y, const double z);
 
+  static Vector3 Zero;
+  
   Vector3& Add(const Vector3& vec);
   Vector3& Sub(const Vector3& vec);
   Vector3& Mul(const Vector3& vec);
@@ -25,6 +27,9 @@ public:
   friend Vector3 operator*(const double& n, const Vector3& v1);
   friend Vector3 operator/(const Vector3& v1, const double& n);
 
+  Vector3& operator*=(double a);
+  Vector3& operator/=(double a);
+  
   Vector3& operator+=(const Vector3& v2);
   Vector3& operator-=(const Vector3& v2);
   Vector3& operator*=(const Vector3& v2);
@@ -32,7 +37,6 @@ public:
   double& operator[](int i);
   const double& operator[](int i) const;
 
-  Vector3& Zero();
   double norm() const;
   void rotate(const Vector3& axis, const Vector3& axisPoint, const double& angle);
   Vector3 getRotatedVector(const Vector3& axis, const Vector3& axisPoint, const double& angle);

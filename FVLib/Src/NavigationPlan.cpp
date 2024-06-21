@@ -107,7 +107,7 @@ FVState NavigationPlan::getStateAt(double t) {
 
 
 // Create naive navigation plan
-void NavigationPlan::CreateNaivePlan(vector<PathPoint> flightPlan) {
+void NavigationPlan::CreateNaivePlan(const FlightPlan& flightPlan) {
   clear();
   for (int i = 1, l = flightPlan.size(); i < l; i++) {
     Vector3 vel = (flightPlan[i].position - flightPlan[i - 1].position) /
@@ -120,7 +120,7 @@ void NavigationPlan::CreateNaivePlan(vector<PathPoint> flightPlan) {
 }
 
 // Create navigation plan with impossible circular turns
-void NavigationPlan::CreateArcTurnPlan(vector<PathPoint> flightPlan, double turnRadius) {
+void NavigationPlan::CreateArcTurnPlan(const FlightPlan& flightPlan, double turnRadius) {
   clear();
   Vector3 prevPoint = flightPlan[0].position;
   double prevTime = flightPlan[0].arrivalTime;
@@ -163,9 +163,26 @@ void NavigationPlan::CreateArcTurnPlan(vector<PathPoint> flightPlan, double turn
   }
 
   Vector3 lastVel = (flightPlan[l - 1].position - flightPlan[l - 2].position) /
-    (flightPlan[l - 1].arrivalTime = flightPlan[l - 2].arrivalTime);
+    (flightPlan[l - 1].arrivalTime - flightPlan[l - 2].arrivalTime);
   addSegment(new RectilinearSegment(prevTime, prevPoint, lastVel,
     flightPlan[l - 1].arrivalTime, flightPlan[l - 1].position, lastVel));
+}
+
+
+// Create a navigation plan of the given type
+void NavigationPlan::CreatePlan(const FlightPlan& flightPlan, NavigationMethods navMethod, double turnRaduis) {
+  switch (navMethod) {
+  case NAIVE:
+    CreateNaivePlan(flightPlan);
+    break;
+
+  case CIRCULAR:
+    CreateArcTurnPlan(flightPlan, turnRaduis);
+    break;
+
+  default:
+    throw domain_error("NavigationPlan::CreatePlan: the given navigation method is not implemented yet!");
+  }
 }
 
 

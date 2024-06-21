@@ -28,3 +28,11 @@ bool check::GT(double value_1, double value_2) {
 bool check::GE(double value_1, double value_2) {
 	return value_1 - value_2 >= check::EPS;
 }
+
+
+// The signum function
+int sign(double x) {
+  if (x > 0) return 1;
+  if (x < 0) return -1;
+  return 0;
+}

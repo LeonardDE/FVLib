@@ -18,7 +18,24 @@ Vector3::Vector3(const double x, const double y, const double z)
   this->z = z;
 }
 
-Vector3 &Vector3::Add(const Vector3 &vec)
+Vector3& Vector3::operator*=(double a) {
+  this->x *= a;
+  this->y *= a;
+  this->z *= a;
+
+  return *this;
+}
+
+Vector3& Vector3::operator/=(double a) {
+  this->x /= a;
+  this->y /= a;
+  this->z /= a;
+
+  return *this;
+}
+  
+
+Vector3& Vector3::Add(const Vector3& vec)
 {
   this->x += vec.x;
   this->y += vec.y;
@@ -134,13 +151,6 @@ const double &Vector3::operator[](int i) const
   return (i == 0 ? x : (i == 1 ? y : (i == 2 ? z : x)));
 }
 
-Vector3 &Vector3::Zero()
-{
-  this->x = 0;
-  this->y = 0;
-  this->z = 0;
-  return *this;
-}
 
 double Vector3::norm() const
 {

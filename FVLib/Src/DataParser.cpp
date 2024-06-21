@@ -6,6 +6,7 @@ using namespace std;
 #include "GlobalSituation.h"
 
 #include "Plane.h"
+#include "FlightPlan.h"
 
 #include "MassPoint.h"
 #include "Copter.h"
@@ -20,7 +21,7 @@ void ParseSolveDataFromJSON(const string& json_name, double& time_step, double& 
   f.close();
 };
 
-void ParsePathFromJSON(const json& path_data, vector<Point>& path) {
+void ParsePathFromJSON(const json& path_data, FlightPlan& path) {
   double time = -INFINITY;
   for (auto& point_data : path_data) {
     if (time > point_data["time"]) {

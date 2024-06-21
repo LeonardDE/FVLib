@@ -5,6 +5,7 @@ using namespace std;
 
 #include "Vector3.h"
 #include "PathPoint.h"
+#include "Plane.h"
 
 // Class for holding a flight plan (a collection of pairs (time,point))
 // It fits to store a nominal plan, an actual plan and a short-term plan
@@ -19,7 +20,7 @@ public:
   FlightPlan(const vector<PathPoint>& newPlan) : points(newPlan) {}
 
   // Getting the size
-  int size() {
+  size_t size() const {
     return points.size();
   }
 
@@ -76,4 +77,9 @@ public:
   // is strictly inside the time interval of the plan to be corrected
   void CorrectWith(const FlightPlan& addPlan);
 
+  // Get the navigation point of the plan at a given instant
+  // t: the time when the state to be computed
+  // afterPoint: the index in the array of the point in which interval the time is located
+  //   if -1, then the index should be found
+  FVState getStateAt(double t, int afterPoint = -1) const;
 };
