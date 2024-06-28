@@ -1,6 +1,5 @@
 {
-  "version" : "2.0",
-  "timeStep": 1,
+  "timeStep": 0.25,
   "solve_part_count": 10,
   "AirCraftList": [
     {
@@ -11,37 +10,35 @@
         "v_y": 0,
         "v_z": 0,
         "maxAcceleration": 1,
-        "k_x": -1,
-        "k_v": -1,
+        "k_xz": -1,
+        "k_y": -1,
         "broadcastStep": 2,
-        "filterRadius": 5,
-        "safetyHeight": 2,
-        "safetyRadius": 3,
-        "navigationType": "Naive",
-        "turnRadius": 0.5
+        "radiusFilter": 5,
+        "heightWarn": 2,
+        "radiusWarn": 3
       },
       "path": [
         {
           "time": 0,
-          "x": 0,
+          "x": 5,
           "y": 0,
           "z": 0
         },
         {
           "time": 10,
-          "x": 10,
+          "x": 15,
           "y": 0,
           "z": 0
         },
         {
           "time": 20,
-          "x": 10,
+          "x": 15,
           "y": 0,
           "z": -5
         },
         {
           "time": 25,
-          "x": 15,
+          "x": 20,
           "y": 0,
           "z": -5
         }
@@ -56,18 +53,23 @@
         "v_y": 0,
         "v_z": 0,
         "maxAcceleration": 1,
-        "k_x": -1,
-        "k_v": -1,
+        "k_xz": -1,
+        "k_y": -1,
         "broadcastStep": 2,
-        "filterRadius": 5,
-        "safetyHeight": 2,
-        "safetyRadius": 3,
-        "navigationType": "Circular"
+        "radiusFilter": 5,
+        "heightWarn": 2,
+        "radiusWarn": 3
       },
       "path": [
         {
-          "time": 25,
+          "time": 10,
           "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        {
+          "time": 20,
+          "x": 10,
           "y": 0,
           "z": 0
         },
@@ -75,16 +77,10 @@
           "time": 30,
           "x": 10,
           "y": 0,
-          "z": 0
-        },
-        {
-          "time": 40,
-          "x": 10,
-          "y": 0,
           "z": -5
         },
         {
-          "time": 45,
+          "time": 35,
           "x": 15,
           "y": 0,
           "z": -5

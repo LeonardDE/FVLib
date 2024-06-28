@@ -22,6 +22,9 @@ public:
   // Method to take data of the current position for computations
   FVState getState() const override;
 
+  // Method to take data of the current position for output
+  DynamicData getOutputPosition() const override;
+
   // Method to take data of the current position for final writing
   FVOutputState getOutputState() const override;
 

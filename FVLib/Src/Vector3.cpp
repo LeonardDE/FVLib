@@ -4,6 +4,8 @@ using namespace std;
 #include "global.h"
 #include "Vector3.h"
 
+Vector3 Vector3::Zero = Vector3();
+
 Vector3::Vector3()
 {
   x = 0.0;

@@ -13,6 +13,7 @@ using namespace std;
 #include "CircularSegment.h"
 #include "PathPoint.h"
 #include "FlightPlan.h"
+#include "OutputData.h"
 
 #include "lib/json.h"
 
@@ -72,6 +73,9 @@ protected:
 public:
   // Method to take data of the current position for computations
   virtual FVState getState() const = 0;
+
+  // Method to take data of the current position for output
+  virtual DynamicData getOutputPosition() const = 0;
 
   // Method to take data of the current position for final writing
   virtual FVOutputState getOutputState() const = 0;

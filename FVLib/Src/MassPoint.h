@@ -9,7 +9,7 @@ public:
     double x, double y, double z,
     double speedX, double speedY, double speedZ,
     double maxAcceleration, double k_x, double k_v,
-    double broadcastStep, double radiusFilter,
+    double broadcastStep, double filterRadius,
     double safetyHeight, double safetyRadius,
     NavigationMethods navType, const FlightPlan& flightPlan,
     double turnRadius = -1);
@@ -19,6 +19,9 @@ public:
 
   // Method to take data of the current position for computations
   FVState getState() const override;
+
+  // Method to take data of the current position for output
+  DynamicData getOutputPosition() const override;
 
   // Method to take data of the current position for final writing
   FVOutputState getOutputState() const override;

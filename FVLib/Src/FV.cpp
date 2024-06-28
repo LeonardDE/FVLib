@@ -14,7 +14,7 @@ void FV::doBroadcast(bool broadcastPlan) {
   if (check::LE(nextBroadcastInstant, time)) {
     nextBroadcastInstant += broadcastStep;
     FVState state = getState();
-    globalSituation->aetherInfo.broadcastState(name, time, getState());
+    globalSituation->broadcastState(globalSituation->nameToIndex[name], time, getState());
 
     nextBroadcastInstant += broadcastStep;
   }
@@ -22,7 +22,8 @@ void FV::doBroadcast(bool broadcastPlan) {
   if (broadcastPlan ||
     !globalSituation->aetherInfo.shortPlans.contains(name) ||
     globalSituation->aetherInfo.shortPlans[name].shortPlan.isEmpty() ||
-    check::LE(globalSituation->aetherInfo.shortPlans[name].translationTime, time)) {
+    (globalSituation->aetherInfo.shortPlans[name].shortPlan.size() > 1 &&
+      check::LE(globalSituation->aetherInfo.shortPlans[name].shortPlan[1].arrivalTime, time))) {
     FVState curState = getState();
     FlightPlan shortPlan;
     shortPlan.addPoint(PathPoint(curState.position, time));
@@ -37,6 +38,6 @@ void FV::doBroadcast(bool broadcastPlan) {
       shortPlan.addPoint(p);
     }
 
-    globalSituation->aetherInfo.broadcastPlan(name, time, shortPlan);
+    globalSituation->broadcastPlan(globalSituation->nameToIndex[name], time, shortPlan);
   }
 }

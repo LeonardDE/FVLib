@@ -1,5 +1,4 @@
 {
-  "version" : "2.0",
   "timeStep": 1,
   "solve_part_count": 10,
   "AirCraftList": [
@@ -11,14 +10,12 @@
         "v_y": 0,
         "v_z": 0,
         "maxAcceleration": 1,
-        "k_x": -1,
-        "k_v": -1,
+        "k_xz": -1,
+        "k_y": -1,
         "broadcastStep": 2,
-        "filterRadius": 5,
-        "safetyHeight": 2,
-        "safetyRadius": 3,
-        "navigationType": "Naive",
-        "turnRadius": 0.5
+        "radiusFilter": 5,
+        "heightWarn": 2,
+        "radiusWarn": 3
       },
       "path": [
         {
@@ -56,13 +53,12 @@
         "v_y": 0,
         "v_z": 0,
         "maxAcceleration": 1,
-        "k_x": -1,
-        "k_v": -1,
+        "k_xz": -1,
+        "k_y": -1,
         "broadcastStep": 2,
-        "filterRadius": 5,
-        "safetyHeight": 2,
-        "safetyRadius": 3,
-        "navigationType": "Circular"
+        "radiusFilter": 5,
+        "heightWarn": 2,
+        "radiusWarn": 3
       },
       "path": [
         {

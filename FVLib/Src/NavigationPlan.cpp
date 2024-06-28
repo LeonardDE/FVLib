@@ -155,6 +155,7 @@ void NavigationPlan::CreateArcTurnPlan(const FlightPlan& flightPlan, double turn
       double t1 = flightPlan[i - 1].arrivalTime - h / velAB.norm();
       double t2 = flightPlan[i - 1].arrivalTime + h / velBC.norm();
 
+      addSegment(new RectilinearSegment(prevTime, prevPoint, velAB, t1, pos1, velAB));
       addSegment(new CircularSegment(t1, pos1, velAB, t2, pos2, velBC, center));
 
       prevPoint = pos2;

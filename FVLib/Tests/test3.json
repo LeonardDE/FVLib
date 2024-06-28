@@ -1,4 +1,5 @@
 {
+  "version" : "2.0",
   "timeStep": 0.25,
   "solve_part_count": 10,
   "AirCraftList": [

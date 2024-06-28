@@ -41,7 +41,6 @@ Copter::Copter(GlobalSituation* gs, const string& name,
   this->safetyHeight = safetyHeight;
 
   globalSituation = gs;
-  this->broadcastStep = broadcastStep;
 
   // Setting the turn radius
   if (turnRadius > 0) {
@@ -60,6 +59,9 @@ Copter::Copter(GlobalSituation* gs, const string& name,
   basePath = flightPlan;
   currentPath = flightPlan;
   navigationPath.CreatePlan(currentPath, navType, turnRadius);
+
+  this->broadcastStep = broadcastStep;
+  nextBroadcastInstant = currentPath[0].arrivalTime;
 }
 
 // The destructor
@@ -143,6 +145,17 @@ FVState Copter::getState() const {
   return state;
 }
 
+
+// Method to take data of the current position for output
+DynamicData Copter::getOutputPosition() const {
+  DynamicData res;
+  res.t = time;
+  res.x = (*curPosition)[0];
+  res.y = (*curPosition)[1];
+  res.z = (*curPosition)[2];
+
+  return res;
+}
 
 // Method to take data of the current position for final writing
 FVOutputState Copter::getOutputState() const {

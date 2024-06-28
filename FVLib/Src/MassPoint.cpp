@@ -8,7 +8,7 @@ MassPoint::MassPoint(GlobalSituation* gs, const string& name,
   double x, double y, double z,
   double speedX, double speedY, double speedZ,
   double maxAcceleration, double k_x, double k_v,
-  double broadcastStep, double radiusFilter,
+  double broadcastStep, double filterRadius,
   double safetyHeight, double safetyRadius,
   NavigationMethods navType, const FlightPlan& flightPlan,
   double turnRadius
@@ -16,7 +16,7 @@ MassPoint::MassPoint(GlobalSituation* gs, const string& name,
 
   type = MASSPOINT;
   this->name = name;
-  time = 0;
+  time = flightPlan[0].arrivalTime;
   curPosition = new Vector3(x, y, z);
   newPosition = new Vector3(x, y, z);
   curVelocity = new Vector3(speedX, speedY, speedZ);
@@ -30,7 +30,6 @@ MassPoint::MassPoint(GlobalSituation* gs, const string& name,
   this->navType = navType;
 
   globalSituation = gs;
-  this->broadcastStep = broadcastStep;
 
   // Setting the turn radius 
   if (turnRadius > 0) {
@@ -46,8 +45,10 @@ MassPoint::MassPoint(GlobalSituation* gs, const string& name,
   basePath = flightPlan;
   currentPath = flightPlan;
   navigationPath.CreatePlan(currentPath, navType, turnRadius);
-}
 
+  this->broadcastStep = broadcastStep;
+  nextBroadcastInstant = currentPath[0].arrivalTime;
+}
 
 void MassPoint::next(double h, double end_time) {
   double dt = end_time - time;
@@ -116,6 +117,17 @@ FVState MassPoint::getState() const {
   return state;
 }
 
+
+// Method to take data of the current position for output
+DynamicData MassPoint::getOutputPosition() const {
+  DynamicData res;
+  res.t = time;
+  res.x = (*curPosition)[0];
+  res.y = (*curPosition)[1];
+  res.z = (*curPosition)[2];
+
+  return res;
+}
 
 // Method to take data of the current position for final writing
 FVOutputState MassPoint::getOutputState() const {

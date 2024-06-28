@@ -24,5 +24,4 @@ private:
   string out_file;
 
   GlobalSituation globalSituation;
-  OutputJsonData data;
 };

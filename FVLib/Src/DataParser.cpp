@@ -1,6 +1,8 @@
 #include <stdexcept>
 using namespace std;
 
+#include "global.h"
+
 #include "DataParser.h"
 
 #include "GlobalSituation.h"
@@ -11,79 +13,129 @@ using namespace std;
 #include "MassPoint.h"
 #include "Copter.h"
 
+const string DataParser::version = "2.0";
 
-void ParseSolveDataFromJSON(const string& json_name, double& time_step, double& integration_h, int& solve_part_count) {
+DataParser::DataParser(const string &json_name)
+{
   ifstream f(json_name);
-  json data = json::parse(f);
 
+  if (!f.is_open())
+  {
+    throw invalid_argument("DataParser constructor: the input file '" + json_name + "' cannot be opened!");
+  }
+
+  data = json::parse(f);
+  f.close();
+
+  if (!data.contains("version"))
+  {
+    throw invalid_argument("DataParser constructor: the given input JSON file does not contain version parameter!");
+  }
+
+  string givenVersion = data["version"];
+  if (givenVersion != version)
+  {
+    throw invalid_argument("DataParser constructor: the given input JSON file version '" + givenVersion + "' does not equal the necessary version '" + version + "' !");
+  }
+}
+
+void DataParser::ParseSolveDataFromJSON(double &time_step, int &solve_part_count)
+{
   time_step = data["timeStep"];
   solve_part_count = data["solve_part_count"];
-  f.close();
 };
 
-void ParsePathFromJSON(const json& path_data, FlightPlan& path) {
+void DataParser::ParsePathFromJSON(const json &path_data, FlightPlan &path)
+{
+  path.clear();
+
   double time = -INFINITY;
-  for (auto& point_data : path_data) {
-    if (time > point_data["time"]) {
-      cout << "PathList is not sorting by ASC" << endl;
-      path.clear();
-      exit(0);
+  for (auto &point_data : path_data)
+  {
+    if (check::LE(point_data["time"], time))
+    {
+      throw invalid_argument("DataParser: a flight plan is not sorted acceding!");
     }
-    path.push_back(
-      Point(
-        Vector3(point_data["x"], point_data["y"], point_data["z"]),
-        point_data["time"]
-      )
-    );
+    path.addPoint(
+        PathPoint(
+            Vector3(point_data["x"], point_data["y"], point_data["z"]),
+            point_data["time"]));
     time = point_data["time"];
   }
-};
+}
 
-void ParseFVToList(const string& json_name, GlobalSituation& gs) {
-  ifstream f(json_name);
-  json data = json::parse(f);
+void DataParser::ParseFVToList(GlobalSituation &gs)
+{
+  for (auto &fv : data["AirCraftList"])
+  {
 
-  for (auto& sub_j : data["AirCraftList"]) {
+    auto &fv_param = fv["parameters"];
 
-    auto& fv_param = sub_j["parameters"];
-
-    auto& fv_path = sub_j["path"];
-    vector<Point> path;
+    auto &fv_path = fv["path"];
+    FlightPlan path;
     ParsePathFromJSON(fv_path, path);
 
-    string typeName = sub_j["type"];
-    if (!FVNameToType.contains(sub_j["type"])) {
+    string typeName = fv["type"];
+    if (!FVNameToType.contains(fv["type"]))
+    {
       throw invalid_argument("Unknown vehicle type '" + typeName + "'");
     }
     FVType type = FVNameToType[typeName];
+    string navTypeName = fv_param["navigationType"];
+    if (!NavMethodNameToType.contains(fv_param["navigationType"]))
+    {
+      throw invalid_argument("Parsing a FV parameters: the navigation type '" + navTypeName + "' is unknown!");
+    }
+    NavigationMethods navMethod = NavMethodNameToType[navTypeName];
 
-    switch (type) {
-    case MASSPOINT: {
-      MassPoint* point = new MassPoint(
-        sub_j["fv_id"],
-        path[0].position.x, path[0].position.y, path[0].position.z,
-        fv_param["v_x"], fv_param["v_y"], fv_param["v_z"],
-        fv_param["maxAcceleration"], fv_param["k_xz"], fv_param["k_y"],
-        fv_param["broadcastStep"], fv_param["radiusFilter"],
-        fv_param["heightWarn"], fv_param["radiusWarn"], &gs);
-      point->setPath(path);
-      gs.FVs.push_back(point);
+    switch (type)
+    {
+    case MASSPOINT:
+    {
+      double turnRadius;
+      if (fv_param.contains("turnRadius"))
+      {
+        turnRadius = fv_param["turnRadius"];
+      }
+      else
+      {
+        turnRadius = -1;
+      }
+      MassPoint *point = new MassPoint(
+          &gs, fv["fv_id"],
+          path[0].position.x, path[0].position.y, path[0].position.z,
+          fv_param["v_x"], fv_param["v_y"], fv_param["v_z"],
+          fv_param["maxAcceleration"], fv_param["k_x"], fv_param["k_v"],
+          fv_param["broadcastStep"], fv_param["filterRadius"],
+          fv_param["safetyHeight"], fv_param["safetyRadius"],
+          navMethod, path, turnRadius);
+      gs.addFV(point);
       break;
     }
 
-    case COPTER: {
-      Copter* copter = new Copter(
-        sub_j["fv_id"],
-        path[0].position.x, path[0].position.y, path[0].position.z,
-        fv_param["v_x"], fv_param["v_y"], fv_param["v_z"],
-        fv_param["inertial_xz"], fv_param["inertial_y"],
-        fv_param["k_xz"], fv_param["k_y"],
-        fv_param["maxVelocity_xz"], fv_param["maxVelocity_y"], fv_param["minVelocity_y"],
-        fv_param["broadcastStep"], fv_param["radiusFilter"],
-        fv_param["heightWarn"], fv_param["radiusWarn"], &gs);
+    case COPTER:
+    {
+      double turnRadius;
+      if (fv_param.contains("turnRadius"))
+      {
+        turnRadius = fv_param["turnRadius"];
+      }
+      else
+      {
+        turnRadius = -1;
+      }
+      Copter *copter = new Copter(
+          &gs, fv["fv_id"],
+          path[0].position.x, path[0].position.y, path[0].position.z,
+          fv_param["v_x"], fv_param["v_y"], fv_param["v_z"],
+          fv_param["inertial_xz"], fv_param["inertial_y"],
+          fv_param["k_xz"], fv_param["k_v_xz"], fv_param["k_y"], fv_param["k_v_y"],
+          fv_param["maxVelocity_xz"], fv_param["maxVelocity_y"], fv_param["minVelocity_y"],
+          fv_param["broadcastStep"], fv_param["filterRadius"],
+          fv_param["safetyHeight"], fv_param["safetyRadius"],
+          navMethod, path, turnRadius);
 
-      copter->setPath(path);
-      gs.FVs.push_back(copter);
+      gs.addFV(copter);
       break;
     }
 
@@ -91,5 +143,4 @@ void ParseFVToList(const string& json_name, GlobalSituation& gs) {
       throw invalid_argument("The procession of the type '" + typeName + "' is not implemented");
     }
   }
-  f.close();
 };
